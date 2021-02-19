@@ -1,0 +1,389 @@
+openapi: 3.0.1
+
+info:
+  title: Dentsply Sirona Intraoral Filters API
+  description: |
+    This API is used to apply custom filters to images acquired from the DSIO Modality API.
+  version: "1.0"
+
+servers:
+  - url: 'https://localhost:43809/api/dsio/filters/v1'
+    description: Default endpoint for local Sensor Plugin service
+
+tags: 
+  - name: Images
+    description: Manage image resources for processing
+  - name: Filters
+    description: Filters that can be applied to image resources
+paths:
+  /images:
+    post:
+      tags: [Images]
+      summary: Upload a new image resource for processing.
+      operationId: createImage
+      description: |
+        Create a new image by uploading a 16-bit grayscale PNG image file.
+      requestBody:
+        content:
+          image/png:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Image resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResource'
+        '400':
+          description: Bad input parameter
+        '415':
+          description: Unsupported media type
+  /images/modality:
+    post:
+      tags: [Images]
+      summary: Create an image resource from a Modality session.
+      operationId: modalityImage
+      description: |
+        Create a new image resource by referencing an image captured in a current modality session.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModalitySession'
+      responses:
+        '201':
+          description: Image resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResource'
+        '400':
+          description: Bad input parameter
+        '404':
+          description: Modality session or image not found
+  /images/{id}:
+    get:
+      tags: [Images]
+      summary: Gets an image resource
+      operationId: getImage
+      description: Retrieves an image resource
+      parameters: 
+        - name: id
+          in: path
+          description: Id of the image resource to delete
+          required: true
+          schema:
+            type: string
+            format: text
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResource'
+        '404':
+          description: Image resource not found
+    delete:
+      tags: [Images]
+      summary: Delete an image resource
+      operationId: deleteImage
+      description: |
+        Deletes an image resource from the filters service. This image will no longer be available for processing.
+      parameters: 
+        - name: id
+          in: path
+          description: Id of the image resource to delete
+          required: true
+          schema:
+            type: string
+            format: text
+      responses:
+        '204':
+          description: Successfully deleted resource
+        '404':
+          description: Image resource not found
+      
+  /images/{id}/filters/unmap:
+    post:
+      tags: [Filters]
+      summary: Unmap image
+      operationId: unmapImage
+      description: |
+        Removes the gamma map, described by LutInfo, that was applied to the image and return the original image
+      parameters: 
+        - name: id
+          in: path
+          description: Id of the image resource to process
+          required: true
+          schema:
+            type: string
+            format: text
+      requestBody:
+          description: The LutInfo describing the mapping that was applied to the image resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LutInfo'
+      responses:
+        '200':
+          description: Success
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Supplied LutInfo contains invalid parameters
+        '404':
+          description: Image resource not found
+
+  /images/{id}/filters/select:
+    post:
+      tags: [Filters]
+      summary: Apply Select Filter
+      operationId: filterSelect
+      description: |
+        Applies the Select Filter to the specified image resource and returns the filtered image. This filter is optimized for images acquired from Xios XG Select and CDR Elite sensors.
+      parameters: 
+        - name: id
+          in: path
+          description: Id of the image resource to process
+          required: true
+          schema:
+            type: string
+            format: text
+      requestBody:
+          description: The parameters used to process the image
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectFilter'
+      responses:
+        '200':
+          description: Success
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Supplied SelectFilter contains invalid parameters
+        '404':
+          description: Image resource not found
+  /images/{id}/filters/supreme:
+    post:
+      tags: [Filters]
+      summary: Apply Supreme Filter
+      operationId: filterSupreme
+      description: |
+        Applies the Supreme Filter to the specified image resource and returns the filtered image.
+      parameters: 
+        - name: id
+          in: path
+          description: Id of the image resource to process
+          required: true
+          schema:
+            type: string
+            format: text
+      requestBody:
+          description: The parameters used to process the image
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupremeFilter'
+      responses:
+        '200':
+          description: Success
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Supplied filter contains invalid parameters
+        '404':
+          description: Image resource not found
+  /images/{id}/filters/ae:
+    post:
+      tags: [Filters]
+      summary: Apply AE Filter
+      operationId: filterAE
+      description: |
+        Applies the AE Filter to the specified image resource and returns the filtered image.
+      parameters: 
+        - name: id
+          in: path
+          description: Id of the image resource to process
+          required: true
+          schema:
+            type: string
+            format: text
+      requestBody:
+          description: The parameters used to process the image
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AEFilter'
+      responses:
+        '200':
+          description: Success
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Supplied filter contains invalid parameters
+        '404':
+          description: Image resource not found
+
+components:
+  schemas:
+    ImageResource:
+      description: Represents an image resource uploaded for processing.
+      type: object
+      properties:
+        id:
+          description: The resource id associated with the image
+          type: string
+          example: 160c98f9-d188-4118-94c4-697161fd5caf
+        mediaType:
+          description: The media type describing the format of the image data.
+          type: string
+          example: "image/png"
+        url:
+          description: The Url where the media resource can be downloaded.
+          type: string
+          example: "https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png"
+        modalitySession:
+          description: |
+            Optional object that when present indicates that the resource belongs to a session created with the Modality API.
+          allOf:
+            - $ref: '#/components/schemas/ModalitySession'
+
+    ModalitySession:
+      description: Describes a resource from a current Modality session
+      type: object
+      properties:
+        sessionId:
+          description: Id of modality session
+          type: string
+          example: 451f7e06-5827-4c99-b6fb-b9c330ca922c
+        imageId:
+          description: Id of the image acquired by modality
+          type: string
+          example: 39db323b-198d-4219-b79e-ca918cde5be5
+            
+    LutInfo:
+        description: |
+          Describes the lookup table (LUT) mapping applied to an image.
+
+        type: object
+        properties:
+          gamma:
+            description: Gamma value used in map
+            type: number
+            format: double
+            example: 2.3
+          slope:
+            description: Slope value used in map
+            type: number
+            format: double
+            example: 65535.0
+          offset:
+            description: Offset value used in map
+            type: number
+            format: double
+            example: 0.0
+          totalGrays:
+            description: Total number of gray values in original (unmapped) image
+            type: number
+            format: integer
+            example: 4096
+          minimumGray:
+            description: Minimum gray value in original (unmapped) image
+            type: number
+            format: integer
+            example: 3612
+          maximumGray:
+            description: Maximum gray value in original (unmapped) image
+            type: number
+            format: integer
+            example: 418
+
+    SelectFilter:
+      description: |
+        Parameters used to apply the Select filter. This filter is optimized for images acquired from Xios XG Select and Schick Elite sensors.
+      type: object
+      properties:
+        enhancementMode:
+          description: The Select enhancement mode
+          type: string
+          enum: 
+            - none
+            - smooth
+            - edgeLow
+            - edgeHigh
+            - edgePro
+          example: edgePro
+        lutInfo:
+          $ref: '#/components/schemas/LutInfo'
+
+    SupremeFilter:
+      description: |
+        Parameters used to apply the Supreme filter. This filter is optimized for images acquired from Xios XG Supreme and Schick 33 sensors.
+      type: object
+      properties:
+        task:
+          description: The task associated with the filter
+          type: string
+          enum: 
+            - general
+            - endodontic
+            - periodontic
+            - restorative
+            - hygiene
+          example: general
+        binningMode:
+          description: The binning mode used when the image was acquired.
+          type: string
+          enum:
+            - binned2x2
+            - unbinned
+          example: binned
+        sharpness:
+          description: The sharpness to apply to the image expressed as a percentage in the range 0-100.
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          example: 70.0
+        lutInfo:
+          $ref: '#/components/schemas/LutInfo'
+
+    AEFilter:
+      description: |
+        Parameters used to apply the AE filter. This filter is optimized for images acquired from Xios AE and Schick AE sensors.
+      type: object
+      properties:
+        task:
+          description: The task associated with the filter
+          type: string
+          enum: 
+            - general
+            - endodontic
+            - periodontic
+            - restorative
+          example: general
+        sharpness:
+          description: The sharpness to apply to the image expressed as a percentage in the range 0-100.
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          example: 70.0
+        lutInfo:
+          $ref: '#/components/schemas/LutInfo'
