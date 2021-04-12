@@ -19,7 +19,7 @@ paths:
   /images:
     post:
       tags: [Images]
-      summary: Upload a new image resource for processing.
+      summary: Upload New Image Resource for Processing
       operationId: createImage
       description: |
         Create a new image by uploading a 16-bit grayscale PNG image file.
@@ -43,7 +43,7 @@ paths:
   /images/modality:
     post:
       tags: [Images]
-      summary: Create an image resource from a Modality session.
+      summary: Create Image Resource from Modality Session
       operationId: modalityImage
       description: |
         Create a new image resource by referencing an image captured in a current modality session.
@@ -66,13 +66,13 @@ paths:
   /images/{id}:
     get:
       tags: [Images]
-      summary: Gets an image resource
+      summary: Get Image Resource
       operationId: getImage
       description: Retrieves an image resource
       parameters: 
         - name: id
           in: path
-          description: Id of the image resource to delete
+          description: Id of the image resource to retrieve
           required: true
           schema:
             type: string
@@ -88,7 +88,7 @@ paths:
           description: Image resource not found
     delete:
       tags: [Images]
-      summary: Delete an image resource
+      summary: Delete Image Resource
       operationId: deleteImage
       description: |
         Deletes an image resource from the filters service. This image will no longer be available for processing.
