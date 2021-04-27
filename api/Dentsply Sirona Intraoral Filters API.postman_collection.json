@@ -1,0 +1,1081 @@
+{
+	"info": {
+		"_postman_id": "a96268b0-44b4-4b7a-bce5-3c13141be12b",
+		"name": "Dentsply Sirona Intraoral Filters API",
+		"description": "This API is used to apply custom filters to images acquired from the DSIO Modality API.\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Images",
+			"item": [
+				{
+					"name": "Create Image Resource",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "image/png"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"deserunt mollit do\""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/images",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"images"
+							]
+						},
+						"description": "Create a new image resource by uploading a 16-bit grayscale PNG image file.\n"
+					},
+					"response": [
+						{
+							"name": "Image resource created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\"deserunt mollit do\""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+						},
+						{
+							"name": "Bad input parameter",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\"deserunt mollit do\""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unsupported media type",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\"deserunt mollit do\""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images"
+									]
+								}
+							},
+							"status": "Unsupported Media Type",
+							"code": 415,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Create Modality Resource",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/images/modality",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"images",
+								"modality"
+							]
+						},
+						"description": "Create a new image resource by referencing an image captured in a current modality session.\n"
+					},
+					"response": [
+						{
+							"name": "Image resource created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/modality",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										"modality"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+						},
+						{
+							"name": "Bad input parameter",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/modality",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										"modality"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Modality session or image not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/modality",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										"modality"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get Image Resource",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/images/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"images",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "deserunt mollit do",
+									"description": "(Required) Id of the image resource to retrieve"
+								}
+							]
+						},
+						"description": "Retrieves an image resource"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/images/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+						},
+						{
+							"name": "Image resource not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/images/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Delete Image Resource",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/images/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"images",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "deserunt mollit do",
+									"description": "(Required) Id of the image resource to delete"
+								}
+							]
+						},
+						"description": "Deletes an image resource from the filters service. This image will no longer be available for processing.\n"
+					},
+					"response": [
+						{
+							"name": "Successfully deleted resource",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/images/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Image resource not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/images/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"description": "Manage image resources for processing"
+		},
+		{
+			"name": "Filters",
+			"item": [
+				{
+					"name": "Unmap image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gamma\": 2.3,\n    \"slope\": 65535,\n    \"offset\": 0,\n    \"totalGrays\": 4096,\n    \"minimumGray\": 3612,\n    \"maximumGray\": 418\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/images/:id/filters/unmap",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"images",
+								":id",
+								"filters",
+								"unmap"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "deserunt mollit do",
+									"description": "(Required) Id of the image resource to process"
+								}
+							]
+						},
+						"description": "Removes the gamma map, described by LutInfo, that was applied to the image and return the original image\n"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gamma\": 2.3,\n    \"slope\": 65535,\n    \"offset\": 0,\n    \"totalGrays\": 4096,\n    \"minimumGray\": 3612,\n    \"maximumGray\": 418\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/unmap",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"unmap"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "image/png"
+								}
+							],
+							"cookie": [],
+							"body": "deserunt mollit do"
+						},
+						{
+							"name": "Supplied LutInfo contains invalid parameters",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gamma\": 2.3,\n    \"slope\": 65535,\n    \"offset\": 0,\n    \"totalGrays\": 4096,\n    \"minimumGray\": 3612,\n    \"maximumGray\": 418\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/unmap",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"unmap"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Image resource not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gamma\": 2.3,\n    \"slope\": 65535,\n    \"offset\": 0,\n    \"totalGrays\": 4096,\n    \"minimumGray\": 3612,\n    \"maximumGray\": 418\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/unmap",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"unmap"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Apply Select Filter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"enhancementMode\": \"edgePro\",\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/images/:id/filters/select",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"images",
+								":id",
+								"filters",
+								"select"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "deserunt mollit do",
+									"description": "(Required) Id of the image resource to process"
+								}
+							]
+						},
+						"description": "Applies the Select Filter to the specified image resource and returns the filtered image. This filter is optimized for images acquired from Xios XG Select and CDR Elite sensors.\n"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"enhancementMode\": \"edgePro\",\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/select",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"select"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "image/png"
+								}
+							],
+							"cookie": [],
+							"body": "deserunt mollit do"
+						},
+						{
+							"name": "Supplied filter contains invalid parameters",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"enhancementMode\": \"edgePro\",\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/select",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"select"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Image resource not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"enhancementMode\": \"edgePro\",\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/select",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"select"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Apply Supreme Filter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"binned2x2\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/images/:id/filters/supreme",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"images",
+								":id",
+								"filters",
+								"supreme"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "deserunt mollit do",
+									"description": "(Required) Id of the image resource to process"
+								}
+							]
+						},
+						"description": "Applies the Supreme Filter to the specified image resource and returns the filtered image.\n"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"binned2x2\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/supreme",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"supreme"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "image/png"
+								}
+							],
+							"cookie": [],
+							"body": "deserunt mollit do"
+						},
+						{
+							"name": "Supplied filter contains invalid parameters",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"binned2x2\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/supreme",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"supreme"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Image resource not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"binned2x2\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/supreme",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"supreme"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Apply AE Filter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/images/:id/filters/ae",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"images",
+								":id",
+								"filters",
+								"ae"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "deserunt mollit do",
+									"description": "(Required) Id of the image resource to process"
+								}
+							]
+						},
+						"description": "Applies the AE Filter to the specified image resource and returns the filtered image.\n"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/ae",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"ae"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "image/png"
+								}
+							],
+							"cookie": [],
+							"body": "deserunt mollit do"
+						},
+						{
+							"name": "Supplied filter contains invalid parameters",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/ae",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"ae"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Image resource not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/ae",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"ae"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"description": "Filters that can be applied to image resources"
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:43809/api/dsio/filters/v1",
+			"type": "string"
+		}
+	]
+}

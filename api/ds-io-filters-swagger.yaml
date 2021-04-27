@@ -19,10 +19,10 @@ paths:
   /images:
     post:
       tags: [Images]
-      summary: Upload New Image Resource for Processing
+      summary: Create Image Resource
       operationId: createImage
       description: |
-        Create a new image by uploading a 16-bit grayscale PNG image file.
+        Create a new image resource by uploading a 16-bit grayscale PNG image file.
       requestBody:
         content:
           image/png:
@@ -43,7 +43,7 @@ paths:
   /images/modality:
     post:
       tags: [Images]
-      summary: Create Image Resource from Modality Session
+      summary: Create Modality Resource
       operationId: modalityImage
       description: |
         Create a new image resource by referencing an image captured in a current modality session.
@@ -170,7 +170,7 @@ paths:
                 type: string
                 format: binary
         '400':
-          description: Supplied SelectFilter contains invalid parameters
+          description: Supplied filter contains invalid parameters
         '404':
           description: Image resource not found
   /images/{id}/filters/supreme:
