@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace DSIO.Filters.Api.Sdk.Types.V1
 {
-    public class SelectFilterImageParam
+    /// <summary>
+    /// Sensor binning mode
+    /// </summary>
+    public enum BinningMode
     {
-        public EnhancementMode EnhancementMode { get; set; }
-        public LutInfo LutInfo { get; set; }
+        Unbinned,
+        Binned2X2
     }
 }

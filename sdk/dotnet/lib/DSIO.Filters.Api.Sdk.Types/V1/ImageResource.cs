@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DS.IO.FiltersApi.V1.Types
+namespace DSIO.Filters.Api.Sdk.Types.V1
 {
     public class ImageResource
     {

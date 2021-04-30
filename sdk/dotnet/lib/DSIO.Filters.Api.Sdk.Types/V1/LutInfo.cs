@@ -1,4 +1,4 @@
-﻿namespace DS.IO.FiltersApi.V1.Types
+﻿namespace DSIO.Filters.Api.Sdk.Types.V1
 {
     /// <summary>
     /// Describes the lookup table (LUT) mapping applied to an image. 

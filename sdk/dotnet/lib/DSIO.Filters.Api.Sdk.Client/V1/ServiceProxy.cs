@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using DS.IO.FiltersApi.V1.Types;
+using DSIO.Filters.Api.Sdk.Types.V1;
 
 namespace DSIO.Filters.Api.Sdk.Client.V1
 {
@@ -130,7 +130,8 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         {
             var response = await Client.GetAsync("images/" + id);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<ImageResource>();
+            var result = await response.Content.ReadAsAsync<ImageResource>();
+            return result;
         }
 
         /// <summary>
@@ -150,22 +151,12 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <summary>
         /// Retrieves the image stream by Applying the Select Filter
         /// </summary>
+        /// <param name="imageId">Image Id</param>
+        /// <param name="selectFilterImageParam">The parameters used to process the image</param>
         /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
-        public async Task<StreamContent> SelectFilter(string imageId)
+        public async Task<StreamContent> SelectFilter(string imageId, SelectFilterImageParam selectFilterImageParam)
         {
-            var selectFilterParam = new SelectFilterImageParam
-            {
-                EnhancementMode = EnhancementMode.EdgePro,
-                LutInfo = new LutInfo {
-                    Gamma = 2.3,
-                    Slope = 65535,
-                    Offset = 0,
-                    TotalGrays = 4096,
-                    MinimumGray = 3612,
-                    MaximumGray = 418
-                }
-            };
-            var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/select", selectFilterParam);
+            var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/select", selectFilterImageParam);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<StreamContent>();
         }
@@ -173,25 +164,12 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <summary>
         /// Retrieves the image stream by Applying the Supreme Filter
         /// </summary>
+        /// <param name="imageId">Image Id</param>
+        /// <param name="selectFilterImageParam">The parameters used to process the image</param>
         /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
-        public async Task<StreamContent> SupremeFilter(string imageId)
+        public async Task<StreamContent> SupremeFilter(string imageId, SupremeFilterImageParam supremeFilterImageParam)
         {
-            var supremeFilterParam = new SupremeFilterImageParam
-            {
-                TaskName = TaskName.General,
-                BinningMode = BinningMode.Binned2X2,
-                Sharpness = 70,
-                LutInfo = new LutInfo
-                {
-                    Gamma = 2.3,
-                    Slope = 65535,
-                    Offset = 0,
-                    TotalGrays = 4096,
-                    MinimumGray = 3612,
-                    MaximumGray = 418
-                }
-            };
-            var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/supreme", supremeFilterParam);
+            var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/supreme", supremeFilterImageParam);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<StreamContent>();
         }
@@ -199,24 +177,12 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <summary>
         /// Retrieves the image stream by Applying the Ae Filter
         /// </summary>
+        /// <param name="imageId">Image Id</param>
+        /// <param name="selectFilterImageParam">The parameters used to process the image</param>        
         /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
-        public async Task<StreamContent> AeFilter(string imageId)
+        public async Task<StreamContent> AeFilter(string imageId, OmegaFilterImageParam omegaFilterImageParam)
         {
-            var omegaFilterParam = new OmegaFilterImageParam
-            {
-                TaskName = TaskName.General,
-                Sharpness = 70,
-                LutInfo = new LutInfo
-                {
-                    Gamma = 2.3,
-                    Slope = 65535,
-                    Offset = 0,
-                    TotalGrays = 4096,
-                    MinimumGray = 3612,
-                    MaximumGray = 418
-                }
-            };
-            var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/ae", omegaFilterParam);
+            var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/ae", omegaFilterImageParam);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<StreamContent>();
         }
@@ -224,18 +190,11 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <summary>
         /// Retrieves the image stream by Applying the Unmap Filter
         /// </summary>
+        /// <param name="imageId">Image Id</param>
+        /// <param name="selectFilterImageParam">The parameters used to process the image</param>
         /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
-        public async Task<StreamContent> UnmapFilter(string imageId)
+        public async Task<StreamContent> UnmapFilter(string imageId, LutInfo lutInfo)
         {
-            var lutInfo = new LutInfo
-            {
-                Gamma = 2.3,
-                Slope = 65535,
-                Offset = 0,
-                TotalGrays = 4096,
-                MinimumGray = 3612,
-                MaximumGray = 418
-             };
             var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/unmap", lutInfo);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<StreamContent>();
