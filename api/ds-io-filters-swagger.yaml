@@ -10,7 +10,7 @@ servers:
   - url: 'https://localhost:43809/api/dsio/filters/v1'
     description: Default endpoint for local Sensor Plugin service
 
-tags: 
+tags:
   - name: Images
     description: Manage image resources for processing
   - name: Filters
@@ -22,7 +22,7 @@ paths:
       summary: Create Image Resource
       operationId: createImage
       description: |
-        Create a new image resource by uploading a 16-bit grayscale PNG image file.
+        Create a new image resource by uploading a 16-bit grayscale PNG image file. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.
       requestBody:
         content:
           image/png:
@@ -46,7 +46,7 @@ paths:
       summary: Create Modality Resource
       operationId: modalityImage
       description: |
-        Create a new image resource by referencing an image captured in a current modality session.
+        Create a new image resource by referencing an image captured in a current modality session. This resource will only be available as long as the modality session is active. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.
       requestBody:
         content:
           application/json:
@@ -69,7 +69,7 @@ paths:
       summary: Get Image Resource
       operationId: getImage
       description: Retrieves an image resource
-      parameters: 
+      parameters:
         - name: id
           in: path
           description: Id of the image resource to retrieve
@@ -92,7 +92,7 @@ paths:
       operationId: deleteImage
       description: |
         Deletes an image resource from the filters service. This image will no longer be available for processing.
-      parameters: 
+      parameters:
         - name: id
           in: path
           description: Id of the image resource to delete
@@ -105,7 +105,7 @@ paths:
           description: Successfully deleted resource
         '404':
           description: Image resource not found
-      
+
   /images/{id}/filters/unmap:
     post:
       tags: [Filters]
@@ -113,7 +113,7 @@ paths:
       operationId: unmapImage
       description: |
         Removes the gamma map, described by LutInfo, that was applied to the image and return the original image
-      parameters: 
+      parameters:
         - name: id
           in: path
           description: Id of the image resource to process
@@ -147,7 +147,7 @@ paths:
       operationId: filterSelect
       description: |
         Applies the Select Filter to the specified image resource and returns the filtered image. This filter is optimized for images acquired from Xios XG Select and CDR Elite sensors.
-      parameters: 
+      parameters:
         - name: id
           in: path
           description: Id of the image resource to process
@@ -180,7 +180,7 @@ paths:
       operationId: filterSupreme
       description: |
         Applies the Supreme Filter to the specified image resource and returns the filtered image.
-      parameters: 
+      parameters:
         - name: id
           in: path
           description: Id of the image resource to process
@@ -213,7 +213,7 @@ paths:
       operationId: filterAE
       description: |
         Applies the AE Filter to the specified image resource and returns the filtered image.
-      parameters: 
+      parameters:
         - name: id
           in: path
           description: Id of the image resource to process
@@ -258,6 +258,16 @@ components:
           description: The Url where the media resource can be downloaded.
           type: string
           example: "https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png"
+        createdOn:
+          description: Timestamp indicating the time that the resource was created.
+          type: string
+          format: date-time
+          example: 2021-05-03T10:56:00:00-04:00
+        expires:
+          description: Timestamp indicating the time that the resource will automatically expire and be deleted.
+          type: string
+          format: date-time
+          example: 2021-05-03T18:56:00:00-04:00
         modalitySession:
           description: |
             Optional object that when present indicates that the resource belongs to a session created with the Modality API.
@@ -276,7 +286,7 @@ components:
           description: Id of the image acquired by modality
           type: string
           example: 39db323b-198d-4219-b79e-ca918cde5be5
-            
+
     LutInfo:
         description: |
           Describes the lookup table (LUT) mapping applied to an image.
@@ -322,7 +332,7 @@ components:
         enhancementMode:
           description: The Select enhancement mode
           type: string
-          enum: 
+          enum:
             - none
             - smooth
             - edgeLow
@@ -340,7 +350,7 @@ components:
         task:
           description: The task associated with the filter
           type: string
-          enum: 
+          enum:
             - general
             - endodontic
             - periodontic
@@ -372,7 +382,7 @@ components:
         task:
           description: The task associated with the filter
           type: string
-          enum: 
+          enum:
             - general
             - endodontic
             - periodontic

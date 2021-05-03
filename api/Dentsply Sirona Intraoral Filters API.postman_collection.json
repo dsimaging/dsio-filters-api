@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a96268b0-44b4-4b7a-bce5-3c13141be12b",
+		"_postman_id": "162a93c8-74ff-48a3-a925-c580aa97d4a0",
 		"name": "Dentsply Sirona Intraoral Filters API",
 		"description": "This API is used to apply custom filters to images acquired from the DSIO Modality API.\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -21,7 +21,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\"deserunt mollit do\""
+							"raw": "\"sed anim dolor aliqua\""
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images",
@@ -32,7 +32,7 @@
 								"images"
 							]
 						},
-						"description": "Create a new image resource by uploading a 16-bit grayscale PNG image file.\n"
+						"description": "Create a new image resource by uploading a 16-bit grayscale PNG image file. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.\n"
 					},
 					"response": [
 						{
@@ -42,7 +42,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "\"deserunt mollit do\""
+									"raw": "\"sed anim dolor aliqua\""
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -64,7 +64,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1998-06-23T05:21:45.831Z\",\n \"expires\": \"1967-07-29T20:58:41.338Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Bad input parameter",
@@ -73,7 +73,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "\"deserunt mollit do\""
+									"raw": "\"sed anim dolor aliqua\""
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -104,7 +104,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "\"deserunt mollit do\""
+									"raw": "\"sed anim dolor aliqua\""
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -154,7 +154,7 @@
 								"modality"
 							]
 						},
-						"description": "Create a new image resource by referencing an image captured in a current modality session.\n"
+						"description": "Create a new image resource by referencing an image captured in a current modality session. This resource will only be available as long as the modality session is active. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.\n"
 					},
 					"response": [
 						{
@@ -187,7 +187,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1998-06-23T05:21:45.831Z\",\n \"expires\": \"1967-07-29T20:58:41.338Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Bad input parameter",
@@ -272,7 +272,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "deserunt mollit do",
+									"value": "sed anim dolor aliqua",
 									"description": "(Required) Id of the image resource to retrieve"
 								}
 							]
@@ -311,7 +311,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1998-06-23T05:21:45.831Z\",\n \"expires\": \"1967-07-29T20:58:41.338Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Image resource not found",
@@ -365,7 +365,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "deserunt mollit do",
+									"value": "sed anim dolor aliqua",
 									"description": "(Required) Id of the image resource to delete"
 								}
 							]
@@ -475,7 +475,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "deserunt mollit do",
+									"value": "sed anim dolor aliqua",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -520,7 +520,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "deserunt mollit do"
+							"body": "sed anim dolor aliqua"
 						},
 						{
 							"name": "Supplied LutInfo contains invalid parameters",
@@ -630,7 +630,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "deserunt mollit do",
+									"value": "sed anim dolor aliqua",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -675,7 +675,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "deserunt mollit do"
+							"body": "sed anim dolor aliqua"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -785,7 +785,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "deserunt mollit do",
+									"value": "sed anim dolor aliqua",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -830,7 +830,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "deserunt mollit do"
+							"body": "sed anim dolor aliqua"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -940,7 +940,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "deserunt mollit do",
+									"value": "sed anim dolor aliqua",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -985,7 +985,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "deserunt mollit do"
+							"body": "sed anim dolor aliqua"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
