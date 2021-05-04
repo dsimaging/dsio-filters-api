@@ -102,25 +102,32 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                    <Button x:Name="BtnCreateImage"
+                <Button x:Name="BtnCreateImage"
                             Grid.Row="0" Grid.Column="0"
                             Margin="6"
                             Padding="12, 6"
                             Click="BtnCreateImage_OnClick">Create Image</Button>
-                    <Button x:Name="BtnDeleteImage"
+                <Button x:Name="BtnCreateImageFromModalitySession"
                             Grid.Row="1" Grid.Column="0"
+                            Margin="6"
+                            Padding="12, 10"
+                            Click="BtnCreateImageFromModalitySession_OnClick">Create Image From Modality Session</Button>
+                <Button x:Name="BtnDeleteImage"
+                            Grid.Row="2" Grid.Column="0"
                             Margin="6,0"
                             Click="BtnDeleteImage_OnClick">Delete Image</Button>
-                    <TextBox x:Name="TbxFileName"  Grid.Row="0" Grid.Column="1" Margin="4" Text=""></TextBox>
+                <TextBox x:Name="TbxFileName" Grid.Row="0" Grid.Column="1" Margin="4" Text="" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
                 <Button x:Name="BtnBrowseFileOpen" Grid.Row="0" Grid.Column="2"
                             Margin="2, 4, 4, 4" Padding="12, 6" Click="BtnBrowseFileOpen_OnClick">Browse</Button>
-                    <TextBlock Grid.Row="1" Grid.Column="1" Margin="4" Text="{Binding SelectedImageResource.Id}"></TextBlock>
+                <TextBox x:Name="TbxModalitySession" Grid.Row="1" Grid.Column="1" Margin="4" Text="" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+                <TextBlock Grid.Row="2" Grid.Column="1" Margin="4" Text="{Binding SelectedImageResource.Id}"></TextBlock>
                 </Grid>
         </GroupBox>
     </Grid>

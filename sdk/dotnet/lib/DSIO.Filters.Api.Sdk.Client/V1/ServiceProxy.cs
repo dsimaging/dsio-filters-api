@@ -108,7 +108,7 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <returns>An ModalitySession of <see cref="ModalitySession" /> object</returns>
         public async Task<ImageResource> CreateImage(ModalitySession modalitySession)
         {
-            var response = await Client.PostAsJsonAsync("images", modalitySession);
+            var response = await Client.PostAsJsonAsync("images/modality", modalitySession);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<ImageResource>();
         }

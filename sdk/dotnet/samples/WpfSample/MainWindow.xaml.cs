@@ -1,20 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using DSIO.Filters.Api.Sdk.Types.V1;
 using Microsoft.Win32;
 
 namespace WpfSample
@@ -52,6 +37,12 @@ namespace WpfSample
         {
             // Create a new image
             ViewModel.UploadImage(TbxFileName.Text.ToString());
+        }
+
+        private void BtnCreateImageFromModalitySession_OnClick(object sender, RoutedEventArgs e)
+        {
+            // Create a new image
+            ViewModel.CreateImageFromModalitySession(TbxModalitySession.Text.ToString());
         }
 
         private void BtnDeleteImage_OnClick(object sender, RoutedEventArgs e)
