@@ -1,0 +1,127 @@
+﻿<Window x:Class="WpfSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfSample"
+        mc:Ignorable="d"
+        Closing="MainWindow_OnClosing"
+        Title="WPF Sample"
+        Height="700" Width="800">
+    <Grid Margin="6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- API Credentials Login -->
+        <GroupBox Grid.Row="0" Margin="4">
+            <GroupBox.Header>
+                <Label>Login</Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0">Api Username:</Label>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ApiUserName}"></TextBox>
+                <Label Grid.Row="1" Grid.Column="0">Api Key:</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ApiKey}"></TextBox>
+
+                <Button x:Name="BtnLogin"
+                        Grid.Row="0" Grid.Column="2"
+                        Margin="5"
+                        Click="BtnLogin_OnClick"
+                        Width="150">
+                    Login
+                </Button>
+                <TextBlock Grid.Row="1" Grid.Column="2"
+                           Margin="5"
+                           TextAlignment="Center"
+                           Text="{Binding LoginStatus}" />
+            </Grid>
+        </GroupBox>
+
+        <!-- Images section -->
+        <GroupBox Grid.Row="1" Margin="4" IsEnabled="{Binding IsAuthenticated}">
+            <GroupBox.Header>
+                <Label>Images</Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="BtnGetImageDetails"
+                        Grid.Row="0" Grid.Column="0"
+                        Margin="6"
+                        Padding="12, 6"
+                        Click="BtnGetImageDetails_OnClick">
+                    Get Image Details
+                </Button>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ImageId}"></TextBox>
+
+                <!-- Show DeviceInfo labels in col 0 -->
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <TextBlock>Image Id:</TextBlock>
+                    <TextBlock>Media Type:</TextBlock>
+                    <TextBlock>Url:</TextBlock>
+                    <TextBlock>Modality Session Id:</TextBlock>
+                    <TextBlock>Modality Session Image Id:</TextBlock>
+                </StackPanel>
+
+                <!-- Show DeviceInfo data in col 1 -->
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Id}"></TextBlock>
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.MediaType}"></TextBlock>
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Url}"></TextBlock>
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ModalitySession.SessionId}"></TextBlock>
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ModalitySession.ImageId}"></TextBlock>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <!-- Images section -->
+        <GroupBox Grid.Row="2" Margin="4" IsEnabled="{Binding IsAuthenticated}">
+            <GroupBox.Header>
+                <Label>Images</Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                    <Button x:Name="BtnCreateImage"
+                            Grid.Row="0" Grid.Column="0"
+                            Margin="6"
+                            Padding="12, 6"
+                            Click="BtnCreateImage_OnClick">Create Image</Button>
+                    <Button x:Name="BtnDeleteImage"
+                            Grid.Row="1" Grid.Column="0"
+                            Margin="6,0"
+                            Click="BtnDeleteImage_OnClick">Delete Image</Button>
+                    <TextBox x:Name="TbxFileName"  Grid.Row="0" Grid.Column="1" Margin="4" Text=""></TextBox>
+                <Button x:Name="BtnBrowseFileOpen" Grid.Row="0" Grid.Column="2"
+                            Margin="2, 4, 4, 4" Padding="12, 6" Click="BtnBrowseFileOpen_OnClick">Browse</Button>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Margin="4" Text="{Binding SelectedImageResource.Id}"></TextBlock>
+                </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

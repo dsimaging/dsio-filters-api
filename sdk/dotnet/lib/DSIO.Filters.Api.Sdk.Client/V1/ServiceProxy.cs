@@ -92,18 +92,10 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// Create a new image by uploading a 16-bit grayscale PNG image file.
         /// </summary>
         /// <returns>An ImageResource of <see cref="ImageResource" /> object</returns>
-        public async Task<ImageResource> UploadImage(string imageFileName)
+        public async Task<ImageResource> UploadImage(StreamContent imageContent, string ContentMediaType)
         {
-            var fileStream = new FileStream(imageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-            var content = new MultipartFormDataContent();
-            content.Add(new StringContent(imageFileName), "x-file-name");
-            content.Add(new StringContent("true"), "x-convert-document");
-            content.Add(new StringContent("Agion"), "x-source");
-            content.Add(new StringContent("application/octet-stream"), "Content-Type");
-            var imageContent = new StreamContent(fileStream);
-            content.Add(imageContent, "image");
-
-            var response = await Client.PostAsync("images", content);
+            imageContent.Headers.ContentType = new MediaTypeHeaderValue(ContentMediaType);
+            var response = await Client.PostAsync("images", imageContent);
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadAsAsync<ImageResource>();
@@ -141,7 +133,7 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <returns>An id of <see cref="id" /> object</returns>
         public async Task<HttpStatusCode> DeleteImage(string id)
         {
-            var response = await Client.GetAsync("images/" + id);
+            var response = await Client.DeleteAsync("images/" + id);
             response.EnsureSuccessStatusCode();
             return response.StatusCode;
         }
