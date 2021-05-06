@@ -36,13 +36,13 @@ namespace WpfSample
         private void BtnCreateImage_OnClick(object sender, RoutedEventArgs e)
         {
             // Create a new image
-            ViewModel.UploadImage(TbxFileName.Text.ToString());
+            ViewModel.UploadImage();
         }
 
         private void BtnCreateImageFromModalitySession_OnClick(object sender, RoutedEventArgs e)
         {
             // Create a new image
-            ViewModel.CreateImageFromModalitySession(TbxModalitySession.Text.ToString());
+            ViewModel.CreateImageFromModalitySession();
         }
 
         private void BtnDeleteImage_OnClick(object sender, RoutedEventArgs e)
@@ -51,12 +51,38 @@ namespace WpfSample
             ViewModel.DeleteImage();
         }
 
+        private void BtnSelectFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            // Select Filter
+            ViewModel.SelectFilter();
+        }
+
+        private void BtnSupremeFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            // Supreme Filter
+            ViewModel.SupremeFilter();
+        }
+
+        private void BtnAeFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            // Ae Filter
+            ViewModel.AeFilter();
+        }
+
+        private void BtnUnmapFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            // Unmap Filter
+            ViewModel.UnmapFilter();
+        }
+
         private void BtnBrowseFileOpen_OnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "image files (*.png)|*.png";
             if (openFileDialog.ShowDialog() == true)
-                TbxFileName.Text = openFileDialog.FileName;
+            {
+                ViewModel.UploadImageFileName = openFileDialog.FileName;
+            }
         }
     }
 }

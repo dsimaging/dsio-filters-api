@@ -21,6 +21,57 @@ namespace WpfSample
         public MainViewModel()
         {
             _serviceProxy = new ServiceProxy();
+            SetDefaultValues();
+        }
+        void SetDefaultValues()
+        {
+            SelectFilterParam = @"{
+'enhancementMode': 'edgePro',
+'lutInfo': {
+                'gamma': 2.3,
+'slope': 65535,
+'offset': 0,
+'totalGrays': 4096,
+'minimumGray': 3612,
+'maximumGray': 418
+}
+        }";
+
+            SupremeFilterParam = @"{
+  'task': 'general',
+  'binningMode': 'binned2X2',
+  'sharpness': 70,
+  'lutInfo': {
+                'gamma': 2.3,
+    'slope': 65535,
+    'offset': 0,
+    'totalGrays': 4096,
+    'minimumGray': 3612,
+    'maximumGray': 418
+  }
+        }";
+
+            OmegaFilterParam = @"{
+  'task': 'general',
+  'sharpness': 70,
+  'lutInfo': {
+                'gamma': 2.3,
+    'slope': 65535,
+    'offset': 0,
+    'totalGrays': 4096,
+    'minimumGray': 3612,
+    'maximumGray': 418
+  }
+        }";
+
+            UnmapFilterParam = @"{
+  'gamma': 2.3,
+  'slope': 65535,
+  'offset': 0,
+  'totalGrays': 4096,
+  'minimumGray': 3612,
+  'maximumGray': 418
+}";
         }
 
         #region INotifyPropertyChanged
@@ -106,6 +157,149 @@ namespace WpfSample
             }
         }
 
+        private string _uploadImageFileName;
+        public string UploadImageFileName
+        {
+            get => _uploadImageFileName;
+            set
+            {
+                if (value != _uploadImageFileName)
+                {
+                    _uploadImageFileName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _modalitySessionParam;
+        public string ModalitySessionParam
+        {
+            get => _modalitySessionParam;
+            set
+            {
+                if (value != _modalitySessionParam)
+                {
+                    _modalitySessionParam = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _selectFilterParam;
+        public string SelectFilterParam
+        {
+            get => _selectFilterParam;
+            set
+            {
+                if (value != _selectFilterParam)
+                {
+                    _selectFilterParam = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _supremeFilterParam;
+        public string SupremeFilterParam
+        {
+            get => _supremeFilterParam;
+            set
+            {
+                if (value != _supremeFilterParam)
+                {
+                    _supremeFilterParam = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _omegaFilterParam;
+        public string OmegaFilterParam
+        {
+            get => _omegaFilterParam;
+            set
+            {
+                if (value != _omegaFilterParam)
+                {
+                    _omegaFilterParam = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _unmapFilterParam;
+        public string UnmapFilterParam
+        {
+            get => _unmapFilterParam;
+            set
+            {
+                if (value != _unmapFilterParam)
+                {
+                    _unmapFilterParam = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _selectFilteredImageFileName;
+        public string SelectFilteredImageFileName
+        {
+            get => _selectFilteredImageFileName;
+            set
+            {
+                if (value != _selectFilteredImageFileName)
+                {
+                    _selectFilteredImageFileName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        private string _supremeFilteredImageFileName;
+        public string SupremeFilteredImageFileName
+        {
+            get => _supremeFilteredImageFileName;
+            set
+            {
+                if (value != _supremeFilteredImageFileName)
+                {
+                    _supremeFilteredImageFileName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        private string _aeFilteredImageFileName;
+        public string AeFilteredImageFileName
+        {
+            get => _aeFilteredImageFileName;
+            set
+            {
+                if (value != _aeFilteredImageFileName)
+                {
+                    _aeFilteredImageFileName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        private string _unmapFilteredImageFileName;
+        public string UnmapFilteredImageFileName
+        {
+            get => _unmapFilteredImageFileName;
+            set
+            {
+                if (value != _unmapFilteredImageFileName)
+                {
+                    _unmapFilteredImageFileName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public void Login()
         {
             // Update status
@@ -144,6 +338,11 @@ namespace WpfSample
                 if (value != _selectedImageResource)
                 {
                     _selectedImageResource = value;
+                    ImageId = string.Empty;
+                    if (SelectedImageResource != null)
+                    {
+                        ImageId = SelectedImageResource.Id;
+                    }
                     OnPropertyChanged();
                 }
             }
@@ -151,9 +350,9 @@ namespace WpfSample
         #endregion
 
         #region Images
-        public void UploadImage(string imageFileName)
+        public void UploadImage()
         {
-            var fileStream = new FileStream(imageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            var fileStream = new FileStream(UploadImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
             var imageContent = new StreamContent(fileStream);
             // Upload a new image
             _serviceProxy.UploadImage(imageContent, "image/png").ContinueWith(task =>
@@ -169,9 +368,9 @@ namespace WpfSample
             });
         }
 
-        public void CreateImageFromModalitySession(string modalitySessionJson)
+        public void CreateImageFromModalitySession()
         {
-            ModalitySession modalitySession = Newtonsoft.Json.JsonConvert.DeserializeObject<ModalitySession>(modalitySessionJson);
+            ModalitySession modalitySession = Newtonsoft.Json.JsonConvert.DeserializeObject<ModalitySession>(ModalitySessionParam);
             // Create image from Modality Session
             _serviceProxy.CreateImage(modalitySession).ContinueWith(task =>
             {
@@ -235,10 +434,91 @@ namespace WpfSample
         /// <summary>
         /// Select Filter
         /// </summary>
-        private void SelectFilter(SelectFilterImageParam selectFilterImageParam)
+        public void SelectFilter()
         {
-
+            SelectFilteredImageFileName = string.Empty;
+            SelectFilterImageParam selectFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SelectFilterImageParam>(SelectFilterParam);
+            // Apply Select Filter
+            _serviceProxy.SelectFilter(ImageId, selectFilterImageParam).ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    MessageBox.Show(task.Exception?.Message);
+                }
+                else if (task.IsCompleted)
+                {
+                    SelectFilteredImageFileName = System.Environment.CurrentDirectory + @"\SelectFilteredImage.png";
+                    task.Result.WriteToFile(SelectFilteredImageFileName);
+                }
+            });
         }
+
+        /// <summary>
+        /// Supreme Filter
+        /// </summary>
+        public void SupremeFilter()
+        {
+            SupremeFilteredImageFileName = string.Empty;
+            SupremeFilterImageParam supremeFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SupremeFilterImageParam>(SupremeFilterParam);
+            // Apply Supreme Filter
+            _serviceProxy.SupremeFilter(ImageId, supremeFilterImageParam).ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    MessageBox.Show(task.Exception?.Message);
+                }
+                else if (task.IsCompleted)
+                {
+                    SupremeFilteredImageFileName = System.Environment.CurrentDirectory + @"\SupremeFilteredImage.png";
+                    task.Result.WriteToFile(SupremeFilteredImageFileName);
+                }
+            });
+        }
+
+        /// <summary>
+        /// Ae Filter
+        /// </summary>
+        public void AeFilter()
+        {
+            AeFilteredImageFileName = string.Empty;
+            OmegaFilterImageParam omegaFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<OmegaFilterImageParam>(OmegaFilterParam);
+            // Apply Ae Filter
+            _serviceProxy.AeFilter(ImageId, omegaFilterImageParam).ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    MessageBox.Show(task.Exception?.Message);
+                }
+                else if (task.IsCompleted)
+                {
+                    AeFilteredImageFileName = System.Environment.CurrentDirectory + @"\AeFilteredImage.png";
+                    task.Result.WriteToFile(AeFilteredImageFileName);
+                }
+            });
+        }
+
+        /// <summary>
+        /// Unmap Filter
+        /// </summary>
+        public void UnmapFilter()
+        {
+            UnmapFilteredImageFileName = string.Empty;
+            LutInfo lutInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<LutInfo>(UnmapFilterParam);
+            // Apply Unmap Filter
+            _serviceProxy.UnmapFilter(ImageId, lutInfo).ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    MessageBox.Show(task.Exception?.Message);
+                }
+                else if (task.IsCompleted)
+                {
+                    UnmapFilteredImageFileName = System.Environment.CurrentDirectory + @"\UnmapFilteredImage.png";
+                    task.Result.WriteToFile(UnmapFilteredImageFileName);
+                }
+            });
+        }
+
         #endregion
     }
 }

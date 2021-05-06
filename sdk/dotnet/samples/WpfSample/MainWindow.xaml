@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Closing="MainWindow_OnClosing"
         Title="WPF Sample"
-        Height="700" Width="800">
+        Height="800" Width="800">
     <Grid Margin="6">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -59,47 +59,6 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Button x:Name="BtnGetImageDetails"
-                        Grid.Row="0" Grid.Column="0"
-                        Margin="6"
-                        Padding="12, 6"
-                        Click="BtnGetImageDetails_OnClick">
-                    Get Image Details
-                </Button>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ImageId}"></TextBox>
-
-                <!-- Show DeviceInfo labels in col 0 -->
-                <StackPanel Grid.Row="1" Grid.Column="0">
-                    <TextBlock>Image Id:</TextBlock>
-                    <TextBlock>Media Type:</TextBlock>
-                    <TextBlock>Url:</TextBlock>
-                    <TextBlock>Modality Session Id:</TextBlock>
-                    <TextBlock>Modality Session Image Id:</TextBlock>
-                </StackPanel>
-
-                <!-- Show DeviceInfo data in col 1 -->
-                <StackPanel Grid.Row="1" Grid.Column="1">
-                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Id}"></TextBlock>
-                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.MediaType}"></TextBlock>
-                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Url}"></TextBlock>
-                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ModalitySession.SessionId}"></TextBlock>
-                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ModalitySession.ImageId}"></TextBlock>
-                </StackPanel>
-            </Grid>
-        </GroupBox>
-
-        <!-- Images section -->
-        <GroupBox Grid.Row="2" Margin="4" IsEnabled="{Binding IsAuthenticated}">
-            <GroupBox.Header>
-                <Label>Images</Label>
-            </GroupBox.Header>
-            <Grid>
-                <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -114,21 +73,100 @@
                             Margin="6"
                             Padding="12, 6"
                             Click="BtnCreateImage_OnClick">Create Image</Button>
+                <TextBox x:Name="TbxFileName" Grid.Row="0" Grid.Column="1" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding UploadImageFileName}" ></TextBox>
+                <Button x:Name="BtnBrowseFileOpen" Grid.Row="0" Grid.Column="2"
+                            Margin="2, 4, 4, 4" Padding="12, 6" Click="BtnBrowseFileOpen_OnClick">Browse</Button>
+
                 <Button x:Name="BtnCreateImageFromModalitySession"
                             Grid.Row="1" Grid.Column="0"
                             Margin="6"
                             Padding="12, 10"
                             Click="BtnCreateImageFromModalitySession_OnClick">Create Image From Modality Session</Button>
+                <TextBox x:Name="TbxModalitySession" Grid.Row="1" Grid.Column="1" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding ModalitySessionParam}"></TextBox>
+
+                <Button x:Name="BtnGetImageDetails"
+                        Grid.Row="2" Grid.Column="0"
+                        Margin="6"
+                        Padding="12, 6"
+                        Click="BtnGetImageDetails_OnClick">
+                    Get Image Details
+                </Button>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ImageId}" Margin="6"></TextBox>
+
+                <!-- Show DeviceInfo labels in col 0 -->
+                <StackPanel Grid.Row="3" Grid.Column="0" Margin="6">
+                    <TextBlock>Image Id:</TextBlock>
+                    <TextBlock>Media Type:</TextBlock>
+                    <TextBlock>Url:</TextBlock>
+                    <TextBlock>Modality Session Id:</TextBlock>
+                    <TextBlock>Modality Session Image Id:</TextBlock>
+                </StackPanel>
+                <!-- Show DeviceInfo data in col 1 -->
+                <StackPanel Grid.Row="3" Grid.Column="1">
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Id}"></TextBlock>
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.MediaType}"></TextBlock>
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Url}"></TextBlock>
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ModalitySession.SessionId}"></TextBlock>
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ModalitySession.ImageId}"></TextBlock>
+                </StackPanel>
+
                 <Button x:Name="BtnDeleteImage"
-                            Grid.Row="2" Grid.Column="0"
+                            Grid.Row="4" Grid.Column="0"
                             Margin="6,0"
                             Click="BtnDeleteImage_OnClick">Delete Image</Button>
-                <TextBox x:Name="TbxFileName" Grid.Row="0" Grid.Column="1" Margin="4" Text="" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
-                <Button x:Name="BtnBrowseFileOpen" Grid.Row="0" Grid.Column="2"
-                            Margin="2, 4, 4, 4" Padding="12, 6" Click="BtnBrowseFileOpen_OnClick">Browse</Button>
-                <TextBox x:Name="TbxModalitySession" Grid.Row="1" Grid.Column="1" Margin="4" Text="" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
-                <TextBlock Grid.Row="2" Grid.Column="1" Margin="4" Text="{Binding SelectedImageResource.Id}"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="1" Margin="4" Text="{Binding SelectedImageResource.Id}"></TextBlock>
                 </Grid>
         </GroupBox>
+
+        <!-- Images section -->
+        <GroupBox Grid.Row="2" Margin="4" IsEnabled="{Binding IsAuthenticated}">
+            <GroupBox.Header>
+                <Label>Filters</Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="190" />
+                    <ColumnDefinition Width="185" />
+                    <ColumnDefinition Width="180" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="BtnSelectFilter"
+                            Grid.Row="1" Grid.Column="0"
+                            Margin="6"
+                            Padding="12, 10"
+                            Click="BtnSelectFilter_OnClick">Select Filter</Button>
+                <TextBox x:Name="TbxSelectFilter" Grid.Row="0" Grid.Column="0" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding SelectFilterParam}"></TextBox>
+                <Button x:Name="BtnSupremeFilter"
+                            Grid.Row="1" Grid.Column="1"
+                            Margin="6"
+                            Padding="12, 10"
+                            Click="BtnSupremeFilter_OnClick">Supreme Filter</Button>
+                <TextBox x:Name="TbxSupremeFilter" Grid.Row="0" Grid.Column="1" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding SupremeFilterParam}"></TextBox>
+                <Button x:Name="BtnAeFilter"
+                            Grid.Row="1" Grid.Column="2"
+                            Margin="6"
+                            Padding="12, 10"
+                            Click="BtnAeFilter_OnClick">AE Filter</Button>
+                <TextBox x:Name="TbxAeFilter" Grid.Row="0" Grid.Column="2" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding OmegaFilterParam}"></TextBox>
+                <Button x:Name="BtnUnmapFilter"
+                            Grid.Row="1" Grid.Column="3"
+                            Margin="6"
+                            Padding="12, 10"
+                            Click="BtnUnmapFilter_OnClick">Unmap Filter</Button>
+                <TextBox x:Name="TbxUnmapFilter" Grid.Row="0" Grid.Column="3" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding UnmapFilterParam}"></TextBox>
+                <Image x:Name="SelectFilteredImage" Grid.Row="4" Grid.Column="0" Source="{Binding SelectFilteredImageFileName}" />
+                <Image x:Name="SupremeFilteredImage" Grid.Row="4" Grid.Column="1" Source="{Binding SupremeFilteredImageFileName}" />
+                <Image x:Name="AeFilteredImage" Grid.Row="4" Grid.Column="2" Source="{Binding AeFilteredImageFileName}" />
+                <Image x:Name="UnmapFilteredImage" Grid.Row="4" Grid.Column="3" Source="{Binding UnmapFilteredImageFileName}" />
+            </Grid>
+        </GroupBox>
+
     </Grid>
 </Window>

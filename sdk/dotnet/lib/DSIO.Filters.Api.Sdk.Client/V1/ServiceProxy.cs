@@ -146,11 +146,12 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <param name="imageId">Image Id</param>
         /// <param name="selectFilterImageParam">The parameters used to process the image</param>
         /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
-        public async Task<StreamContent> SelectFilter(string imageId, SelectFilterImageParam selectFilterImageParam)
+        public async Task<Stream> SelectFilter(string imageId, SelectFilterImageParam selectFilterImageParam)
         {
             var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/select", selectFilterImageParam);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<StreamContent>();
+            var stream = await response.Content.ReadAsStreamAsync();
+            return stream;
         }
 
         /// <summary>
@@ -159,11 +160,11 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <param name="imageId">Image Id</param>
         /// <param name="selectFilterImageParam">The parameters used to process the image</param>
         /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
-        public async Task<StreamContent> SupremeFilter(string imageId, SupremeFilterImageParam supremeFilterImageParam)
+        public async Task<Stream> SupremeFilter(string imageId, SupremeFilterImageParam supremeFilterImageParam)
         {
             var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/supreme", supremeFilterImageParam);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<StreamContent>();
+            return await response.Content.ReadAsStreamAsync();
         }
 
         /// <summary>
@@ -172,11 +173,11 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <param name="imageId">Image Id</param>
         /// <param name="selectFilterImageParam">The parameters used to process the image</param>        
         /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
-        public async Task<StreamContent> AeFilter(string imageId, OmegaFilterImageParam omegaFilterImageParam)
+        public async Task<Stream> AeFilter(string imageId, OmegaFilterImageParam omegaFilterImageParam)
         {
             var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/ae", omegaFilterImageParam);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<StreamContent>();
+            return await response.Content.ReadAsStreamAsync();
         }
 
         /// <summary>
@@ -185,11 +186,11 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <param name="imageId">Image Id</param>
         /// <param name="selectFilterImageParam">The parameters used to process the image</param>
         /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
-        public async Task<StreamContent> UnmapFilter(string imageId, LutInfo lutInfo)
+        public async Task<Stream> UnmapFilter(string imageId, LutInfo lutInfo)
         {
             var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/unmap", lutInfo);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<StreamContent>();
+            return await response.Content.ReadAsStreamAsync();
         }
         #endregion
 
