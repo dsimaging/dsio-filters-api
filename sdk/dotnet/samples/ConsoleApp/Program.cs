@@ -32,88 +32,97 @@ namespace ConsoleApp
             try
             {
                 // Test availability
-                Console.WriteLine("Checking availability of service...");
+                Console.WriteLine("Checking availability of service...\n");
                 var isAvailable = await service.IsServiceAvailable();
-                Console.WriteLine($"Filters Api V1 service isAvailable: {isAvailable}");
+                Console.WriteLine($"Filters Api V1 service isAvailable: {isAvailable}\n");
 
                 if (isAvailable)
                 {
                     ImageResource imageResource = null;
 
-                    // Test Upload Image
-                    Console.Write("Enter the Image File URL Input Parameter: ");
-                    string uploadImageFileName = Console.ReadLine();
-                    var fileStream = new FileStream(uploadImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                    var imageContent = new StreamContent(fileStream);
-                    // Upload a new image
-                    service.UploadImage(imageContent, "image/png").ContinueWith(task =>
+                    try
                     {
-                        if (task.IsFaulted)
+                        // Test Upload Image
+                        Console.Write("Enter the Image File URL Input Parameter: ");
+                        string uploadImageFileName = Console.ReadLine();
+                        var fileStream = new FileStream(uploadImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                        var imageContent = new StreamContent(fileStream);
+                        // Upload a new image
+                        service.UploadImage(imageContent, "image/png").ContinueWith(task =>
                         {
-                            Console.WriteLine(task.Exception?.Message);
-                        }
-                        else if (task.IsCompleted)
-                        {
-                            imageResource = task.Result;
-                            Console.WriteLine($"Filters Api V1 service Image Resource: {imageResource.Url}");
-                        }
-                    });
-
-                    // Test Create Image From a Modality Session
-                    Console.Write("Enter the Modality Session Input Parameters: ");
-                    string modalitySessionParam = Console.ReadLine();
-                    ModalitySession modalitySession = Newtonsoft.Json.JsonConvert.DeserializeObject<ModalitySession>(modalitySessionParam);
-                    // Create image from Modality Session
-                    service.CreateImage(modalitySession).ContinueWith(task =>
-                    {
-                        if (task.IsFaulted)
-                        {
-                            Console.WriteLine(task.Exception?.Message);
-                        }
-                        else if (task.IsCompleted)
-                        {
-                            imageResource = task.Result;
-                        }
-                    });
-                    if (imageResource != null)
-                    {
-                        Console.WriteLine($"Filters Api V1 service Image Resource: {imageResource.Url}");
+                            if (task.IsFaulted)
+                            {
+                                Console.WriteLine(task.Exception?.Message + "\n");
+                            }
+                            else if (task.IsCompleted)
+                            {
+                                imageResource = task.Result;
+                                Console.WriteLine($"Filters Api V1 service Image Resource: {imageResource.Id}\n");
+                                Console.WriteLine($"Filters Api V1 service Image Resource: {imageResource.Url}\n");
+                            }
+                        });
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        Console.WriteLine($"Filters Api V1 service Image Resource Not Found");
+                        Console.WriteLine($"Filters Api V1 service Test Upload Image Exception: {ex.Message}\n");
                     }
 
-                    // Test Get Image
-                    Console.Write("Enter the Image Id: ");
-                    var imageId = Console.ReadLine();
-                    imageResource = await service.GetImage(imageId);
-                    if (imageResource != null)
-                    {
-                        Console.WriteLine($"Filters Api V1 service Image Resource: {imageResource.Url}");
+                    try { 
+                        // Test Create Image From a Modality Session
+                        Console.Write("Enter the Modality Session Input Parameters: ");
+                        string modalitySessionParam = Console.ReadLine();
+                        ModalitySession modalitySession = Newtonsoft.Json.JsonConvert.DeserializeObject<ModalitySession>(modalitySessionParam);
+                        // Create image from Modality Session
+                        service.CreateImage(modalitySession).ContinueWith(task =>
+                        {
+                            if (task.IsFaulted)
+                            {
+                                Console.WriteLine(task.Exception?.Message);
+                            }
+                            else if (task.IsCompleted)
+                            {
+                                imageResource = task.Result;
+                            }
+                        });
+                        if (imageResource != null)
+                        {
+                            Console.WriteLine($"Filters Api V1 service Image Resource: {imageResource.Url}\n");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Filters Api V1 service Image Resource Not Found\n");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        Console.WriteLine($"Filters Api V1 service Image Resource Not Found");
+                        Console.WriteLine($"Filters Api V1 service Test Create Image From a Modality Session Exception: {ex.Message}\n");
                     }
 
-                    // Test Delete Image
-                    Console.Write("Enter the Image Id: ");
-                    imageId = Console.ReadLine();
-                    HttpStatusCode httpStatus = await service.DeleteImage(imageId);
-                    if (httpStatus == HttpStatusCode.OK)
-                    {
-                        Console.WriteLine($"Filters Api V1 service Image Resource: {imageResource.Url}");
+                    try 
+                    { 
+                        // Test Get Image
+                        Console.Write("Enter the Image Id: ");
+                        var imageId = Console.ReadLine();
+                        imageResource = await service.GetImage(imageId);
+                        if (imageResource != null)
+                        {
+                            Console.WriteLine($"Filters Api V1 service Image Resource: {imageResource.Url}\n");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Filters Api V1 service Image Resource Not Found\n");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        Console.WriteLine($"Filters Api V1 service Image Resource Not Found");
+                        Console.WriteLine($"Filters Api V1 service Test Get Image Exception: {ex.Message}\n");
                     }
 
+                    try { 
                     // Test Select Filter
                     string selectFilteredImageFileName = string.Empty;
                     Console.Write("Enter the Image Id: ");
-                    imageId = Console.ReadLine();
+                    var imageId = Console.ReadLine();
                     Console.Write("Enter the Select Filter Input Parameters: ");
                     string selectFilterParam = Console.ReadLine();
                     SelectFilterImageParam selectFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SelectFilterImageParam>(selectFilterParam);
@@ -122,77 +131,124 @@ namespace ConsoleApp
                     {
                         if (task.IsFaulted)
                         {
-                            Console.WriteLine(task.Exception?.Message);
+                            Console.WriteLine(task.Exception?.Message + "\n");
                         }
                         else if (task.IsCompleted)
                         {
                             selectFilteredImageFileName = System.Environment.CurrentDirectory + @"\SelectFilteredImage.png";
                             task.Result.WriteToFile(selectFilteredImageFileName);
+                            Console.WriteLine($"Filters Api V1 service Select Filtered Image Output URL: {selectFilteredImageFileName}\n");
                         }
                     });
-
-                    // Test Supreme Filter
-                    string supremeFilteredImageFileName = string.Empty;
-                    Console.Write("Enter the Image Id: ");
-                    imageId = Console.ReadLine();
-                    Console.Write("Enter the Supreme Filter Input Parameters: ");
-                    string supremeFilterParam = Console.ReadLine();
-                    SupremeFilterImageParam supremeFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SupremeFilterImageParam>(supremeFilteredImageFileName);
-                    // Apply Select Filter
-                    service.SupremeFilter(imageId, supremeFilterImageParam).ContinueWith(task =>
+                    }
+                    catch (Exception ex)
                     {
-                        if (task.IsFaulted)
-                        {
-                            Console.WriteLine(task.Exception?.Message);
-                        }
-                        else if (task.IsCompleted)
-                        {
-                            supremeFilteredImageFileName = System.Environment.CurrentDirectory + @"\SupremeFilteredImage.png";
-                            task.Result.WriteToFile(supremeFilteredImageFileName);
-                        }
-                    });
+                        Console.WriteLine($"Filters Api V1 service Test Select Image Exception: {ex.Message}\n");
+                    }
 
-                    // Test AE Filter
-                    string aeFilteredImageFileName = string.Empty;
-                    Console.Write("Enter the Image Id: ");
-                    imageId = Console.ReadLine();
-                    Console.Write("Enter the Ae Filter Input Parameters: ");
-                    string omegaFilterParam = Console.ReadLine();
-                    OmegaFilterImageParam omegaFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<OmegaFilterImageParam>(omegaFilterParam);
-                    // Apply ae Filter
-                    service.AeFilter(imageId, omegaFilterImageParam).ContinueWith(task =>
+                    try
+                    { 
+                        // Test Supreme Filter
+                        string supremeFilteredImageFileName = string.Empty;
+                        Console.Write("Enter the Image Id: ");
+                        var imageId = Console.ReadLine();
+                        Console.Write("Enter the Supreme Filter Input Parameters: ");
+                        string supremeFilterParam = Console.ReadLine();
+                        SupremeFilterImageParam supremeFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SupremeFilterImageParam>(supremeFilteredImageFileName);
+                        // Apply Select Filter
+                        service.SupremeFilter(imageId, supremeFilterImageParam).ContinueWith(task =>
+                        {
+                            if (task.IsFaulted)
+                            {
+                                Console.WriteLine(task.Exception?.Message + "\n");
+                            }
+                            else if (task.IsCompleted)
+                            {
+                                supremeFilteredImageFileName = System.Environment.CurrentDirectory + @"\SupremeFilteredImage.png";
+                                task.Result.WriteToFile(supremeFilteredImageFileName);
+                                Console.WriteLine($"Filters Api V1 service Supreme Filtered Image Output URL: {supremeFilteredImageFileName}\n");
+                            }
+                        });
+                    }
+                    catch (Exception ex)
                     {
-                        if (task.IsFaulted)
-                        {
-                            Console.WriteLine(task.Exception?.Message);
-                        }
-                        else if (task.IsCompleted)
-                        {
-                            aeFilteredImageFileName = System.Environment.CurrentDirectory + @"\AEFilteredImage.png";
-                            task.Result.WriteToFile(aeFilteredImageFileName);
-                        }
-                    });
+                        Console.WriteLine($"Filters Api V1 service Test Supreme Image Exception: {ex.Message}\n");
+                    }
 
-                    // Test Unmap Filter
-                    string UnmapFilteredImageFileName = string.Empty;
-                    Console.Write("Enter the Image Id: ");
-                    imageId = Console.ReadLine();
-                    Console.Write("Enter the Unmap Filter Input Parameters: ");
-                    string unmapFilterParam = Console.ReadLine();
-                    LutInfo lutInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<LutInfo>(unmapFilterParam);
-                    // Apply Unmap Filter
-                    service.UnmapFilter(imageId, lutInfo).ContinueWith(task =>
+                    try { 
+                        // Test AE Filter
+                        string aeFilteredImageFileName = string.Empty;
+                        Console.Write("Enter the Image Id: ");
+                        var imageId = Console.ReadLine();
+                        Console.Write("Enter the Ae Filter Input Parameters: ");
+                        string omegaFilterParam = Console.ReadLine();
+                        OmegaFilterImageParam omegaFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<OmegaFilterImageParam>(omegaFilterParam);
+                        // Apply ae Filter
+                        service.AeFilter(imageId, omegaFilterImageParam).ContinueWith(task =>
+                        {
+                            if (task.IsFaulted)
+                            {
+                                Console.WriteLine(task.Exception?.Message + "\n");
+                            }
+                            else if (task.IsCompleted)
+                            {
+                                aeFilteredImageFileName = System.Environment.CurrentDirectory + @"\AEFilteredImage.png";
+                                task.Result.WriteToFile(aeFilteredImageFileName);
+                                Console.WriteLine($"Filters Api V1 service AE Filtered Image Output URL: {aeFilteredImageFileName}\n");
+                            }
+                        });
+                    }
+                    catch (Exception ex)
                     {
-                        if (task.IsFaulted)
+                        Console.WriteLine($"Filters Api V1 service Test AE Image Exception: {ex.Message}\n");
+                    }
+
+                    try { 
+                        // Test Unmap Filter
+                        string UnmapFilteredImageFileName = string.Empty;
+                        Console.Write("Enter the Image Id: ");
+                        var imageId = Console.ReadLine();
+                        Console.Write("Enter the Unmap Filter Input Parameters: ");
+                        string unmapFilterParam = Console.ReadLine();
+                        LutInfo lutInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<LutInfo>(unmapFilterParam);
+                        // Apply Unmap Filter
+                        service.UnmapFilter(imageId, lutInfo).ContinueWith(task =>
                         {
-                            Console.WriteLine(task.Exception?.Message);
-                        }
-                        else if (task.IsCompleted)
+                            if (task.IsFaulted)
+                            {
+                                Console.WriteLine(task.Exception?.Message + "\n");
+                            }
+                            else if (task.IsCompleted)
+                            {
+                                UnmapFilteredImageFileName = System.Environment.CurrentDirectory + @"\UnmapFilteredImage.png";
+                                task.Result.WriteToFile(UnmapFilteredImageFileName);
+                                Console.WriteLine($"Filters Api V1 service Unmap Filtered Image Output URL: {UnmapFilteredImageFileName}\n");
+                            }
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Filters Api V1 service Test Unmap Image Exception: {ex.Message}\n");
+                    }
+
+                    try { 
+                        // Test Delete Image
+                        Console.Write("Enter the Image Id: ");
+                        var imageId = Console.ReadLine();
+                        HttpStatusCode httpStatus = await service.DeleteImage(imageId);
+                        if (httpStatus == HttpStatusCode.OK)
                         {
-                            UnmapFilteredImageFileName = System.Environment.CurrentDirectory + @"\UnmapFilteredImage.png";
-                            task.Result.WriteToFile(UnmapFilteredImageFileName);
+                            Console.WriteLine($"Filters Api V1 service Image Resource: {imageResource.Url}\n");
                         }
-                    });
+                        else
+                        {
+                            Console.WriteLine($"Filters Api V1 service Image Resource Not Found\n");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Filters Api V1 service Test Delete Image Exception: {ex.Message}\n");
+                    }
 
                     // We are now listening for changes in the Device list. Try
                     // changing the connected sensor of the Simulator to see examples
