@@ -161,10 +161,10 @@
                             Padding="12, 10"
                             Click="BtnUnmapFilter_OnClick">Unmap Filter</Button>
                 <TextBox x:Name="TbxUnmapFilter" Grid.Row="0" Grid.Column="3" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding UnmapFilterParam}"></TextBox>
-                <Image x:Name="SelectFilteredImage" Grid.Row="4" Grid.Column="0" Source="{Binding SelectFilteredImageFileName}" />
-                <Image x:Name="SupremeFilteredImage" Grid.Row="4" Grid.Column="1" Source="{Binding SupremeFilteredImageFileName}" />
-                <Image x:Name="AeFilteredImage" Grid.Row="4" Grid.Column="2" Source="{Binding AeFilteredImageFileName}" />
-                <Image x:Name="UnmapFilteredImage" Grid.Row="4" Grid.Column="3" Source="{Binding UnmapFilteredImageFileName}" />
+                <Image x:Name="SelectFilteredImage" Grid.Row="4" Grid.Column="0" />
+                <Image x:Name="SupremeFilteredImage" Grid.Row="4" Grid.Column="1" />
+                <Image x:Name="AeFilteredImage" Grid.Row="4" Grid.Column="2" />
+                <Image x:Name="UnmapFilteredImage" Grid.Row="4" Grid.Column="3" />
             </Grid>
         </GroupBox>
 

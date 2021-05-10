@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 
 namespace WpfSample
@@ -51,28 +53,36 @@ namespace WpfSample
             ViewModel.DeleteImage();
         }
 
-        private void BtnSelectFilter_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnSelectFilter_OnClick(object sender, RoutedEventArgs e)
         {
-            // Select Filter
-            ViewModel.SelectFilter();
+            SelectFilteredImage.Source = null;
+            // Apply Select Filter and Update the displayed image using BitmapImage
+            var stream = await ViewModel.SelectFilter();
+            SelectFilteredImage.Source = stream.ToBitmapImage();
         }
 
-        private void BtnSupremeFilter_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnSupremeFilter_OnClick(object sender, RoutedEventArgs e)
         {
-            // Supreme Filter
-            ViewModel.SupremeFilter();
+            SupremeFilteredImage.Source = null;
+            // Supreme Filter and Update the displayed image using BitmapImage
+            var stream = await ViewModel.SupremeFilter();
+            SupremeFilteredImage.Source = stream.ToBitmapImage();
         }
 
-        private void BtnAeFilter_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnAeFilter_OnClick(object sender, RoutedEventArgs e)
         {
-            // Ae Filter
-            ViewModel.AeFilter();
+            AeFilteredImage.Source = null;
+            // Ae Filter and Update the displayed image using BitmapImage
+            var stream = await ViewModel.AeFilter();
+            AeFilteredImage.Source = stream.ToBitmapImage();
         }
 
-        private void BtnUnmapFilter_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnUnmapFilter_OnClick(object sender, RoutedEventArgs e)
         {
-            // Unmap Filter
-            ViewModel.UnmapFilter();
+            UnmapFilteredImage.Source = null;
+            // Unmap Filter and Update the displayed image using BitmapImage
+            var stream = await ViewModel.UnmapFilter();
+            UnmapFilteredImage.Source = stream.ToBitmapImage();
         }
 
         private void BtnBrowseFileOpen_OnClick(object sender, RoutedEventArgs e)

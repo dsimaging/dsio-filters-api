@@ -4,24 +4,20 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace WpfSample
 {
     internal static class V1TypeExtensions
     {
-        public static void WriteToFile(this Stream stream, string fileName)
+        public static BitmapImage ToBitmapImage(this Stream stream)
         {
-            if (File.Exists(fileName))
-            {
-                fileName = fileName.Replace("FilteredImage.png", "FilteredImage_Copy.png");
-            }
-            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate);
-            byte[] bytesStream = new byte[stream.Length];
-            if (stream.Read(bytesStream, 0, bytesStream.Length) != -1)
-            {
-                fs.Write(bytesStream);
-            }
-            fs.Close();
+            // use the stream to initialize a BitmapImage
+            var bitmapImage = new BitmapImage { CacheOption = BitmapCacheOption.OnLoad };
+            bitmapImage.BeginInit();
+            bitmapImage.StreamSource = stream;
+            bitmapImage.EndInit();
+            return bitmapImage;
         }
     }
 }

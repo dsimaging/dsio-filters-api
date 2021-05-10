@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using DSIO.Filters.Api.Sdk.Client.V1;
 using DSIO.Filters.Api.Sdk.Types.V1;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 /// <summary>
 /// ViewModel class for MainWindow
@@ -241,65 +242,7 @@ namespace WpfSample
             }
         }
 
-        private string _selectFilteredImageFileName;
-        public string SelectFilteredImageFileName
-        {
-            get => _selectFilteredImageFileName;
-            set
-            {
-                if (value != _selectFilteredImageFileName)
-                {
-                    _selectFilteredImageFileName = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-
-        private string _supremeFilteredImageFileName;
-        public string SupremeFilteredImageFileName
-        {
-            get => _supremeFilteredImageFileName;
-            set
-            {
-                if (value != _supremeFilteredImageFileName)
-                {
-                    _supremeFilteredImageFileName = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-
-        private string _aeFilteredImageFileName;
-        public string AeFilteredImageFileName
-        {
-            get => _aeFilteredImageFileName;
-            set
-            {
-                if (value != _aeFilteredImageFileName)
-                {
-                    _aeFilteredImageFileName = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-
-        private string _unmapFilteredImageFileName;
-        public string UnmapFilteredImageFileName
-        {
-            get => _unmapFilteredImageFileName;
-            set
-            {
-                if (value != _unmapFilteredImageFileName)
-                {
-                    _unmapFilteredImageFileName = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
+ 
         public void Login()
         {
             // Update status
@@ -434,89 +377,41 @@ namespace WpfSample
         /// <summary>
         /// Select Filter
         /// </summary>
-        public void SelectFilter()
+        public async Task<Stream> SelectFilter()
         {
-            SelectFilteredImageFileName = string.Empty;
-            SelectFilterImageParam selectFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SelectFilterImageParam>(SelectFilterParam);
             // Apply Select Filter
-            _serviceProxy.SelectFilter(ImageId, selectFilterImageParam).ContinueWith(task =>
-            {
-                if (task.IsFaulted)
-                {
-                    MessageBox.Show(task.Exception?.Message);
-                }
-                else if (task.IsCompleted)
-                {
-                    SelectFilteredImageFileName = System.Environment.CurrentDirectory + @"\SelectFilteredImage.png";
-                    task.Result.WriteToFile(SelectFilteredImageFileName);
-                }
-            });
+            SelectFilterImageParam selectFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SelectFilterImageParam>(SelectFilterParam);
+            return await _serviceProxy.SelectFilter(ImageId, selectFilterImageParam);
         }
 
         /// <summary>
         /// Supreme Filter
         /// </summary>
-        public void SupremeFilter()
+        public async Task<Stream> SupremeFilter()
         {
-            SupremeFilteredImageFileName = string.Empty;
             SupremeFilterImageParam supremeFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SupremeFilterImageParam>(SupremeFilterParam);
             // Apply Supreme Filter
-            _serviceProxy.SupremeFilter(ImageId, supremeFilterImageParam).ContinueWith(task =>
-            {
-                if (task.IsFaulted)
-                {
-                    MessageBox.Show(task.Exception?.Message);
-                }
-                else if (task.IsCompleted)
-                {
-                    SupremeFilteredImageFileName = System.Environment.CurrentDirectory + @"\SupremeFilteredImage.png";
-                    task.Result.WriteToFile(SupremeFilteredImageFileName);
-                }
-            });
+            return await _serviceProxy.SupremeFilter(ImageId, supremeFilterImageParam);
         }
 
         /// <summary>
         /// Ae Filter
         /// </summary>
-        public void AeFilter()
+        public async Task<Stream> AeFilter()
         {
-            AeFilteredImageFileName = string.Empty;
             OmegaFilterImageParam omegaFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<OmegaFilterImageParam>(OmegaFilterParam);
             // Apply Ae Filter
-            _serviceProxy.AeFilter(ImageId, omegaFilterImageParam).ContinueWith(task =>
-            {
-                if (task.IsFaulted)
-                {
-                    MessageBox.Show(task.Exception?.Message);
-                }
-                else if (task.IsCompleted)
-                {
-                    AeFilteredImageFileName = System.Environment.CurrentDirectory + @"\AeFilteredImage.png";
-                    task.Result.WriteToFile(AeFilteredImageFileName);
-                }
-            });
+            return await _serviceProxy.AeFilter(ImageId, omegaFilterImageParam);
         }
 
         /// <summary>
         /// Unmap Filter
         /// </summary>
-        public void UnmapFilter()
+        public async Task<Stream> UnmapFilter()
         {
-            UnmapFilteredImageFileName = string.Empty;
             LutInfo lutInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<LutInfo>(UnmapFilterParam);
             // Apply Unmap Filter
-            _serviceProxy.UnmapFilter(ImageId, lutInfo).ContinueWith(task =>
-            {
-                if (task.IsFaulted)
-                {
-                    MessageBox.Show(task.Exception?.Message);
-                }
-                else if (task.IsCompleted)
-                {
-                    UnmapFilteredImageFileName = System.Environment.CurrentDirectory + @"\UnmapFilteredImage.png";
-                    task.Result.WriteToFile(UnmapFilteredImageFileName);
-                }
-            });
+            return await _serviceProxy.UnmapFilter(ImageId, lutInfo);
         }
 
         #endregion
