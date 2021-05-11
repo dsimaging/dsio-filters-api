@@ -2,9 +2,9 @@
 {
     public class SupremeFilterImageParam
     {
-        public TaskName TaskName { get; set; }
+        public TaskName? TaskName { get; set; }
 
-        public BinningMode BinningMode { get; set; }
+        public BinningMode? BinningMode { get; set; }
 
         public int Sharpness { get; set; }
 

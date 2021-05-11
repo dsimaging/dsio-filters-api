@@ -2,7 +2,7 @@
 {
     public class SelectFilterImageParam
     {
-        public EnhancementMode EnhancementMode { get; set; }
+        public EnhancementMode? EnhancementMode { get; set; }
 
         public LutInfo LutInfo { get; set; }
     }
