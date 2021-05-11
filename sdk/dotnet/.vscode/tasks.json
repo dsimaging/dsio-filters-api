@@ -18,18 +18,6 @@
             }
         },
         {
-            "label": "Build ConsoleApp",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/samples/ConsoleApp/ConsoleApp.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
             "label": "Build WpfSample",
             "command": "dotnet",
             "type": "process",
