@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib\DSIO.Filters.Api.Sdk.Client\DSIO.Filters.Api.Sdk.Client.csproj" />
+    <ProjectReference Include="..\..\lib\DSIO.Filters.Api.Sdk.Types\DSIO.Filters.Api.Sdk.Types.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>
