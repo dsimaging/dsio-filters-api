@@ -62,25 +62,25 @@ namespace WpfSample
             FilteredImage.Source = null;
             switch (ViewModel.SelectedFilterParam)
             {
-                case FILTER_TYPE.SELECT_FILTER:
+                case FilterType.Select:
                     {
                         // Apply Select Filter and Update the displayed image using BitmapImage
                         stream = await ViewModel.SelectFilter();
                         break;
                     }
-                case FILTER_TYPE.SUPREME_FILTER:
+                case FilterType.Supreme:
                     {
                         // Apply Supreme Filter and Update the displayed image using BitmapImage
                         stream = await ViewModel.SupremeFilter();
                         break;
                     }
-                case FILTER_TYPE.AE_FILTER:
+                case FilterType.Ae:
                     {
                         // Apply Ae Filter and Update the displayed image using BitmapImage
                         stream = await ViewModel.AeFilter();
                         break;
                     }
-                case FILTER_TYPE.UNMAP_FILTER:
+                case FilterType.Unmap:
                     {
                         // Apply Unmap Filter and Update the displayed image using BitmapImage
                         stream = await ViewModel.UnmapFilter();

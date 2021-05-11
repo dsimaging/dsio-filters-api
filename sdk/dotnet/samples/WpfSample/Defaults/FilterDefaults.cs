@@ -9,12 +9,12 @@ namespace WpfSample.Defaults
 {
     public static class FilterDefaults
     {
-        public static Dictionary<FILTER_TYPE, string> GetValues()
+        public static Dictionary<FilterType, string> GetValues()
         {
-            Dictionary<FILTER_TYPE, string> _filterParamList = new Dictionary<FILTER_TYPE, string>();
+            Dictionary<FilterType, string> _filterParamList = new Dictionary<FilterType, string>();
 
 
-            _filterParamList.Add(FILTER_TYPE.SELECT_FILTER, @"{
+            _filterParamList.Add(FilterType.Select, @"{
 'enhancementMode': 'edgePro',
 'lutInfo': {
                 'gamma': 2.3,
@@ -26,7 +26,7 @@ namespace WpfSample.Defaults
 }
         }");
 
-            _filterParamList.Add(FILTER_TYPE.SUPREME_FILTER, @"{
+            _filterParamList.Add(FilterType.Supreme, @"{
   'task': 'general',
   'binningMode': 'binned2X2',
   'sharpness': 70,
@@ -40,7 +40,7 @@ namespace WpfSample.Defaults
   }
         }");
 
-            _filterParamList.Add(FILTER_TYPE.AE_FILTER, @"{
+            _filterParamList.Add(FilterType.Ae, @"{
   'task': 'general',
   'sharpness': 70,
   'lutInfo': {
@@ -53,7 +53,7 @@ namespace WpfSample.Defaults
   }
         }");
 
-            _filterParamList.Add(FILTER_TYPE.UNMAP_FILTER, @"{
+            _filterParamList.Add(FilterType.Unmap, @"{
   'gamma': 2.3,
   'slope': 65535,
   'offset': 0,

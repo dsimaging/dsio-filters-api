@@ -31,8 +31,8 @@ namespace WpfSample
         {
             FilterParamList = FilterDefaults.GetValues();
             // assign Select Filter on load
-            SelectedFilterParam = FILTER_TYPE.SELECT_FILTER;
-            FilterParam = FilterParamList[FILTER_TYPE.SELECT_FILTER];
+            SelectedFilterParam = FilterType.Select;
+            FilterParam = FilterParamList[FilterType.Select];
         }
 
         #region INotifyPropertyChanged
@@ -146,8 +146,8 @@ namespace WpfSample
             }
         }
 
-        private Dictionary<FILTER_TYPE, string> _filterParamList;
-        public Dictionary<FILTER_TYPE, string> FilterParamList
+        private Dictionary<FilterType, string> _filterParamList;
+        public Dictionary<FilterType, string> FilterParamList
         {
             get => _filterParamList;
             set
@@ -157,8 +157,8 @@ namespace WpfSample
             }
         }
 
-        private FILTER_TYPE _selectedFilterParam;
-        public FILTER_TYPE SelectedFilterParam
+        private FilterType _selectedFilterParam;
+        public FilterType SelectedFilterParam
         {
             get => _selectedFilterParam;
             set
