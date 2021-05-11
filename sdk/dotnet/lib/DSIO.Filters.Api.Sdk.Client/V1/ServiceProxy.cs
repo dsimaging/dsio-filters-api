@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -7,12 +6,13 @@ using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+
 using DSIO.Filters.Api.Sdk.Types.V1;
 
 namespace DSIO.Filters.Api.Sdk.Client.V1
 {
     /// <summary>
-    /// A class that wraps <see cref="HttpClient"> and provides async
+    /// A class that wraps <see cref="HttpClient" /> and provides async
     /// methods for sending API requests and receiving responses.
     /// </summary>
     public class ServiceProxy
@@ -87,6 +87,7 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         }
 
         #region Images
+
         /// <summary>
         /// Upload a new image resource for processing. 
         /// Create a new image by uploading a 16-bit grayscale PNG image file.
@@ -137,9 +138,11 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
             response.EnsureSuccessStatusCode();
             return response.StatusCode;
         }
+
         #endregion
 
         #region Filters
+
         /// <summary>
         /// Retrieves the image stream by Applying the Select Filter
         /// </summary>
@@ -158,7 +161,7 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// Retrieves the image stream by Applying the Supreme Filter
         /// </summary>
         /// <param name="imageId">Image Id</param>
-        /// <param name="selectFilterImageParam">The parameters used to process the image</param>
+        /// <param name="supremeFilterImageParam">The parameters used to process the image</param>
         /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
         public async Task<Stream> SupremeFilter(string imageId, SupremeFilterImageParam supremeFilterImageParam)
         {
@@ -171,7 +174,7 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// Retrieves the image stream by Applying the Ae Filter
         /// </summary>
         /// <param name="imageId">Image Id</param>
-        /// <param name="selectFilterImageParam">The parameters used to process the image</param>        
+        /// <param name="omegaFilterImageParam">The parameters used to process the image</param>        
         /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
         public async Task<Stream> AeFilter(string imageId, OmegaFilterImageParam omegaFilterImageParam)
         {
@@ -184,7 +187,7 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// Retrieves the image stream by Applying the Unmap Filter
         /// </summary>
         /// <param name="imageId">Image Id</param>
-        /// <param name="selectFilterImageParam">The parameters used to process the image</param>
+        /// <param name="lutInfo">The parameters used to process the image</param>
         /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
         public async Task<Stream> UnmapFilter(string imageId, LutInfo lutInfo)
         {
@@ -192,6 +195,7 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStreamAsync();
         }
+
         #endregion
 
     }
