@@ -60,41 +60,51 @@ namespace WpfSample
             Stream stream = null;
 
             FilteredImage.Source = null;
-            switch (ViewModel.SelectedFilterParam)
+
+            try
             {
-                case FilterType.Select:
+                switch (ViewModel.SelectedFilterParam)
+                {
+                    case FilterType.Select:
                     {
                         // Apply Select Filter and Update the displayed image using BitmapImage
                         stream = await ViewModel.SelectFilter();
                         break;
                     }
-                case FilterType.Supreme:
+                    case FilterType.Supreme:
                     {
                         // Apply Supreme Filter and Update the displayed image using BitmapImage
                         stream = await ViewModel.SupremeFilter();
                         break;
                     }
-                case FilterType.Ae:
+                    case FilterType.Ae:
                     {
                         // Apply Ae Filter and Update the displayed image using BitmapImage
                         stream = await ViewModel.AeFilter();
                         break;
                     }
-                case FilterType.Unmap:
+                    case FilterType.Unmap:
                     {
                         // Apply Unmap Filter and Update the displayed image using BitmapImage
                         stream = await ViewModel.UnmapFilter();
                         break;
                     }
+                }
+
+                if (stream != null)
+                {
+                    FilteredImage.Source = stream.ToBitmapImage();
+                }
+                else
+                {
+                    MessageBox.Show("Unknown Filter");
+                }
             }
-            if (stream != null)
+            catch (Exception exception)
             {
-                FilteredImage.Source = stream.ToBitmapImage();
+                MessageBox.Show(exception.Message);
             }
-            else
-            {
-                MessageBox.Show("Unknown Filter");
-            }
+
         }
 
         private void BtnBrowseFileOpen_OnClick(object sender, RoutedEventArgs e)

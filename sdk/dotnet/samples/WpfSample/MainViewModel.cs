@@ -12,10 +12,6 @@ using DSIO.Filters.Api.Sdk.Types.V1;
 using WpfSample.Types;
 using WpfSample.Defaults;
 
-/// <summary>
-/// ViewModel class for MainWindow
-/// </summary>
-/// 
 namespace WpfSample
 {
     public class MainViewModel : INotifyPropertyChanged
@@ -27,7 +23,8 @@ namespace WpfSample
             _serviceProxy = new ServiceProxy();
             SetDefaultValues();
         }
-        void SetDefaultValues()
+
+        private void SetDefaultValues()
         {
             FilterParamList = FilterDefaults.GetValues();
             // assign Select Filter on load
@@ -211,7 +208,8 @@ namespace WpfSample
 
         #endregion
 
-        #region Image
+        #region Images
+
         private ImageResource _selectedImageResource;
         public ImageResource SelectedImageResource
         {
@@ -230,9 +228,7 @@ namespace WpfSample
                 }
             }
         }
-        #endregion
-
-        #region Images
+        
         public void UploadImage()
         {
             var fileStream = new FileStream(UploadImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -277,8 +273,8 @@ namespace WpfSample
             // Get Image Details
             _serviceProxy.GetImage(ImageId).ContinueWith(task =>
             {
-            // Must be on UI thread to change Mouse
-            Mouse.OverrideCursor = null;
+                // Must be on UI thread to change Mouse
+                Mouse.OverrideCursor = null;
                 if (task.IsFaulted)
                 {
                     MessageBox.Show(task.Exception?.Message);
@@ -286,9 +282,9 @@ namespace WpfSample
                 else if (task.IsCompletedSuccessfully)
                 {
                     SelectedImageResource = task.Result;
-                }
-            // We synchronize the Continuation task so we can make UI changes
-        }, TaskScheduler.FromCurrentSynchronizationContext());
+                } 
+                // We synchronize the Continuation task so we can make UI changes
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         public void DeleteImage()
@@ -313,7 +309,8 @@ namespace WpfSample
         }
         #endregion
 
-        #region "Filters"
+        #region Filters
+
         /// <summary>
         /// Select Filter
         /// </summary>
