@@ -127,44 +127,16 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="100" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="190" />
-                    <ColumnDefinition Width="185" />
-                    <ColumnDefinition Width="180" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="BtnSelectFilter"
-                            Grid.Row="1" Grid.Column="0"
-                            Margin="6"
-                            Padding="12, 10"
-                            Click="BtnSelectFilter_OnClick">Select Filter</Button>
-                <TextBox x:Name="TbxSelectFilter" Grid.Row="0" Grid.Column="0" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding SelectFilterParam}"></TextBox>
-                <Button x:Name="BtnSupremeFilter"
-                            Grid.Row="1" Grid.Column="1"
-                            Margin="6"
-                            Padding="12, 10"
-                            Click="BtnSupremeFilter_OnClick">Supreme Filter</Button>
-                <TextBox x:Name="TbxSupremeFilter" Grid.Row="0" Grid.Column="1" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding SupremeFilterParam}"></TextBox>
-                <Button x:Name="BtnAeFilter"
-                            Grid.Row="1" Grid.Column="2"
-                            Margin="6"
-                            Padding="12, 10"
-                            Click="BtnAeFilter_OnClick">AE Filter</Button>
-                <TextBox x:Name="TbxAeFilter" Grid.Row="0" Grid.Column="2" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding OmegaFilterParam}"></TextBox>
-                <Button x:Name="BtnUnmapFilter"
-                            Grid.Row="1" Grid.Column="3"
-                            Margin="6"
-                            Padding="12, 10"
-                            Click="BtnUnmapFilter_OnClick">Unmap Filter</Button>
-                <TextBox x:Name="TbxUnmapFilter" Grid.Row="0" Grid.Column="3" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding UnmapFilterParam}"></TextBox>
-                <Image x:Name="SelectFilteredImage" Grid.Row="4" Grid.Column="0" />
-                <Image x:Name="SupremeFilteredImage" Grid.Row="4" Grid.Column="1" />
-                <Image x:Name="AeFilteredImage" Grid.Row="4" Grid.Column="2" />
-                <Image x:Name="UnmapFilteredImage" Grid.Row="4" Grid.Column="3" />
+                <ComboBox x:Name="TbxAeFilter" Grid.Row="0" Grid.Column="0" Margin="4" DisplayMemberPath="Key" SelectedValuePath="Key" SelectedValue="{Binding Path=SelectedFilterParam, Mode=TwoWay}" ItemsSource="{Binding Path=FilterParamList}"></ComboBox>
+                <Button x:Name="BtnFilter" Grid.Row="0" Grid.Column="1" Margin="6" Padding="12, 10" Click="BtnFilter_OnClick">Apply Filter</Button>
+                <TextBox x:Name="TbxFilter" Grid.Row="1" Grid.Column="0" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding FilterParam}"></TextBox>
+                <Image x:Name="FilteredImage" Grid.Row="1" Grid.Column="1" />
             </Grid>
         </GroupBox>
 

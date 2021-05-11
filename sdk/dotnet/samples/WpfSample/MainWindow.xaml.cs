@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using WpfSample.Types;
 
 namespace WpfSample
 {
@@ -53,36 +55,46 @@ namespace WpfSample
             ViewModel.DeleteImage();
         }
 
-        private async void BtnSelectFilter_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnFilter_OnClick(object sender, RoutedEventArgs e)
         {
-            SelectFilteredImage.Source = null;
-            // Apply Select Filter and Update the displayed image using BitmapImage
-            var stream = await ViewModel.SelectFilter();
-            SelectFilteredImage.Source = stream.ToBitmapImage();
-        }
+            Stream stream = null;
 
-        private async void BtnSupremeFilter_OnClick(object sender, RoutedEventArgs e)
-        {
-            SupremeFilteredImage.Source = null;
-            // Supreme Filter and Update the displayed image using BitmapImage
-            var stream = await ViewModel.SupremeFilter();
-            SupremeFilteredImage.Source = stream.ToBitmapImage();
-        }
-
-        private async void BtnAeFilter_OnClick(object sender, RoutedEventArgs e)
-        {
-            AeFilteredImage.Source = null;
-            // Ae Filter and Update the displayed image using BitmapImage
-            var stream = await ViewModel.AeFilter();
-            AeFilteredImage.Source = stream.ToBitmapImage();
-        }
-
-        private async void BtnUnmapFilter_OnClick(object sender, RoutedEventArgs e)
-        {
-            UnmapFilteredImage.Source = null;
-            // Unmap Filter and Update the displayed image using BitmapImage
-            var stream = await ViewModel.UnmapFilter();
-            UnmapFilteredImage.Source = stream.ToBitmapImage();
+            FilteredImage.Source = null;
+            switch (ViewModel.SelectedFilterParam)
+            {
+                case FILTER_TYPE.SELECT_FILTER:
+                    {
+                        // Apply Select Filter and Update the displayed image using BitmapImage
+                        stream = await ViewModel.SelectFilter();
+                        break;
+                    }
+                case FILTER_TYPE.SUPREME_FILTER:
+                    {
+                        // Apply Supreme Filter and Update the displayed image using BitmapImage
+                        stream = await ViewModel.SupremeFilter();
+                        break;
+                    }
+                case FILTER_TYPE.AE_FILTER:
+                    {
+                        // Apply Ae Filter and Update the displayed image using BitmapImage
+                        stream = await ViewModel.AeFilter();
+                        break;
+                    }
+                case FILTER_TYPE.UNMAP_FILTER:
+                    {
+                        // Apply Unmap Filter and Update the displayed image using BitmapImage
+                        stream = await ViewModel.UnmapFilter();
+                        break;
+                    }
+            }
+            if (stream != null)
+            {
+                FilteredImage.Source = stream.ToBitmapImage();
+            }
+            else
+            {
+                MessageBox.Show("Unknown Filter");
+            }
         }
 
         private void BtnBrowseFileOpen_OnClick(object sender, RoutedEventArgs e)

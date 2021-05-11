@@ -4,10 +4,13 @@ using System.Net.Http;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using System.Collections.Generic;
+
 using DSIO.Filters.Api.Sdk.Client.V1;
 using DSIO.Filters.Api.Sdk.Types.V1;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
+using WpfSample.Types;
+using WpfSample.Defaults;
 
 /// <summary>
 /// ViewModel class for MainWindow
@@ -26,53 +29,10 @@ namespace WpfSample
         }
         void SetDefaultValues()
         {
-            SelectFilterParam = @"{
-'enhancementMode': 'edgePro',
-'lutInfo': {
-                'gamma': 2.3,
-'slope': 65535,
-'offset': 0,
-'totalGrays': 4096,
-'minimumGray': 3612,
-'maximumGray': 418
-}
-        }";
-
-            SupremeFilterParam = @"{
-  'task': 'general',
-  'binningMode': 'binned2X2',
-  'sharpness': 70,
-  'lutInfo': {
-                'gamma': 2.3,
-    'slope': 65535,
-    'offset': 0,
-    'totalGrays': 4096,
-    'minimumGray': 3612,
-    'maximumGray': 418
-  }
-        }";
-
-            OmegaFilterParam = @"{
-  'task': 'general',
-  'sharpness': 70,
-  'lutInfo': {
-                'gamma': 2.3,
-    'slope': 65535,
-    'offset': 0,
-    'totalGrays': 4096,
-    'minimumGray': 3612,
-    'maximumGray': 418
-  }
-        }";
-
-            UnmapFilterParam = @"{
-  'gamma': 2.3,
-  'slope': 65535,
-  'offset': 0,
-  'totalGrays': 4096,
-  'minimumGray': 3612,
-  'maximumGray': 418
-}";
+            FilterParamList = FilterDefaults.GetValues();
+            // assign Select Filter on load
+            SelectedFilterParam = FILTER_TYPE.SELECT_FILTER;
+            FilterParam = FilterParamList[FILTER_TYPE.SELECT_FILTER];
         }
 
         #region INotifyPropertyChanged
@@ -186,62 +146,42 @@ namespace WpfSample
             }
         }
 
-        private string _selectFilterParam;
-        public string SelectFilterParam
+        private Dictionary<FILTER_TYPE, string> _filterParamList;
+        public Dictionary<FILTER_TYPE, string> FilterParamList
         {
-            get => _selectFilterParam;
+            get => _filterParamList;
             set
             {
-                if (value != _selectFilterParam)
+                _filterParamList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private FILTER_TYPE _selectedFilterParam;
+        public FILTER_TYPE SelectedFilterParam
+        {
+            get => _selectedFilterParam;
+            set
+            {
+                _selectedFilterParam = value;
+                FilterParam = FilterParamList[_selectedFilterParam];
+                OnPropertyChanged();
+            }
+        }
+
+        private string _filterParam;
+        public string FilterParam
+        {
+            get => _filterParam;
+            set
+            {
+                if (value != _filterParam)
                 {
-                    _selectFilterParam = value;
+                    _filterParam = value;
                     OnPropertyChanged();
                 }
             }
         }
-
-        private string _supremeFilterParam;
-        public string SupremeFilterParam
-        {
-            get => _supremeFilterParam;
-            set
-            {
-                if (value != _supremeFilterParam)
-                {
-                    _supremeFilterParam = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _omegaFilterParam;
-        public string OmegaFilterParam
-        {
-            get => _omegaFilterParam;
-            set
-            {
-                if (value != _omegaFilterParam)
-                {
-                    _omegaFilterParam = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _unmapFilterParam;
-        public string UnmapFilterParam
-        {
-            get => _unmapFilterParam;
-            set
-            {
-                if (value != _unmapFilterParam)
-                {
-                    _unmapFilterParam = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
  
         public void Login()
         {
@@ -380,7 +320,7 @@ namespace WpfSample
         public async Task<Stream> SelectFilter()
         {
             // Apply Select Filter
-            SelectFilterImageParam selectFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SelectFilterImageParam>(SelectFilterParam);
+            SelectFilterImageParam selectFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SelectFilterImageParam>(FilterParam);
             return await _serviceProxy.SelectFilter(ImageId, selectFilterImageParam);
         }
 
@@ -389,7 +329,7 @@ namespace WpfSample
         /// </summary>
         public async Task<Stream> SupremeFilter()
         {
-            SupremeFilterImageParam supremeFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SupremeFilterImageParam>(SupremeFilterParam);
+            SupremeFilterImageParam supremeFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SupremeFilterImageParam>(FilterParam);
             // Apply Supreme Filter
             return await _serviceProxy.SupremeFilter(ImageId, supremeFilterImageParam);
         }
@@ -399,7 +339,7 @@ namespace WpfSample
         /// </summary>
         public async Task<Stream> AeFilter()
         {
-            OmegaFilterImageParam omegaFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<OmegaFilterImageParam>(OmegaFilterParam);
+            OmegaFilterImageParam omegaFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<OmegaFilterImageParam>(FilterParam);
             // Apply Ae Filter
             return await _serviceProxy.AeFilter(ImageId, omegaFilterImageParam);
         }
@@ -409,7 +349,7 @@ namespace WpfSample
         /// </summary>
         public async Task<Stream> UnmapFilter()
         {
-            LutInfo lutInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<LutInfo>(UnmapFilterParam);
+            LutInfo lutInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<LutInfo>(FilterParam);
             // Apply Unmap Filter
             return await _serviceProxy.UnmapFilter(ImageId, lutInfo);
         }
