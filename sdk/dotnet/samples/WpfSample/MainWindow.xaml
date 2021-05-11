@@ -82,7 +82,20 @@
                             Margin="6"
                             Padding="12, 10"
                             Click="BtnCreateImageFromModalitySession_OnClick">Create Image From Modality Session</Button>
-                <TextBox x:Name="TbxModalitySession" Grid.Row="1" Grid.Column="1" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding ModalitySessionParam}"></TextBox>
+                <Grid Grid.Row="1" Grid.Column="1" Margin="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0">Session Id:</Label>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ModalitySessionId}"></TextBox>
+                    <Label Grid.Row="1" Grid.Column="0">Image Id:</Label>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ModalityImageId}"></TextBox>
+                </Grid>
 
                 <Button x:Name="BtnGetImageDetails"
                         Grid.Row="2" Grid.Column="0"

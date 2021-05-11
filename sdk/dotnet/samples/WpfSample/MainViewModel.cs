@@ -101,85 +101,6 @@ namespace WpfSample
             }
         }
 
-        private string _imageId;
-        public string ImageId
-        {
-            get => _imageId;
-            set
-            {
-                if (value != _imageId)
-                {
-                    _imageId = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _uploadImageFileName;
-        public string UploadImageFileName
-        {
-            get => _uploadImageFileName;
-            set
-            {
-                if (value != _uploadImageFileName)
-                {
-                    _uploadImageFileName = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _modalitySessionParam;
-        public string ModalitySessionParam
-        {
-            get => _modalitySessionParam;
-            set
-            {
-                if (value != _modalitySessionParam)
-                {
-                    _modalitySessionParam = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private Dictionary<FilterType, string> _filterParamList;
-        public Dictionary<FilterType, string> FilterParamList
-        {
-            get => _filterParamList;
-            set
-            {
-                _filterParamList = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private FilterType _selectedFilterParam;
-        public FilterType SelectedFilterParam
-        {
-            get => _selectedFilterParam;
-            set
-            {
-                _selectedFilterParam = value;
-                FilterParam = FilterParamList[_selectedFilterParam];
-                OnPropertyChanged();
-            }
-        }
-
-        private string _filterParam;
-        public string FilterParam
-        {
-            get => _filterParam;
-            set
-            {
-                if (value != _filterParam)
-                {
-                    _filterParam = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
- 
         public void Login()
         {
             // Update status
@@ -209,6 +130,62 @@ namespace WpfSample
         #endregion
 
         #region Images
+
+        private string _imageId;
+        public string ImageId
+        {
+            get => _imageId;
+            set
+            {
+                if (value != _imageId)
+                {
+                    _imageId = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _uploadImageFileName;
+        public string UploadImageFileName
+        {
+            get => _uploadImageFileName;
+            set
+            {
+                if (value != _uploadImageFileName)
+                {
+                    _uploadImageFileName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _modalitySessionId;
+        public string ModalitySessionId
+        {
+            get => _modalitySessionId;
+            set
+            {
+                if (value != _modalitySessionId)
+                {
+                    _modalitySessionId = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _modalityImageId;
+        public string ModalityImageId
+        {
+            get => _modalityImageId;
+            set
+            {
+                if (value != _modalityImageId)
+                {
+                    _modalityImageId = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private ImageResource _selectedImageResource;
         public ImageResource SelectedImageResource
@@ -249,7 +226,13 @@ namespace WpfSample
 
         public void CreateImageFromModalitySession()
         {
-            ModalitySession modalitySession = Newtonsoft.Json.JsonConvert.DeserializeObject<ModalitySession>(ModalitySessionParam);
+            // Create ModalitySession from supplied session id and image id
+            var modalitySession = new ModalitySession()
+            {
+                SessionId = ModalitySessionId,
+                ImageId = ModalityImageId
+            };
+
             // Create image from Modality Session
             _serviceProxy.CreateImage(modalitySession).ContinueWith(task =>
             {
@@ -310,6 +293,43 @@ namespace WpfSample
         #endregion
 
         #region Filters
+
+        private Dictionary<FilterType, string> _filterParamList;
+        public Dictionary<FilterType, string> FilterParamList
+        {
+            get => _filterParamList;
+            set
+            {
+                _filterParamList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private FilterType _selectedFilterParam;
+        public FilterType SelectedFilterParam
+        {
+            get => _selectedFilterParam;
+            set
+            {
+                _selectedFilterParam = value;
+                FilterParam = FilterParamList[_selectedFilterParam];
+                OnPropertyChanged();
+            }
+        }
+
+        private string _filterParam;
+        public string FilterParam
+        {
+            get => _filterParam;
+            set
+            {
+                if (value != _filterParam)
+                {
+                    _filterParam = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// Select Filter
