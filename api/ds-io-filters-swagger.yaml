@@ -363,7 +363,7 @@ components:
           enum:
             - binned2x2
             - unbinned
-          example: binned
+          example: unbinned
         sharpness:
           description: The sharpness to apply to the image expressed as a percentage in the range 0-100.
           type: number
