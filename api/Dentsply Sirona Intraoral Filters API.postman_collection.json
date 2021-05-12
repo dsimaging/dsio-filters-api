@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "162a93c8-74ff-48a3-a925-c580aa97d4a0",
+		"_postman_id": "fe8f1445-9517-497f-8dbf-1247e36d99a9",
 		"name": "Dentsply Sirona Intraoral Filters API",
 		"description": "This API is used to apply custom filters to images acquired from the DSIO Modality API.\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -21,7 +21,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\"sed anim dolor aliqua\""
+							"raw": "\"eiusmod consectetur ex anim\""
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images",
@@ -42,7 +42,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "\"sed anim dolor aliqua\""
+									"raw": "\"eiusmod consectetur ex anim\""
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -64,7 +64,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1998-06-23T05:21:45.831Z\",\n \"expires\": \"1967-07-29T20:58:41.338Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"2018-05-10T20:33:54.754Z\",\n \"expires\": \"2018-11-19T21:30:50.435Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Bad input parameter",
@@ -73,7 +73,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "\"sed anim dolor aliqua\""
+									"raw": "\"eiusmod consectetur ex anim\""
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -104,7 +104,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "\"sed anim dolor aliqua\""
+									"raw": "\"eiusmod consectetur ex anim\""
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -187,7 +187,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1998-06-23T05:21:45.831Z\",\n \"expires\": \"1967-07-29T20:58:41.338Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"2018-05-10T20:33:54.754Z\",\n \"expires\": \"2018-11-19T21:30:50.435Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Bad input parameter",
@@ -272,7 +272,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "sed anim dolor aliqua",
+									"value": "eiusmod consectetur ex anim",
 									"description": "(Required) Id of the image resource to retrieve"
 								}
 							]
@@ -311,7 +311,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1998-06-23T05:21:45.831Z\",\n \"expires\": \"1967-07-29T20:58:41.338Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"2018-05-10T20:33:54.754Z\",\n \"expires\": \"2018-11-19T21:30:50.435Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Image resource not found",
@@ -365,7 +365,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "sed anim dolor aliqua",
+									"value": "eiusmod consectetur ex anim",
 									"description": "(Required) Id of the image resource to delete"
 								}
 							]
@@ -475,7 +475,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "sed anim dolor aliqua",
+									"value": "eiusmod consectetur ex anim",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -520,7 +520,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "sed anim dolor aliqua"
+							"body": "eiusmod consectetur ex anim"
 						},
 						{
 							"name": "Supplied LutInfo contains invalid parameters",
@@ -630,7 +630,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "sed anim dolor aliqua",
+									"value": "eiusmod consectetur ex anim",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -675,7 +675,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "sed anim dolor aliqua"
+							"body": "eiusmod consectetur ex anim"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -769,7 +769,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"binned2x2\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+							"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"unbinned\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images/:id/filters/supreme",
@@ -785,7 +785,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "sed anim dolor aliqua",
+									"value": "eiusmod consectetur ex anim",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -800,7 +800,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"binned2x2\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"unbinned\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/supreme",
@@ -830,7 +830,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "sed anim dolor aliqua"
+							"body": "eiusmod consectetur ex anim"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -839,7 +839,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"binned2x2\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"unbinned\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/supreme",
@@ -878,7 +878,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"binned2x2\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"unbinned\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/supreme",
@@ -940,7 +940,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "sed anim dolor aliqua",
+									"value": "eiusmod consectetur ex anim",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -985,7 +985,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "sed anim dolor aliqua"
+							"body": "eiusmod consectetur ex anim"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
