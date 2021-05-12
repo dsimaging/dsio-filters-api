@@ -30,7 +30,7 @@ namespace WpfSample.Defaults
 
             _filterParamList.Add(FilterType.Supreme, 
 @"{
-    'taskName': 'general',
+    'task': 'general',
     'binningMode': 'Unbinned',
     'sharpness': 70,
     'lutInfo': 
@@ -46,7 +46,7 @@ namespace WpfSample.Defaults
 
             _filterParamList.Add(FilterType.Ae, 
 @"{
-    'taskName': 'general',
+    'task': 'general',
     'sharpness': 70,
     'lutInfo': 
     {

@@ -2,7 +2,7 @@
 {
     public class OmegaFilterImageParam
     {
-        public TaskName? TaskName { get; set; }
+        public TaskName? Task { get; set; }
 
         public int Sharpness { get; set; }
 
