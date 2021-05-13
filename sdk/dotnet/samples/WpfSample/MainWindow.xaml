@@ -104,7 +104,7 @@
                         Click="BtnGetImageDetails_OnClick">
                     Get Image Details
                 </Button>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ImageId}" Margin="6"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ImageResourceId}" Margin="6"></TextBox>
 
                 <!-- Show DeviceInfo labels in col 0 -->
                 <StackPanel Grid.Row="3" Grid.Column="0" Margin="6">

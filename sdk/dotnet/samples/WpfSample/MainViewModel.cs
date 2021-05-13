@@ -131,15 +131,15 @@ namespace WpfSample
 
         #region Images
 
-        private string _imageId;
-        public string ImageId
+        private string _imageResourceId;
+        public string ImageResourceId
         {
-            get => _imageId;
+            get => _imageResourceId;
             set
             {
-                if (value != _imageId)
+                if (value != _imageResourceId)
                 {
-                    _imageId = value;
+                    _imageResourceId = value;
                     OnPropertyChanged();
                 }
             }
@@ -215,7 +215,7 @@ namespace WpfSample
                 else if (task.IsCompleted)
                 {
                     SelectedImageResource = task.Result;
-                    ImageId = SelectedImageResource.Id;
+                    ImageResourceId = SelectedImageResource.Id;
                 }
             });
         }
@@ -239,7 +239,7 @@ namespace WpfSample
                 else if (task.IsCompleted)
                 {
                     SelectedImageResource = task.Result;
-                    ImageId = SelectedImageResource.Id;
+                    ImageResourceId = SelectedImageResource.Id;
                 }
             });
         }
@@ -247,7 +247,7 @@ namespace WpfSample
         // Get Image Details
         public void GetImageDetails()
         {
-            if (string.IsNullOrEmpty(ImageId))
+            if (string.IsNullOrEmpty(ImageResourceId))
             {
                 MessageBox.Show("Please provide a resource Id to retrieve");
                 return;
@@ -257,7 +257,7 @@ namespace WpfSample
             Mouse.OverrideCursor = Cursors.Wait;
 
             // Get Image Details
-            _serviceProxy.GetImage(ImageId).ContinueWith(task =>
+            _serviceProxy.GetImage(ImageResourceId).ContinueWith(task =>
             {
                 // Must be on UI thread to change Mouse
                 Mouse.OverrideCursor = null;
