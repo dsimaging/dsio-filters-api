@@ -203,45 +203,51 @@ namespace WpfSample
 
         public void UploadImage()
         {
-            var fileStream = new FileStream(UploadImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-            var imageContent = new StreamContent(fileStream);
-            // Upload a new image
-            _serviceProxy.UploadImage(imageContent, "image/png").ContinueWith(task =>
+            if (!string.IsNullOrEmpty(UploadImageFileName))
             {
-                if (task.IsFaulted)
+                var fileStream = new FileStream(UploadImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                var imageContent = new StreamContent(fileStream);
+                // Upload a new image
+                _serviceProxy.UploadImage(imageContent, "image/png").ContinueWith(task =>
                 {
-                    MessageBox.Show(task.Exception?.Message);
-                }
-                else if (task.IsCompleted)
-                {
-                    SelectedImageResource = task.Result;
-                    ImageResourceId = SelectedImageResource.Id;
-                }
-            });
+                    if (task.IsFaulted)
+                    {
+                        MessageBox.Show(task.Exception?.Message);
+                    }
+                    else if (task.IsCompleted)
+                    {
+                        SelectedImageResource = task.Result;
+                        ImageResourceId = SelectedImageResource.Id;
+                    }
+                });
+            }
         }
 
         public void CreateImageFromModalitySession()
         {
-            // Create ModalitySession from supplied session id and image id
-            var modalitySession = new ModalitySession()
+            if (!string.IsNullOrEmpty(ModalitySessionId) && !string.IsNullOrEmpty(ModalityImageId))
             {
-                SessionId = ModalitySessionId,
-                ImageId = ModalityImageId
-            };
+                // Create ModalitySession from supplied session id and image id
+                var modalitySession = new ModalitySession()
+                {
+                    SessionId = ModalitySessionId,
+                    ImageId = ModalityImageId
+                };
 
-            // Create image from Modality Session
-            _serviceProxy.CreateImage(modalitySession).ContinueWith(task =>
-            {
-                if (task.IsFaulted)
+                // Create image from Modality Session
+                _serviceProxy.CreateImage(modalitySession).ContinueWith(task =>
                 {
-                    MessageBox.Show(task.Exception?.Message);
-                }
-                else if (task.IsCompleted)
-                {
-                    SelectedImageResource = task.Result;
-                    ImageResourceId = SelectedImageResource.Id;
-                }
-            });
+                    if (task.IsFaulted)
+                    {
+                        MessageBox.Show(task.Exception?.Message);
+                    }
+                    else if (task.IsCompleted)
+                    {
+                        SelectedImageResource = task.Result;
+                        ImageResourceId = SelectedImageResource.Id;
+                    }
+                });
+            }
         }
 
         // Get Image Details

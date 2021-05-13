@@ -61,6 +61,13 @@ namespace WpfSample
 
             FilteredImage.Source = null;
 
+            // Make sure we have an image resource to process
+            if (string.IsNullOrEmpty(ViewModel.ImageResourceId))
+            {
+                MessageBox.Show("Please create or retrieve an image resource to filter");
+                return;
+            }
+
             try
             {
                 switch (ViewModel.SelectedFilterParam)
@@ -94,10 +101,6 @@ namespace WpfSample
                 if (stream != null)
                 {
                     FilteredImage.Source = stream.ToBitmapImage();
-                }
-                else
-                {
-                    MessageBox.Show("Unknown Filter");
                 }
             }
             catch (Exception exception)
