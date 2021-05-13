@@ -196,16 +196,11 @@ namespace WpfSample
                 if (value != _selectedImageResource)
                 {
                     _selectedImageResource = value;
-                    ImageId = string.Empty;
-                    if (SelectedImageResource != null)
-                    {
-                        ImageId = SelectedImageResource.Id;
-                    }
                     OnPropertyChanged();
                 }
             }
         }
-        
+
         public void UploadImage()
         {
             var fileStream = new FileStream(UploadImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -220,6 +215,7 @@ namespace WpfSample
                 else if (task.IsCompleted)
                 {
                     SelectedImageResource = task.Result;
+                    ImageId = SelectedImageResource.Id;
                 }
             });
         }
@@ -243,6 +239,7 @@ namespace WpfSample
                 else if (task.IsCompleted)
                 {
                     SelectedImageResource = task.Result;
+                    ImageId = SelectedImageResource.Id;
                 }
             });
         }
@@ -250,6 +247,12 @@ namespace WpfSample
         // Get Image Details
         public void GetImageDetails()
         {
+            if (string.IsNullOrEmpty(ImageId))
+            {
+                MessageBox.Show("Please provide a resource Id to retrieve");
+                return;
+            }
+
             SelectedImageResource = null;
             Mouse.OverrideCursor = Cursors.Wait;
 
@@ -265,7 +268,7 @@ namespace WpfSample
                 else if (task.IsCompletedSuccessfully)
                 {
                     SelectedImageResource = task.Result;
-                } 
+                }
                 // We synchronize the Continuation task so we can make UI changes
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
@@ -336,9 +339,14 @@ namespace WpfSample
         /// </summary>
         public async Task<Stream> SelectFilter()
         {
-            // Apply Select Filter
-            SelectFilterImageParam selectFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SelectFilterImageParam>(FilterParam);
-            return await _serviceProxy.SelectFilter(ImageId, selectFilterImageParam);
+            if (SelectedImageResource != null)
+            {
+                // Apply Select Filter
+                SelectFilterImageParam selectFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SelectFilterImageParam>(FilterParam);
+                return await _serviceProxy.SelectFilter(SelectedImageResource.Id, selectFilterImageParam);
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -346,9 +354,14 @@ namespace WpfSample
         /// </summary>
         public async Task<Stream> SupremeFilter()
         {
-            SupremeFilterImageParam supremeFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SupremeFilterImageParam>(FilterParam);
-            // Apply Supreme Filter
-            return await _serviceProxy.SupremeFilter(ImageId, supremeFilterImageParam);
+            if (SelectedImageResource != null)
+            {
+                SupremeFilterImageParam supremeFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SupremeFilterImageParam>(FilterParam);
+                // Apply Supreme Filter
+                return await _serviceProxy.SupremeFilter(SelectedImageResource.Id, supremeFilterImageParam);
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -356,9 +369,14 @@ namespace WpfSample
         /// </summary>
         public async Task<Stream> AeFilter()
         {
-            OmegaFilterImageParam omegaFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<OmegaFilterImageParam>(FilterParam);
-            // Apply Ae Filter
-            return await _serviceProxy.AeFilter(ImageId, omegaFilterImageParam);
+            if (SelectedImageResource != null)
+            {
+                OmegaFilterImageParam omegaFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<OmegaFilterImageParam>(FilterParam);
+                // Apply Ae Filter
+                return await _serviceProxy.AeFilter(SelectedImageResource.Id, omegaFilterImageParam);
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -366,9 +384,14 @@ namespace WpfSample
         /// </summary>
         public async Task<Stream> UnmapFilter()
         {
-            LutInfo lutInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<LutInfo>(FilterParam);
-            // Apply Unmap Filter
-            return await _serviceProxy.UnmapFilter(ImageId, lutInfo);
+            if (SelectedImageResource != null)
+            {
+                LutInfo lutInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<LutInfo>(FilterParam);
+                // Apply Unmap Filter
+                return await _serviceProxy.UnmapFilter(SelectedImageResource.Id, lutInfo);
+            }
+
+            return null;
         }
 
         #endregion

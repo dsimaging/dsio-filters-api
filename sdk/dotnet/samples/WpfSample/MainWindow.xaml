@@ -108,7 +108,7 @@
 
                 <!-- Show DeviceInfo labels in col 0 -->
                 <StackPanel Grid.Row="3" Grid.Column="0" Margin="6">
-                    <TextBlock>Image Id:</TextBlock>
+                    <TextBlock>Resource Id:</TextBlock>
                     <TextBlock>Media Type:</TextBlock>
                     <TextBlock>Url:</TextBlock>
                     <TextBlock>Modality Session Id:</TextBlock>
