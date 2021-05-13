@@ -109,6 +109,8 @@
                 <!-- Show DeviceInfo labels in col 0 -->
                 <StackPanel Grid.Row="3" Grid.Column="0" Margin="6">
                     <TextBlock>Resource Id:</TextBlock>
+                    <TextBlock>Created:</TextBlock>
+                    <TextBlock>Expires:</TextBlock>
                     <TextBlock>Media Type:</TextBlock>
                     <TextBlock>Url:</TextBlock>
                     <TextBlock>Modality Session Id:</TextBlock>
@@ -117,6 +119,8 @@
                 <!-- Show DeviceInfo data in col 1 -->
                 <StackPanel Grid.Row="3" Grid.Column="1">
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Id}"></TextBlock>
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.CreatedOn}"></TextBlock>
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Expires}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.MediaType}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Url}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ModalitySession.SessionId}"></TextBlock>
