@@ -5,7 +5,6 @@
     /// </summary>
     public enum EnhancementMode
     {
-        None,
         Smooth,
         EdgeLow,
         EdgeHigh,
