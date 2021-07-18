@@ -105,6 +105,31 @@ paths:
           description: Successfully deleted resource
         '404':
           description: Image resource not found
+  /images/{id}/media:
+    get:
+      tags: [Images]
+      summary: Get Image Media
+      operationId: getImageMedia
+      description: Retrieve the media associated with an image resource
+      parameters:
+        - name: id
+          in: path
+          description: Id of the image resource to retrieve
+          required: true
+          schema:
+            type: string
+            format: text
+      responses:
+        '200':
+          description: Success
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Image resource not found
+
 
   /images/{id}/filters/unmap:
     post:

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fe8f1445-9517-497f-8dbf-1247e36d99a9",
+		"_postman_id": "749d44a8-da0a-4258-afe2-e5bf1624079e",
 		"name": "Dentsply Sirona Intraoral Filters API",
 		"description": "This API is used to apply custom filters to images acquired from the DSIO Modality API.\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -21,7 +21,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\"eiusmod consectetur ex anim\""
+							"raw": "\"ea aliquip aliqua\""
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images",
@@ -42,7 +42,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "\"eiusmod consectetur ex anim\""
+									"raw": "\"ea aliquip aliqua\""
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -64,7 +64,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"2018-05-10T20:33:54.754Z\",\n \"expires\": \"2018-11-19T21:30:50.435Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1973-04-08T08:44:02.658Z\",\n \"expires\": \"1945-04-10T13:19:29.337Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Bad input parameter",
@@ -73,7 +73,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "\"eiusmod consectetur ex anim\""
+									"raw": "\"ea aliquip aliqua\""
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -104,7 +104,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "\"eiusmod consectetur ex anim\""
+									"raw": "\"ea aliquip aliqua\""
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -187,7 +187,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"2018-05-10T20:33:54.754Z\",\n \"expires\": \"2018-11-19T21:30:50.435Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1973-04-08T08:44:02.658Z\",\n \"expires\": \"1945-04-10T13:19:29.337Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Bad input parameter",
@@ -272,7 +272,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "eiusmod consectetur ex anim",
+									"value": "ea aliquip aliqua",
 									"description": "(Required) Id of the image resource to retrieve"
 								}
 							]
@@ -311,7 +311,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"2018-05-10T20:33:54.754Z\",\n \"expires\": \"2018-11-19T21:30:50.435Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1973-04-08T08:44:02.658Z\",\n \"expires\": \"1945-04-10T13:19:29.337Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Image resource not found",
@@ -365,7 +365,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "eiusmod consectetur ex anim",
+									"value": "ea aliquip aliqua",
 									"description": "(Required) Id of the image resource to delete"
 								}
 							]
@@ -440,6 +440,102 @@
 							"body": ""
 						}
 					]
+				},
+				{
+					"name": "Get Image Media",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/images/:id/media",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"images",
+								":id",
+								"media"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "ea aliquip aliqua",
+									"description": "(Required) Id of the image resource to retrieve"
+								}
+							]
+						},
+						"description": "Retrieve the media associated with an image resource"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/media",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"media"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "image/*"
+								}
+							],
+							"cookie": [],
+							"body": "ea aliquip aliqua"
+						},
+						{
+							"name": "Image resource not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/media",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"media"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
 				}
 			],
 			"description": "Manage image resources for processing"
@@ -475,7 +571,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "eiusmod consectetur ex anim",
+									"value": "ea aliquip aliqua",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -520,7 +616,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "eiusmod consectetur ex anim"
+							"body": "ea aliquip aliqua"
 						},
 						{
 							"name": "Supplied LutInfo contains invalid parameters",
@@ -630,7 +726,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "eiusmod consectetur ex anim",
+									"value": "ea aliquip aliqua",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -675,7 +771,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "eiusmod consectetur ex anim"
+							"body": "ea aliquip aliqua"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -785,7 +881,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "eiusmod consectetur ex anim",
+									"value": "ea aliquip aliqua",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -830,7 +926,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "eiusmod consectetur ex anim"
+							"body": "ea aliquip aliqua"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -940,7 +1036,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "eiusmod consectetur ex anim",
+									"value": "ea aliquip aliqua",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -985,7 +1081,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "eiusmod consectetur ex anim"
+							"body": "ea aliquip aliqua"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
