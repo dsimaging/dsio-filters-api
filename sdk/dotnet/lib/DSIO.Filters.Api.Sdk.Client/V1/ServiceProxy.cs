@@ -139,6 +139,18 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
             return response.StatusCode;
         }
 
+        /// <summary>
+        /// Gets the media associated with an image resource
+        /// </summary>
+        /// <returns>A stream representing the media</returns>
+        public async Task<Stream> GetImageMedia(string id)
+        {
+            var response = await Client.GetAsync("images/" + id + "/media");
+            response.EnsureSuccessStatusCode();
+            var result = await response.Content.ReadAsStreamAsync();
+            return result;
+        }
+
         #endregion
 
         #region Filters
