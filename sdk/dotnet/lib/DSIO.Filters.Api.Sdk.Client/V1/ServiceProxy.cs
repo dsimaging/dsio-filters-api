@@ -89,7 +89,6 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         #region Images
 
         /// <summary>
-        /// Upload a new image resource for processing. 
         /// Create a new image by uploading a 16-bit grayscale PNG image file.
         /// </summary>
         /// <returns>An ImageResource of <see cref="ImageResource" /> object</returns>
@@ -103,10 +102,9 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         }
 
         /// <summary>
-        /// Create an image resource from a Modality session.
         /// Create a new image resource by referencing an image captured in a current modality session.
         /// </summary>
-        /// <returns>An ModalitySession of <see cref="ModalitySession" /> object</returns>
+        /// <returns>An ImageResource of <see cref="ImageResource" /> object</returns>
         public async Task<ImageResource> CreateImage(ModalitySession modalitySession)
         {
             var response = await Client.PostAsJsonAsync("images/modality", modalitySession);
@@ -116,9 +114,8 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
 
         /// <summary>
         /// Gets an image resource
-        /// Retrieves an image resource
         /// </summary>
-        /// <returns>An id of <see cref="id" /> object</returns>
+        /// <returns>An ImageResource of <see cref="ImageResource" /> object</returns>
         public async Task<ImageResource> GetImage(string id)
         {
             var response = await Client.GetAsync("images/" + id);
@@ -128,10 +125,9 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         }
 
         /// <summary>
-        /// Delete an image resource
         /// Deletes an image resource from the filters service. This image will no longer be available for processing.
         /// </summary>
-        /// <returns>An id of <see cref="id" /> object</returns>
+        /// <returns>The Http Status Code of the result</returns>
         public async Task<HttpStatusCode> DeleteImage(string id)
         {
             var response = await Client.DeleteAsync("images/" + id);
@@ -156,11 +152,11 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         #region Filters
 
         /// <summary>
-        /// Retrieves the image stream by Applying the Select Filter
+        /// Applies the Select Filter to an image resource
         /// </summary>
-        /// <param name="imageId">Image Id</param>
-        /// <param name="selectFilterImageParam">The parameters used to process the image</param>
-        /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
+        /// <param name="imageId">The Id of the <see cref="ImageResource"></param>
+        /// <param name="selectFilterImageParam">The <see cref="SelectFilterImageParam"> parameters used to process the image</param>
+        /// <returns>A stream representing the filtered image</returns>
         public async Task<Stream> SelectFilter(string imageId, SelectFilterImageParam selectFilterImageParam)
         {
             var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/select", selectFilterImageParam);
@@ -170,11 +166,11 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         }
 
         /// <summary>
-        /// Retrieves the image stream by Applying the Supreme Filter
+        /// Applies the Supreme Filter to an image resource
         /// </summary>
-        /// <param name="imageId">Image Id</param>
-        /// <param name="supremeFilterImageParam">The parameters used to process the image</param>
-        /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
+        /// <param name="imageId">The Id of the <see cref="ImageResource"></param>
+        /// <param name="supremeFilterImageParam">The <see cref="SupremeFilterImageParam"> parameters used to process the image</param>
+        /// <returns>A Stream representing the filtered image</returns>
         public async Task<Stream> SupremeFilter(string imageId, SupremeFilterImageParam supremeFilterImageParam)
         {
             var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/supreme", supremeFilterImageParam);
@@ -183,11 +179,11 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         }
 
         /// <summary>
-        /// Retrieves the image stream by Applying the Ae Filter
+        /// Applies the AE Filter to an image resource 
         /// </summary>
-        /// <param name="imageId">Image Id</param>
-        /// <param name="omegaFilterImageParam">The parameters used to process the image</param>        
-        /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
+        /// <param name="imageId">The Id of the <see cref="ImageResource"></param>
+        /// <param name="omegaFilterImageParam">The <see cref="OmegaFilterImageParam"> parameters used to process the image</param>        
+        /// <returns>A Stream representing the filtered image</returns>
         public async Task<Stream> AeFilter(string imageId, OmegaFilterImageParam omegaFilterImageParam)
         {
             var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/ae", omegaFilterImageParam);
@@ -196,11 +192,11 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         }
 
         /// <summary>
-        /// Retrieves the image stream by Applying the Unmap Filter
+        /// Removes the mapping applied to an image resource and returns the original image
         /// </summary>
-        /// <param name="imageId">Image Id</param>
-        /// <param name="lutInfo">The parameters used to process the image</param>
-        /// <returns>An StreamContent of <see cref="StreamContent" /> object</returns>
+        /// <param name="imageId">The Id of the <see cref="ImageResource"></param>
+        /// <param name="lutInfo">The <see cref="LutInfo"> parameters</param>
+        /// <returns>A stream represnting the unmapped image</returns>
         public async Task<Stream> UnmapFilter(string imageId, LutInfo lutInfo)
         {
             var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/unmap", lutInfo);
