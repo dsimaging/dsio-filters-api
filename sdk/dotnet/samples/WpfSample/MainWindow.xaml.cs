@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
@@ -18,6 +20,11 @@ namespace WpfSample
             InitializeComponent();
 
             DataContext = new MainViewModel();
+
+            // Update title with version info
+            var assembly = Assembly.GetExecutingAssembly();
+            var fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            Title = $"{fileVersionInfo.ProductName} v{fileVersionInfo.ProductVersion}";
         }
 
         public MainViewModel ViewModel => DataContext as MainViewModel;
