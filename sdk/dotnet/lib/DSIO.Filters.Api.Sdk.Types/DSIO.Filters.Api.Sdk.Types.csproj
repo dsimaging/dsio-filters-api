@@ -1,8 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>Dentsply Sirona</Company>
+    <Product>DSIO Filters Api SDK</Product>
+    <Authors>Dentsply Sirona</Authors>
+    <RepositoryUrl>https://github.com/dsimaging/dsio-filters-api</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/dsimaging/dsio-filters-api</PackageProjectUrl>
+    <Description>Contains definitions of types used in the Dentsply Sirona Intraoral Imaging Filters API.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
