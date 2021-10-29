@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "749d44a8-da0a-4258-afe2-e5bf1624079e",
+		"_postman_id": "6d9565e3-ef03-4d2c-832c-34436d5a2d42",
 		"name": "Dentsply Sirona Intraoral Filters API",
 		"description": "This API is used to apply custom filters to images acquired from the DSIO Modality API.\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -16,12 +16,29 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "image/png"
+								"value": "multipart/form-data"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "\"ea aliquip aliqua\""
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "lutInfo",
+									"value": "{\"gamma\":2.3,\"slope\":65535,\"offset\":0,\"totalGrays\":4096,\"minimumGray\":3612,\"maximumGray\":418}",
+									"type": "text"
+								},
+								{
+									"key": "binningMode",
+									"value": "unbinned",
+									"type": "text"
+								},
+								{
+									"key": "media",
+									"description": "The media file to upload. This file must be a 16-bit PNG image.",
+									"type": "file",
+									"src": []
+								}
+							]
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images",
@@ -32,7 +49,7 @@
 								"images"
 							]
 						},
-						"description": "Create a new image resource by uploading a 16-bit grayscale PNG image file. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.\n"
+						"description": "Create a new image resource by uploading a 16-bit grayscale PNG image file and information describing the image. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.\n"
 					},
 					"response": [
 						{
@@ -41,8 +58,25 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "\"ea aliquip aliqua\""
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "lutInfo",
+											"value": "{\"gamma\":2.3,\"slope\":65535,\"offset\":0,\"totalGrays\":4096,\"minimumGray\":3612,\"maximumGray\":418}",
+											"type": "text"
+										},
+										{
+											"key": "binningMode",
+											"value": "unbinned",
+											"type": "text"
+										},
+										{
+											"key": "media",
+											"description": "The media file to upload. This file must be a 16-bit PNG image.",
+											"type": "file",
+											"src": []
+										}
+									]
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -64,7 +98,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1973-04-08T08:44:02.658Z\",\n \"expires\": \"1945-04-10T13:19:29.337Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1971-12-13T16:22:50.979Z\",\n \"expires\": \"1993-09-09T14:34:36.485Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Bad input parameter",
@@ -72,8 +106,25 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "\"ea aliquip aliqua\""
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "lutInfo",
+											"value": "{\"gamma\":2.3,\"slope\":65535,\"offset\":0,\"totalGrays\":4096,\"minimumGray\":3612,\"maximumGray\":418}",
+											"type": "text"
+										},
+										{
+											"key": "binningMode",
+											"value": "unbinned",
+											"type": "text"
+										},
+										{
+											"key": "media",
+											"description": "The media file to upload. This file must be a 16-bit PNG image.",
+											"type": "file",
+											"src": []
+										}
+									]
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -103,8 +154,25 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "\"ea aliquip aliqua\""
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "lutInfo",
+											"value": "{\"gamma\":2.3,\"slope\":65535,\"offset\":0,\"totalGrays\":4096,\"minimumGray\":3612,\"maximumGray\":418}",
+											"type": "text"
+										},
+										{
+											"key": "binningMode",
+											"value": "unbinned",
+											"type": "text"
+										},
+										{
+											"key": "media",
+											"description": "The media file to upload. This file must be a 16-bit PNG image.",
+											"type": "file",
+											"src": []
+										}
+									]
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -142,7 +210,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}"
+							"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images/modality",
@@ -164,7 +237,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}"
+									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/modality",
@@ -187,7 +265,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1973-04-08T08:44:02.658Z\",\n \"expires\": \"1945-04-10T13:19:29.337Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1971-12-13T16:22:50.979Z\",\n \"expires\": \"1993-09-09T14:34:36.485Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Bad input parameter",
@@ -196,7 +274,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}"
+									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/modality",
@@ -228,7 +311,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}"
+									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/modality",
@@ -272,7 +360,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "sunt labore",
 									"description": "(Required) Id of the image resource to retrieve"
 								}
 							]
@@ -296,7 +384,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to retrieve"
 										}
 									]
 								}
@@ -311,7 +401,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1973-04-08T08:44:02.658Z\",\n \"expires\": \"1945-04-10T13:19:29.337Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1971-12-13T16:22:50.979Z\",\n \"expires\": \"1993-09-09T14:34:36.485Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Image resource not found",
@@ -329,7 +419,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to retrieve"
 										}
 									]
 								}
@@ -365,7 +457,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "sunt labore",
 									"description": "(Required) Id of the image resource to delete"
 								}
 							]
@@ -389,7 +481,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to delete"
 										}
 									]
 								}
@@ -422,7 +516,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to delete"
 										}
 									]
 								}
@@ -459,7 +555,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "sunt labore",
 									"description": "(Required) Id of the image resource to retrieve"
 								}
 							]
@@ -484,7 +580,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to retrieve"
 										}
 									]
 								}
@@ -499,7 +597,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "ea aliquip aliqua"
+							"body": "sunt labore"
 						},
 						{
 							"name": "Image resource not found",
@@ -518,7 +616,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to retrieve"
 										}
 									]
 								}
@@ -547,16 +647,7 @@
 					"name": "Unmap image",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"gamma\": 2.3,\n    \"slope\": 65535,\n    \"offset\": 0,\n    \"totalGrays\": 4096,\n    \"minimumGray\": 3612,\n    \"maximumGray\": 418\n}"
-						},
+						"header": [],
 						"url": {
 							"raw": "{{baseUrl}}/images/:id/filters/unmap",
 							"host": [
@@ -571,7 +662,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "sunt labore",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -584,10 +675,6 @@
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"gamma\": 2.3,\n    \"slope\": 65535,\n    \"offset\": 0,\n    \"totalGrays\": 4096,\n    \"minimumGray\": 3612,\n    \"maximumGray\": 418\n}"
-								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/unmap",
 									"host": [
@@ -601,7 +688,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -616,17 +705,13 @@
 								}
 							],
 							"cookie": [],
-							"body": "ea aliquip aliqua"
+							"body": "sunt labore"
 						},
 						{
 							"name": "Supplied LutInfo contains invalid parameters",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"gamma\": 2.3,\n    \"slope\": 65535,\n    \"offset\": 0,\n    \"totalGrays\": 4096,\n    \"minimumGray\": 3612,\n    \"maximumGray\": 418\n}"
-								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/unmap",
 									"host": [
@@ -640,7 +725,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -662,10 +749,6 @@
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"gamma\": 2.3,\n    \"slope\": 65535,\n    \"offset\": 0,\n    \"totalGrays\": 4096,\n    \"minimumGray\": 3612,\n    \"maximumGray\": 418\n}"
-								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/unmap",
 									"host": [
@@ -679,7 +762,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -710,7 +795,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"enhancementMode\": \"edgePro\",\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+							"raw": "{\n    \"enhancementMode\": \"edgePro\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images/:id/filters/select",
@@ -726,7 +816,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "sunt labore",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -741,7 +831,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"enhancementMode\": \"edgePro\",\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"enhancementMode\": \"edgePro\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/select",
@@ -756,7 +851,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -771,7 +868,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "ea aliquip aliqua"
+							"body": "sunt labore"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -780,7 +877,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"enhancementMode\": \"edgePro\",\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"enhancementMode\": \"edgePro\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/select",
@@ -795,7 +897,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -819,7 +923,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"enhancementMode\": \"edgePro\",\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"enhancementMode\": \"edgePro\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/select",
@@ -834,7 +943,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -865,7 +976,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"unbinned\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+							"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images/:id/filters/supreme",
@@ -881,7 +997,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "sunt labore",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -896,7 +1012,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"unbinned\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/supreme",
@@ -911,7 +1032,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -926,7 +1049,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "ea aliquip aliqua"
+							"body": "sunt labore"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -935,7 +1058,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"unbinned\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/supreme",
@@ -950,7 +1078,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -974,7 +1104,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"unbinned\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/supreme",
@@ -989,7 +1124,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -1020,7 +1157,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+							"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images/:id/filters/ae",
@@ -1036,7 +1178,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "sunt labore",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -1051,7 +1193,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/ae",
@@ -1066,7 +1213,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -1081,7 +1230,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "ea aliquip aliqua"
+							"body": "sunt labore"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -1090,7 +1239,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/ae",
@@ -1105,7 +1259,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -1129,7 +1285,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/ae",
@@ -1144,7 +1305,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "sunt labore",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
