@@ -22,13 +22,24 @@ paths:
       summary: Create Image Resource
       operationId: createImage
       description: |
-        Create a new image resource by uploading a 16-bit grayscale PNG image file. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.
+        Create a new image resource by uploading a 16-bit grayscale PNG image file and information describing the image. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.
       requestBody:
         content:
-          image/png:
+          multipart/form-data:
             schema:
-              type: string
-              format: binary
+              type: object
+              properties:
+                lutInfo:
+                  $ref: '#/components/schemas/LutInfo'
+                binningMode:
+                  $ref: '#/components/schemas/BinningMode'
+                media:
+                  description: The media file to upload. This file must be a 16-bit PNG image.
+                  type: string
+                  format: binary
+            encoding:
+              media:
+                contentType: image/png
       responses:
         '201':
           description: Image resource created
@@ -146,12 +157,6 @@ paths:
           schema:
             type: string
             format: text
-      requestBody:
-          description: The LutInfo describing the mapping that was applied to the image resource.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LutInfo'
       responses:
         '200':
           description: Success
@@ -314,7 +319,7 @@ components:
 
     LutInfo:
         description: |
-          Describes the lookup table (LUT) mapping applied to an image.
+          Describes the lookup table (LUT) mapping applied to an image. This information should be obtained from the ImageInfo of the image that was acquired using the DSIO Modality API.
 
         type: object
         properties:
@@ -348,6 +353,14 @@ components:
             type: number
             format: integer
             example: 418
+            
+    BinningMode:
+        description: The binning mode used when the image was acquired. This information should be obtained from the AcquisitionInfo property of the ImageInfo for the image acquired using the DSIO Modality API.
+        type: string
+        enum:
+          - binned2x2
+          - unbinned
+        example: unbinned
 
     SelectFilter:
       description: |
@@ -363,8 +376,6 @@ components:
             - edgeHigh
             - edgePro
           example: edgePro
-        lutInfo:
-          $ref: '#/components/schemas/LutInfo'
 
     SupremeFilter:
       description: |
@@ -381,13 +392,6 @@ components:
             - restorative
             - hygiene
           example: general
-        binningMode:
-          description: The binning mode used when the image was acquired.
-          type: string
-          enum:
-            - binned2x2
-            - unbinned
-          example: unbinned
         sharpness:
           description: The sharpness to apply to the image expressed as a percentage in the range 0-100.
           type: number
@@ -395,8 +399,6 @@ components:
           minimum: 0
           maximum: 100
           example: 70.0
-        lutInfo:
-          $ref: '#/components/schemas/LutInfo'
 
     AEFilter:
       description: |
@@ -419,5 +421,3 @@ components:
           minimum: 0
           maximum: 100
           example: 70.0
-        lutInfo:
-          $ref: '#/components/schemas/LutInfo'
