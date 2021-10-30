@@ -324,11 +324,12 @@ components:
       type: object
       properties:
         acquisitionInfo:
-          description: Provides information regarding an acquisition. AcquisitionInfo must be provided prior to each exposure.
+          description: Describes information regarding the acquisition from the DSIO Modality API.
           type: object
           properties:
             binning:
-              description: The binning mode used to acquire the image. When binning mode is set to Binned2x2, the sensor combines 4 pixels in a 2x2 neighborhood to create a single pixel. The resulting image is 1/4th the size of an Unbinned image, but with lower resolution. Note that some sensors may not support binning, in which case the binning property cannot be changed.
+              description: |
+                The binning mode used to acquire the image. When binning mode is set to Binned2x2, the sensor combines 4 pixels in a 2x2 neighborhood to create a single pixel. The resulting image is 1/4th the size of an Unbinned image, but with lower resolution. Note that some sensors may not support binning, in which case the binning property cannot be changed.
               type: string
               enum: [Unbinned, Binned2x2]
               example: Unbinned

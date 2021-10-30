@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0c49acd4-9172-4cec-b7e0-b512b67e0112",
+		"_postman_id": "7f12e80f-031b-47f2-891c-9b930ebe08cc",
 		"name": "Dentsply Sirona Intraoral Filters API",
 		"description": "This API is used to apply custom filters to images acquired from the DSIO Modality API.\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -88,7 +88,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1956-05-22T15:33:16.371Z\",\n \"expires\": \"2010-03-14T11:47:17.603Z\",\n \"imageInfo\": {\n  \"acquisitionInfo\": {\n   \"binning\": \"Unbinned\"\n  },\n  \"lutInfo\": {\n   \"gamma\": 2.3,\n   \"slope\": 65535,\n   \"offset\": 0,\n   \"totalGrays\": 4096,\n   \"minimumGray\": 3612,\n   \"maximumGray\": 418\n  }\n },\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"2006-04-12T10:13:41.652Z\",\n \"expires\": \"2013-03-11T09:05:00.029Z\",\n \"imageInfo\": {\n  \"acquisitionInfo\": {\n   \"binning\": \"Unbinned\"\n  },\n  \"lutInfo\": {\n   \"gamma\": 2.3,\n   \"slope\": 65535,\n   \"offset\": 0,\n   \"totalGrays\": 4096,\n   \"minimumGray\": 3612,\n   \"maximumGray\": 418\n  }\n },\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Bad input parameter",
@@ -245,7 +245,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1956-05-22T15:33:16.371Z\",\n \"expires\": \"2010-03-14T11:47:17.603Z\",\n \"imageInfo\": {\n  \"acquisitionInfo\": {\n   \"binning\": \"Unbinned\"\n  },\n  \"lutInfo\": {\n   \"gamma\": 2.3,\n   \"slope\": 65535,\n   \"offset\": 0,\n   \"totalGrays\": 4096,\n   \"minimumGray\": 3612,\n   \"maximumGray\": 418\n  }\n },\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"2006-04-12T10:13:41.652Z\",\n \"expires\": \"2013-03-11T09:05:00.029Z\",\n \"imageInfo\": {\n  \"acquisitionInfo\": {\n   \"binning\": \"Unbinned\"\n  },\n  \"lutInfo\": {\n   \"gamma\": 2.3,\n   \"slope\": 65535,\n   \"offset\": 0,\n   \"totalGrays\": 4096,\n   \"minimumGray\": 3612,\n   \"maximumGray\": 418\n  }\n },\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Bad input parameter",
@@ -340,7 +340,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "qui aliqua",
+									"value": "tempor",
 									"description": "(Required) Id of the image resource to retrieve"
 								}
 							]
@@ -365,7 +365,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to retrieve"
 										}
 									]
@@ -381,7 +381,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1956-05-22T15:33:16.371Z\",\n \"expires\": \"2010-03-14T11:47:17.603Z\",\n \"imageInfo\": {\n  \"acquisitionInfo\": {\n   \"binning\": \"Unbinned\"\n  },\n  \"lutInfo\": {\n   \"gamma\": 2.3,\n   \"slope\": 65535,\n   \"offset\": 0,\n   \"totalGrays\": 4096,\n   \"minimumGray\": 3612,\n   \"maximumGray\": 418\n  }\n },\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"2006-04-12T10:13:41.652Z\",\n \"expires\": \"2013-03-11T09:05:00.029Z\",\n \"imageInfo\": {\n  \"acquisitionInfo\": {\n   \"binning\": \"Unbinned\"\n  },\n  \"lutInfo\": {\n   \"gamma\": 2.3,\n   \"slope\": 65535,\n   \"offset\": 0,\n   \"totalGrays\": 4096,\n   \"minimumGray\": 3612,\n   \"maximumGray\": 418\n  }\n },\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Image resource not found",
@@ -400,7 +400,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to retrieve"
 										}
 									]
@@ -437,7 +437,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "qui aliqua",
+									"value": "tempor",
 									"description": "(Required) Id of the image resource to delete"
 								}
 							]
@@ -462,7 +462,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to delete"
 										}
 									]
@@ -497,7 +497,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to delete"
 										}
 									]
@@ -535,7 +535,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "qui aliqua",
+									"value": "tempor",
 									"description": "(Required) Id of the image resource to retrieve"
 								}
 							]
@@ -561,7 +561,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to retrieve"
 										}
 									]
@@ -577,7 +577,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "qui aliqua"
+							"body": "tempor"
 						},
 						{
 							"name": "Image resource not found",
@@ -597,7 +597,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to retrieve"
 										}
 									]
@@ -642,7 +642,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "qui aliqua",
+									"value": "tempor",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -669,7 +669,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to process"
 										}
 									]
@@ -685,7 +685,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "qui aliqua"
+							"body": "tempor"
 						},
 						{
 							"name": "Supplied LutInfo contains invalid parameters",
@@ -706,7 +706,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to process"
 										}
 									]
@@ -743,7 +743,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to process"
 										}
 									]
@@ -796,7 +796,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "qui aliqua",
+									"value": "tempor",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -832,7 +832,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to process"
 										}
 									]
@@ -848,7 +848,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "qui aliqua"
+							"body": "tempor"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -878,7 +878,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to process"
 										}
 									]
@@ -924,7 +924,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to process"
 										}
 									]
@@ -977,7 +977,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "qui aliqua",
+									"value": "tempor",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -1013,7 +1013,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to process"
 										}
 									]
@@ -1029,7 +1029,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "qui aliqua"
+							"body": "tempor"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -1059,7 +1059,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to process"
 										}
 									]
@@ -1105,7 +1105,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to process"
 										}
 									]
@@ -1158,7 +1158,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "qui aliqua",
+									"value": "tempor",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -1194,7 +1194,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to process"
 										}
 									]
@@ -1210,7 +1210,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "qui aliqua"
+							"body": "tempor"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -1240,7 +1240,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to process"
 										}
 									]
@@ -1286,7 +1286,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "qui aliqua",
+											"value": "tempor",
 											"description": "(Required) Id of the image resource to process"
 										}
 									]
