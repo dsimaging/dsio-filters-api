@@ -29,11 +29,9 @@ paths:
             schema:
               type: object
               properties:
-                lutInfo:
-                  $ref: '#/components/schemas/LutInfo'
-                binningMode:
-                  $ref: '#/components/schemas/BinningMode'
-                media:
+                imageInfo:
+                  $ref: '#/components/schemas/ImageInfo'
+                imageMedia:
                   description: The media file to upload. This file must be a 16-bit PNG image.
                   type: string
                   format: binary
@@ -57,7 +55,7 @@ paths:
       summary: Create Modality Resource
       operationId: modalityImage
       description: |
-        Create a new image resource by referencing an image captured in a current modality session. This resource will only be available as long as the modality session is active. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.
+        Create a new image resource by referencing an image captured in a current modality session using the DSIO Modality API. This resource will only be available as long as the modality session is active. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.
       requestBody:
         content:
           application/json:
@@ -285,7 +283,7 @@ components:
           type: string
           example: "image/png"
         url:
-          description: The Url where the media resource can be downloaded.
+          description: The Url where the image media resource can be downloaded.
           type: string
           example: "https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png"
         createdOn:
@@ -298,6 +296,8 @@ components:
           type: string
           format: date-time
           example: 2021-05-03T18:56:00:00-04:00
+        imageInfo:
+          $ref: '#/components/schemas/ImageInfo'
         modalitySession:
           description: |
             Optional object that when present indicates that the resource belongs to a session created with the Modality API.
@@ -317,50 +317,57 @@ components:
           type: string
           example: 39db323b-198d-4219-b79e-ca918cde5be5
 
-    LutInfo:
-        description: |
-          Describes the lookup table (LUT) mapping applied to an image. This information should be obtained from the ImageInfo of the image that was acquired using the DSIO Modality API.
+    ImageInfo:
+      description: |
+        Describes information about the image used to create an `ImageResource`. This information should be obtained directly from the corresponding `ImageInfo` object of the image acquired using the DSIO Modality API. Note that this object is a subset of the DSIO Modality API, thus allowing API consumers to use the same object for both.
 
-        type: object
-        properties:
-          gamma:
-            description: Gamma value used in map
-            type: number
-            format: double
-            example: 2.3
-          slope:
-            description: Slope value used in map
-            type: number
-            format: double
-            example: 65535.0
-          offset:
-            description: Offset value used in map
-            type: number
-            format: double
-            example: 0.0
-          totalGrays:
-            description: Total number of gray values in original (unmapped) image
-            type: number
-            format: integer
-            example: 4096
-          minimumGray:
-            description: Minimum gray value in original (unmapped) image
-            type: number
-            format: integer
-            example: 3612
-          maximumGray:
-            description: Maximum gray value in original (unmapped) image
-            type: number
-            format: integer
-            example: 418
-            
-    BinningMode:
-        description: The binning mode used when the image was acquired. This information should be obtained from the AcquisitionInfo property of the ImageInfo for the image acquired using the DSIO Modality API.
-        type: string
-        enum:
-          - binned2x2
-          - unbinned
-        example: unbinned
+      type: object
+      properties:
+        acquisitionInfo:
+          description: Provides information regarding an acquisition. AcquisitionInfo must be provided prior to each exposure.
+          type: object
+          properties:
+            binning:
+              description: The binning mode used to acquire the image. When binning mode is set to Binned2x2, the sensor combines 4 pixels in a 2x2 neighborhood to create a single pixel. The resulting image is 1/4th the size of an Unbinned image, but with lower resolution. Note that some sensors may not support binning, in which case the binning property cannot be changed.
+              type: string
+              enum: [Unbinned, Binned2x2]
+              example: Unbinned
+        lutInfo:
+          description: |
+            Describes the lookup table (LUT) mapping applied to an image. This information should be obtained from the ImageInfo of the image that was acquired using the DSIO Modality API.
+
+          type: object
+          properties:
+            gamma:
+              description: Gamma value used in map
+              type: number
+              format: double
+              example: 2.3
+            slope:
+              description: Slope value used in map
+              type: number
+              format: double
+              example: 65535.0
+            offset:
+              description: Offset value used in map
+              type: number
+              format: double
+              example: 0.0
+            totalGrays:
+              description: Total number of gray values in original (unmapped) image
+              type: number
+              format: integer
+              example: 4096
+            minimumGray:
+              description: Minimum gray value in original (unmapped) image
+              type: number
+              format: integer
+              example: 3612
+            maximumGray:
+              description: Maximum gray value in original (unmapped) image
+              type: number
+              format: integer
+              example: 418
 
     SelectFilter:
       description: |
