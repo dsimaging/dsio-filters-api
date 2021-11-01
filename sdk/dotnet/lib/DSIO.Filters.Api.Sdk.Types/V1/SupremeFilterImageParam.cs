@@ -4,10 +4,6 @@
     {
         public TaskName? Task { get; set; }
 
-        public BinningMode? BinningMode { get; set; }
-
         public int Sharpness { get; set; }
-
-        public LutInfo LutInfo { get; set; }
     }
 }

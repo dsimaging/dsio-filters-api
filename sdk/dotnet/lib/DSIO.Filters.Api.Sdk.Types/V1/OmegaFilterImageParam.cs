@@ -5,7 +5,5 @@
         public TaskName? Task { get; set; }
 
         public int Sharpness { get; set; }
-
-        public LutInfo LutInfo { get; set; }
     }
 }
