@@ -163,10 +163,10 @@ paths:
               schema:
                 type: string
                 format: binary
-        '400':
-          description: Supplied LutInfo contains invalid parameters
         '404':
           description: Image resource not found
+        '410':
+          description: Gone - Image media for this resource could not be found
 
   /images/{id}/filters/select:
     post:
@@ -201,6 +201,9 @@ paths:
           description: Supplied filter contains invalid parameters
         '404':
           description: Image resource not found
+        '410':
+          description: Gone - Image media for this resource could not be found
+
   /images/{id}/filters/supreme:
     post:
       tags: [Filters]
@@ -234,6 +237,9 @@ paths:
           description: Supplied filter contains invalid parameters
         '404':
           description: Image resource not found
+        '410':
+          description: Gone - Image media for this resource could not be found
+
   /images/{id}/filters/ae:
     post:
       tags: [Filters]
@@ -267,6 +273,8 @@ paths:
           description: Supplied filter contains invalid parameters
         '404':
           description: Image resource not found
+        '410':
+          description: Gone - Image media for this resource could not be found
 
 components:
   schemas:
