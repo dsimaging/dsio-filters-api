@@ -47,7 +47,7 @@ namespace WpfSample
         private void BtnCreateImage_OnClick(object sender, RoutedEventArgs e)
         {
             // Create a new image
-            ViewModel.UploadImage();
+            ViewModel.UploadImage(this);
         }
 
         private void BtnCreateImageFromModalitySession_OnClick(object sender, RoutedEventArgs e)

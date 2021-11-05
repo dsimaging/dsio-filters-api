@@ -216,7 +216,7 @@ namespace WpfSample
             }
         }
 
-        public void UploadImage()
+        public void UploadImage(Window owner)
         {
             // Clear Upload properties
             UploadImageFileName = null;
@@ -224,6 +224,7 @@ namespace WpfSample
 
             // Create and show dialog to supply Upload info
             ImageDataAndInfo imageDataAndInfo = new ImageDataAndInfo(this);
+            imageDataAndInfo.Owner = owner;
             if (imageDataAndInfo.ShowDialog() == true)
             {
                 if (!string.IsNullOrEmpty(UploadImageFileName) && UploadImageInfo != null)
