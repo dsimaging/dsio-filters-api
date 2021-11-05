@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 using DSIO.Filters.Api.Sdk.Types.V1;
 
@@ -92,10 +93,14 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// Create a new image by uploading a 16-bit grayscale PNG image file.
         /// </summary>
         /// <returns>An ImageResource of <see cref="ImageResource" /> object</returns>
-        public async Task<ImageResource> UploadImage(StreamContent imageContent, string ContentMediaType)
+        public async Task<ImageResource> UploadImage(ImageInfo imageInfo, StreamContent imageContent, string ContentMediaType)
         {
+            var content = new MultipartFormDataContent();
             imageContent.Headers.ContentType = new MediaTypeHeaderValue(ContentMediaType);
-            var response = await Client.PostAsync("images", imageContent);
+            content.Add(imageContent, "imageMedia");
+            var imageInfoJson = JsonConvert.SerializeObject(imageInfo);
+            content.Add( new StringContent(imageInfoJson), "ImageInfo");
+            var response = await Client.PostAsync("images", content);
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadAsAsync<ImageResource>();
