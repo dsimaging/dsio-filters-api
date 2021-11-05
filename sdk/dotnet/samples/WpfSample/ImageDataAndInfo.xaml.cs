@@ -26,7 +26,22 @@ namespace WpfSample
             DataContext = mainViewModel;
             InitializeComponent();
 
-            TbxImageInfo.Text = "{\"acquisitionInfo\": {\"binning\": \"Unbinned\"},\"lutInfo\": {\"gamma\": 2.3,\"slope\": 65535,\"offset\": 0,\"totalGrays\": 4096,\"minimumGray\": 3612,\"maximumGray\": 418}}";
+            TbxImageInfo.Text = @"{
+'acquisitionInfo': 
+{
+    'binning': 'Unbinned'
+},
+'lutInfo': 
+{
+    'gamma': 2.3,
+    'slope': 65535,
+    'offset': 0,
+    'totalGrays': 4096,
+    'minimumGray': 3612,
+    'maximumGray': 418
+}
+}";
+
         }
 
         public MainViewModel ViewModel => DataContext as MainViewModel;
