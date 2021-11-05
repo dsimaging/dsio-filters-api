@@ -8,6 +8,11 @@
         Closing="MainWindow_OnClosing"
         Title="WPF Sample"
         Height="800" Width="800">
+
+    <Window.Resources>
+        <local:ObjectToJsonConverter x:Key="JsonConverter"/>
+    </Window.Resources>
+
     <Grid Margin="6">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -109,16 +114,18 @@
                     <TextBlock>Expires:</TextBlock>
                     <TextBlock>Media Type:</TextBlock>
                     <TextBlock>Url:</TextBlock>
+                    <TextBlock>ImageInfo:</TextBlock>
                     <TextBlock>Modality Session Id:</TextBlock>
                     <TextBlock>Modality Session Image Id:</TextBlock>
                 </StackPanel>
                 <!-- Show DeviceInfo data in col 1 -->
-                <StackPanel Grid.Row="3" Grid.Column="1">
+                <StackPanel Grid.Row="3" Grid.Column="1" Margin="6">
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Id}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.CreatedOn}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Expires}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.MediaType}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Url}"></TextBlock>
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ImageInfo, Converter={StaticResource JsonConverter}}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ModalitySession.SessionId}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ModalitySession.ImageId}"></TextBlock>
                 </StackPanel>
