@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 using DSIO.Filters.Api.Sdk.Client.V1;
 using DSIO.Filters.Api.Sdk.Types.V1;
@@ -145,6 +146,20 @@ namespace WpfSample
             }
         }
 
+        private ImageInfo _uploadImageInfo;
+        public ImageInfo UploadImageInfo
+        {
+            get => _uploadImageInfo;
+            set
+            {
+                if (value != _uploadImageInfo)
+                {
+                    _uploadImageInfo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private string _uploadImageFileName;
         public string UploadImageFileName
         {
@@ -203,12 +218,16 @@ namespace WpfSample
 
         public void UploadImage()
         {
-            if (!string.IsNullOrEmpty(UploadImageFileName))
+            ImageDataAndInfo imageDataAndInfo = new ImageDataAndInfo(this);
+            var ret = imageDataAndInfo.ShowDialog();
+
+            if (!string.IsNullOrEmpty(UploadImageFileName) && UploadImageInfo != null)
             {
                 var fileStream = new FileStream(UploadImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
                 var imageContent = new StreamContent(fileStream);
+
                 // Upload a new image
-                _serviceProxy.UploadImage(imageContent, "image/png").ContinueWith(task =>
+                _serviceProxy.UploadImage(UploadImageInfo, imageContent, "image/png").ContinueWith(task =>
                 {
                     if (task.IsFaulted)
                     {

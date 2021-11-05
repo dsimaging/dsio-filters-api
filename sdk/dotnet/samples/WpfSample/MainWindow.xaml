@@ -73,10 +73,6 @@
                             Margin="6"
                             Padding="12, 6"
                             Click="BtnCreateImage_OnClick">Create Image</Button>
-                <TextBox x:Name="TbxFileName" Grid.Row="0" Grid.Column="1" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding UploadImageFileName}" ></TextBox>
-                <Button x:Name="BtnBrowseFileOpen" Grid.Row="0" Grid.Column="2"
-                            Margin="2, 4, 4, 4" Padding="12, 6" Click="BtnBrowseFileOpen_OnClick">Browse</Button>
-
                 <Button x:Name="BtnCreateImageFromModalitySession"
                             Grid.Row="1" Grid.Column="0"
                             Margin="6"

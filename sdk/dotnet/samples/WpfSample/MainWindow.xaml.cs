@@ -116,15 +116,5 @@ namespace WpfSample
             }
 
         }
-
-        private void BtnBrowseFileOpen_OnClick(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "image files (*.png)|*.png";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                ViewModel.UploadImageFileName = openFileDialog.FileName;
-            }
-        }
     }
 }
