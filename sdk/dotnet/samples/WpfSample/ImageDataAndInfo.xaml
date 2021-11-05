@@ -5,18 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfSample"
         mc:Ignorable="d"
-        Title="ImageDataAndInfo" Height="450" Width="800">
-    <DockPanel>
-        <Grid>
-            <Label Margin="35,41,673,336">Image Info:</Label>
-            <Button x:Name="BtnBrowseFileOpen" 
-            HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,81,40,0" Height="30" Width="140" Click="BtnBrowseFileOpen_OnClick">Browse Image File</Button>
-            <TextBox x:Name="TbxImageInfo" Margin="35,81,222,89" TextWrapping="Wrap" AcceptsReturn="True"/>
-            <Button x:Name="BtnSubmit" 
-            HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,222,40" Height="30" Width="140" Click="BtnSubmit_OnClick">Submit</Button>
-            <Button x:Name="BtnCancel" 
-            HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="40,40,40,40" Height="30" Width="140" Click="BtnCancel_OnClick">Cancel</Button>
+        WindowStartupLocation="CenterOwner"
+        Title="Upload Image" Height="450" Width="600">
+    <Grid Margin="6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-        </Grid>
-    </DockPanel>
+        <Label Grid.Row="0" Height="30">Use this dialog to upload an image and provide the required ImageInfo data</Label>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button x:Name="BtnBrowseFileOpen"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Height="30" Width="140"
+                    Click="BtnBrowseFileOpen_OnClick">Select Image File</Button>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto" Width="420">
+                <TextBlock Text="{Binding UploadImageFileName}"
+                           Margin="5,0"/>
+            </ScrollViewer>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <Label Height="30">Enter ImageInfo below as a Json string:</Label>
+            <TextBox x:Name="TbxImageInfo" TextWrapping="Wrap" MinHeight="250" AcceptsReturn="True"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="BtnSubmit"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Height="30" Width="100"
+                    Margin="6"
+                    Click="BtnSubmit_OnClick">Submit</Button>
+
+            <Button x:Name="BtnCancel"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Height="30" Width="100"
+                    Margin="6"
+                    Click="BtnCancel_OnClick">Cancel</Button>
+        </StackPanel>
+ 
+    </Grid>
 </Window>

@@ -69,15 +69,15 @@
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="BtnCreateImage"
-                            Grid.Row="0" Grid.Column="0"
+                            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                             Margin="6"
                             Padding="12, 6"
-                            Click="BtnCreateImage_OnClick">Create Image</Button>
+                            Click="BtnCreateImage_OnClick">Create Resource by Uploading Image</Button>
                 <Button x:Name="BtnCreateImageFromModalitySession"
                             Grid.Row="1" Grid.Column="0"
                             Margin="6"
                             Padding="12, 10"
-                            Click="BtnCreateImageFromModalitySession_OnClick">Create Image From Modality Session</Button>
+                            Click="BtnCreateImageFromModalitySession_OnClick">Create Resource From Modality Session</Button>
                 <Grid Grid.Row="1" Grid.Column="1" Margin="4">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

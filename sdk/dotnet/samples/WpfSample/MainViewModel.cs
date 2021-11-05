@@ -218,27 +218,34 @@ namespace WpfSample
 
         public void UploadImage()
         {
+            // Clear Upload properties
+            UploadImageFileName = null;
+            UploadImageInfo = null;
+
+            // Create and show dialog to supply Upload info
             ImageDataAndInfo imageDataAndInfo = new ImageDataAndInfo(this);
-            var ret = imageDataAndInfo.ShowDialog();
-
-            if (!string.IsNullOrEmpty(UploadImageFileName) && UploadImageInfo != null)
+            if (imageDataAndInfo.ShowDialog() == true)
             {
-                var fileStream = new FileStream(UploadImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                var imageContent = new StreamContent(fileStream);
-
-                // Upload a new image
-                _serviceProxy.UploadImage(UploadImageInfo, imageContent, "image/png").ContinueWith(task =>
+                if (!string.IsNullOrEmpty(UploadImageFileName) && UploadImageInfo != null)
                 {
-                    if (task.IsFaulted)
+                    // create a stream from the image file
+                    var fileStream = new FileStream(UploadImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                    var imageContent = new StreamContent(fileStream);
+
+                    // Upload image with ImageInfo
+                    _serviceProxy.UploadImage(UploadImageInfo, imageContent, "image/png").ContinueWith(task =>
                     {
-                        MessageBox.Show(task.Exception?.Message);
-                    }
-                    else if (task.IsCompleted)
-                    {
-                        SelectedImageResource = task.Result;
-                        ImageResourceId = SelectedImageResource.Id;
-                    }
-                });
+                        if (task.IsFaulted)
+                        {
+                            MessageBox.Show(task.Exception?.Message);
+                        }
+                        else if (task.IsCompleted)
+                        {
+                            SelectedImageResource = task.Result;
+                            ImageResourceId = SelectedImageResource.Id;
+                        }
+                    });
+                }
             }
         }
 
