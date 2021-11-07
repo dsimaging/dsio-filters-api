@@ -449,7 +449,7 @@ namespace WpfSample
             if (SelectedImageResource != null)
             {
                 // Apply Unmap Filter
-                return await _serviceProxy.UnmapFilter(SelectedImageResource.Id, null);
+                return await _serviceProxy.UnmapFilter(SelectedImageResource.Id);
             }
 
             return null;

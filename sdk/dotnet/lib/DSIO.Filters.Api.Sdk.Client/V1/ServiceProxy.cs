@@ -159,8 +159,8 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <summary>
         /// Applies the Select Filter to an image resource
         /// </summary>
-        /// <param name="imageId">The Id of the <see cref="ImageResource"></param>
-        /// <param name="selectFilterParameters">The <see cref="SelectFilterParameters"> parameters used to process the image</param>
+        /// <param name="imageId">The Id of the <see cref="ImageResource"/></param>
+        /// <param name="selectFilterParameters">The <see cref="SelectFilterParameters"/> parameters used to process the image</param>
         /// <returns>A stream representing the filtered image</returns>
         public async Task<Stream> SelectFilter(string imageId, SelectFilterParameters selectFilterParameters)
         {
@@ -173,8 +173,8 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <summary>
         /// Applies the Supreme Filter to an image resource
         /// </summary>
-        /// <param name="imageId">The Id of the <see cref="ImageResource"></param>
-        /// <param name="supremeFilterParameters">The <see cref="SupremeFilterParameters"> parameters used to process the image</param>
+        /// <param name="imageId">The Id of the <see cref="ImageResource"/></param>
+        /// <param name="supremeFilterParameters">The <see cref="SupremeFilterParameters"/> parameters used to process the image</param>
         /// <returns>A Stream representing the filtered image</returns>
         public async Task<Stream> SupremeFilter(string imageId, SupremeFilterParameters supremeFilterParameters)
         {
@@ -186,8 +186,8 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <summary>
         /// Applies the AE Filter to an image resource 
         /// </summary>
-        /// <param name="imageId">The Id of the <see cref="ImageResource"></param>
-        /// <param name="aeFilterParameters">The <see cref="AEFilterParameters"> parameters used to process the image</param>        
+        /// <param name="imageId">The Id of the <see cref="ImageResource"/></param>
+        /// <param name="aeFilterParameters">The <see cref="AEFilterParameters"/> parameters used to process the image</param>        
         /// <returns>A Stream representing the filtered image</returns>
         public async Task<Stream> AeFilter(string imageId, AEFilterParameters aeFilterParameters)
         {
@@ -199,12 +199,11 @@ namespace DSIO.Filters.Api.Sdk.Client.V1
         /// <summary>
         /// Removes the mapping applied to an image resource and returns the original image
         /// </summary>
-        /// <param name="imageId">The Id of the <see cref="ImageResource"></param>
-        /// <param name="lutInfo">The <see cref="LutInfo"> parameters</param>
+        /// <param name="imageId">The Id of the <see cref="ImageResource"/></param>
         /// <returns>A stream representing the unmapped image</returns>
-        public async Task<Stream> UnmapFilter(string imageId, LutInfo lutInfo)
+        public async Task<Stream> UnmapFilter(string imageId)
         {
-            var response = await Client.PostAsJsonAsync("images/" + imageId + "/filters/unmap", lutInfo);
+            var response = await Client.PostAsync("images/" + imageId + "/filters/unmap", null);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStreamAsync();
         }
