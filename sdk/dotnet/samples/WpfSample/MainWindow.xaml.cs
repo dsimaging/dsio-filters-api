@@ -77,7 +77,7 @@ namespace WpfSample
 
             try
             {
-                switch (ViewModel.SelectedFilterParam)
+                switch (ViewModel.SelectedFilterType)
                 {
                     case FilterType.Select:
                     {

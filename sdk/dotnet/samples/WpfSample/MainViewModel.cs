@@ -28,7 +28,7 @@ namespace WpfSample
         private void SetDefaultValues()
         {
             // assign Select Filter on load
-            SelectedFilterParam = FilterType.Select;
+            SelectedFilterType = FilterType.Select;
 
             // Create default settings for all filters
             SelectFilterParam = new SelectFilterParameters()
@@ -346,13 +346,13 @@ namespace WpfSample
 
         #region Filters
 
-        private FilterType _selectedFilterParam;
-        public FilterType SelectedFilterParam
+        private FilterType _selectedFilterType;
+        public FilterType SelectedFilterType
         {
-            get => _selectedFilterParam;
+            get => _selectedFilterType;
             set
             {
-                _selectedFilterParam = value;
+                _selectedFilterType = value;
                 OnPropertyChanged();
             }
         }
