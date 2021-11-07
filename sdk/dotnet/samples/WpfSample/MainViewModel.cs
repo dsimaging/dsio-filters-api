@@ -27,10 +27,8 @@ namespace WpfSample
 
         private void SetDefaultValues()
         {
-            FilterParamList = FilterDefaults.GetValues();
             // assign Select Filter on load
             SelectedFilterParam = FilterType.Select;
-            FilterParam = FilterParamList[FilterType.Select];
 
             // Create default settings for all filters
             SelectFilterParam = new SelectFilterParameters()
@@ -44,7 +42,7 @@ namespace WpfSample
                 Sharpness = 70
             };
 
-            AEFilterParam = new AEFilterParameters()
+            AeFilterParam = new AEFilterParameters()
             {
                 Task = AEFilterParameters.TaskNames.General,
                 Sharpness = 70
@@ -348,17 +346,6 @@ namespace WpfSample
 
         #region Filters
 
-        private Dictionary<FilterType, string> _filterParamList;
-        public Dictionary<FilterType, string> FilterParamList
-        {
-            get => _filterParamList;
-            set
-            {
-                _filterParamList = value;
-                OnPropertyChanged();
-            }
-        }
-
         private FilterType _selectedFilterParam;
         public FilterType SelectedFilterParam
         {
@@ -366,22 +353,7 @@ namespace WpfSample
             set
             {
                 _selectedFilterParam = value;
-                FilterParam = FilterParamList[_selectedFilterParam];
                 OnPropertyChanged();
-            }
-        }
-
-        private string _filterParam;
-        public string FilterParam
-        {
-            get => _filterParam;
-            set
-            {
-                if (value != _filterParam)
-                {
-                    _filterParam = value;
-                    OnPropertyChanged();
-                }
             }
         }
 
@@ -414,7 +386,7 @@ namespace WpfSample
         }
 
         private AEFilterParameters _aeFilterParam;
-        public AEFilterParameters AEFilterParam
+        public AEFilterParameters AeFilterParam
         {
             get => _aeFilterParam;
             set
@@ -463,7 +435,7 @@ namespace WpfSample
             if (SelectedImageResource != null)
             {
                 // Apply Ae Filter
-                return await _serviceProxy.AeFilter(SelectedImageResource.Id, AEFilterParam);
+                return await _serviceProxy.AeFilter(SelectedImageResource.Id, AeFilterParam);
             }
 
             return null;

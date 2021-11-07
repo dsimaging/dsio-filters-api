@@ -16,6 +16,12 @@
         <local:ObjectToJsonConverter x:Key="JsonConverter"/>
 
         <!-- We declare providers for Enum types for use in ComboBoxes -->
+        <ObjectDataProvider x:Key="FilterTypeEnumValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="types:FilterType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
         <ObjectDataProvider x:Key="SelectEnhancementModeEnumValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
                 <x:Type TypeName="v1:SelectFilterParameters+EnhancementModes" />
@@ -161,8 +167,8 @@
                 </Grid>
         </GroupBox>
 
-        <!-- Images section  IsEnabled="{Binding IsAuthenticated}"-->
-        <GroupBox Grid.Row="2" Margin="4" >
+        <!-- Images section -->
+        <GroupBox Grid.Row="2" Margin="4" IsEnabled="{Binding IsAuthenticated}">
             <GroupBox.Header>
                 <Label>Filters</Label>
             </GroupBox.Header>
@@ -180,10 +186,8 @@
                 <!-- Combo box to select filter -->
                 <ComboBox x:Name="TbxAeFilter" Grid.Row="0" Grid.Column="0"
                     Margin="4"
-                    DisplayMemberPath="Key"
-                    SelectedValuePath="Key"
-                    SelectedValue="{Binding Path=SelectedFilterParam, Mode=TwoWay}"
-                    ItemsSource="{Binding Path=FilterParamList}"></ComboBox>
+                    SelectedItem="{Binding Path=SelectedFilterParam, Mode=TwoWay}"
+                    ItemsSource="{Binding Source={StaticResource FilterTypeEnumValues}}"></ComboBox>
 
                 <!-- Button to apply current filter -->
                 <Button x:Name="BtnFilter" Grid.Row="0" Grid.Column="1"
@@ -194,6 +198,8 @@
                 <!-- Filter parameter content -->
                 <!-- We use DockPanels with DataTriggers to control visibility so the proper filter
                      parameters are displayed when the user selects a filter from the above ComboBox -->
+
+                <!-- Select Filter DockPanel -->
                 <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="False" Margin="12">
                     <DockPanel.Style>
                         <Style TargetType="DockPanel">
@@ -214,6 +220,67 @@
                     </ComboBox>
                 </DockPanel>
 
+                <!-- Supreme Filter DockPanel -->
+                <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="False" Margin="8">
+                    <DockPanel.Style>
+                        <Style TargetType="DockPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedFilterParam}" Value="{x:Static types:FilterType.Supreme}">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DockPanel.Style>
+
+                    <!-- Supreme Filter Parameters -->
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Label>Task:</Label>
+                            <ComboBox Width="150"
+                                      SelectedItem="{Binding SupremeFilterParam.Task}"
+                                      ItemsSource="{Binding Source={StaticResource SupremeTaskNameEnumValues}}">
+                            </ComboBox>
+                        </StackPanel>
+                        <TextBlock Margin="0,6,0,0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding SupremeFilterParam.Sharpness, StringFormat=Sharpness: {0:0.00}%}"/>
+                        <Slider Margin="0,4,0,0"
+                                Minimum="0" Maximum="100"
+                                Value="{Binding SupremeFilterParam.Sharpness}" />
+                    </StackPanel>
+                </DockPanel>
+
+                <!-- AE Filter DockPanel -->
+                <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="False" Margin="8">
+                    <DockPanel.Style>
+                        <Style TargetType="DockPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedFilterParam}" Value="{x:Static types:FilterType.Ae}">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DockPanel.Style>
+
+                    <!-- AE Filter Parameters -->
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Label>Task:</Label>
+                            <ComboBox Width="150"
+                                      SelectedItem="{Binding AeFilterParam.Task}"
+                                      ItemsSource="{Binding Source={StaticResource AETaskNameEnumValues}}">
+                            </ComboBox>
+                        </StackPanel>
+                        <TextBlock Margin="0,6,0,0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding AeFilterParam.Sharpness, StringFormat=Sharpness: {0:0.00}%}" />
+                        <Slider  Margin="0,4,0,0"
+                                 Minimum="0" Maximum="100"
+                                 Value="{Binding AeFilterParam.Sharpness}" />
+                    </StackPanel>
+                </DockPanel>
 
                 <!-- Display the filtered image -->
                 <Image x:Name="FilteredImage" Grid.Row="1" Grid.Column="1" />
