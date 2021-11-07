@@ -375,8 +375,8 @@ namespace WpfSample
             if (SelectedImageResource != null)
             {
                 // Apply Select Filter
-                SelectFilterImageParam selectFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SelectFilterImageParam>(FilterParam);
-                return await _serviceProxy.SelectFilter(SelectedImageResource.Id, selectFilterImageParam);
+                SelectFilterParameters selectFilterParameters = Newtonsoft.Json.JsonConvert.DeserializeObject<SelectFilterParameters>(FilterParam);
+                return await _serviceProxy.SelectFilter(SelectedImageResource.Id, selectFilterParameters);
             }
 
             return null;
@@ -389,9 +389,9 @@ namespace WpfSample
         {
             if (SelectedImageResource != null)
             {
-                SupremeFilterImageParam supremeFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SupremeFilterImageParam>(FilterParam);
+                SupremeFilterParameters supremeFilterParameters = Newtonsoft.Json.JsonConvert.DeserializeObject<SupremeFilterParameters>(FilterParam);
                 // Apply Supreme Filter
-                return await _serviceProxy.SupremeFilter(SelectedImageResource.Id, supremeFilterImageParam);
+                return await _serviceProxy.SupremeFilter(SelectedImageResource.Id, supremeFilterParameters);
             }
 
             return null;
@@ -404,9 +404,9 @@ namespace WpfSample
         {
             if (SelectedImageResource != null)
             {
-                OmegaFilterImageParam omegaFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<OmegaFilterImageParam>(FilterParam);
+                AEFilterParameters aeFilterParameters = Newtonsoft.Json.JsonConvert.DeserializeObject<AEFilterParameters>(FilterParam);
                 // Apply Ae Filter
-                return await _serviceProxy.AeFilter(SelectedImageResource.Id, omegaFilterImageParam);
+                return await _serviceProxy.AeFilter(SelectedImageResource.Id, aeFilterParameters);
             }
 
             return null;

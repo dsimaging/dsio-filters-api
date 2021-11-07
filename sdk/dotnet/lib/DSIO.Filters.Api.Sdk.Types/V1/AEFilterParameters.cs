@@ -1,6 +1,6 @@
 ﻿namespace DSIO.Filters.Api.Sdk.Types.V1
 {
-    public class SupremeFilterImageParam
+    public class AEFilterParameters
     {
         public enum TaskNames
         {
@@ -8,11 +8,10 @@
             Endodontic,
             Periodontic,
             Restorative,
-            Hygiene
-        };
+        }
 
         public TaskNames Task { get; set; }
 
-        public int Sharpness { get; set; }
+        public float Sharpness { get; set; }
     }
 }

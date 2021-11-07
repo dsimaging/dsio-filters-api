@@ -1,6 +1,6 @@
 ﻿namespace DSIO.Filters.Api.Sdk.Types.V1
 {
-    public class SelectFilterImageParam
+    public class SelectFilterParameters
     {
         public enum EnhancementModes
         {
