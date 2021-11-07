@@ -175,8 +175,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -213,11 +212,13 @@
                     </DockPanel.Style>
 
                     <!-- Select Filter Parameters -->
-                    <Label>Enhancement Mode:</Label>
-                    <ComboBox Width="150"
-                              SelectedItem="{Binding SelectFilterParam.EnhancementMode}"
-                              ItemsSource="{Binding Source={StaticResource SelectEnhancementModeEnumValues}}">
-                    </ComboBox>
+                    <StackPanel Orientation="Horizontal">
+                        <Label MaxHeight="36" VerticalAlignment="Top">Enhancement Mode:</Label>
+                        <ComboBox Width="150" MaxHeight="36" VerticalAlignment="Top"
+                                  SelectedItem="{Binding SelectFilterParam.EnhancementMode}"
+                                  ItemsSource="{Binding Source={StaticResource SelectEnhancementModeEnumValues}}">
+                        </ComboBox>
+                    </StackPanel>
                 </DockPanel>
 
                 <!-- Supreme Filter DockPanel -->
@@ -237,7 +238,7 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Margin="4">
                             <Label>Task:</Label>
-                            <ComboBox Width="150"
+                            <ComboBox Width="150" MaxHeight="36"
                                       SelectedItem="{Binding SupremeFilterParam.Task}"
                                       ItemsSource="{Binding Source={StaticResource SupremeTaskNameEnumValues}}">
                             </ComboBox>
