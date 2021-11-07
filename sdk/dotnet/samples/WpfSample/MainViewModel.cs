@@ -32,8 +32,23 @@ namespace WpfSample
             SelectedFilterParam = FilterType.Select;
             FilterParam = FilterParamList[FilterType.Select];
 
-            SelectFilterParam = new SelectFilterImageParam
-                {EnhancementMode = EnhancementMode.EdgePro};
+            // Create default settings for all filters
+            SelectFilterParam = new SelectFilterParameters()
+            {
+                EnhancementMode = SelectFilterParameters.EnhancementModes.EdgePro
+            };
+
+            SupremeFilterParam = new SupremeFilterParameters()
+            {
+                Task = SupremeFilterParameters.TaskNames.General,
+                Sharpness = 70
+            };
+
+            AEFilterParam = new AEFilterParameters()
+            {
+                Task = AEFilterParameters.TaskNames.General,
+                Sharpness = 70
+            };
         }
 
         #region INotifyPropertyChanged
@@ -370,9 +385,8 @@ namespace WpfSample
             }
         }
 
-        private SelectFilterImageParam _selectFilterParam;
-
-        public SelectFilterImageParam SelectFilterParam
+        private SelectFilterParameters _selectFilterParam;
+        public SelectFilterParameters SelectFilterParam
         {
             get => _selectFilterParam;
             set
@@ -380,6 +394,34 @@ namespace WpfSample
                 if (value != _selectFilterParam)
                 {
                     _selectFilterParam = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private SupremeFilterParameters _supremeFilterParam;
+        public SupremeFilterParameters SupremeFilterParam
+        {
+            get => _supremeFilterParam;
+            set
+            {
+                if (value != _supremeFilterParam)
+                {
+                    _supremeFilterParam = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private AEFilterParameters _aeFilterParam;
+        public AEFilterParameters AEFilterParam
+        {
+            get => _aeFilterParam;
+            set
+            {
+                if (value != _aeFilterParam)
+                {
+                    _aeFilterParam = value;
                     OnPropertyChanged();
                 }
             }
@@ -393,8 +435,7 @@ namespace WpfSample
             if (SelectedImageResource != null)
             {
                 // Apply Select Filter
-                SelectFilterParameters selectFilterParameters = Newtonsoft.Json.JsonConvert.DeserializeObject<SelectFilterParameters>(FilterParam);
-                return await _serviceProxy.SelectFilter(SelectedImageResource.Id, selectFilterParameters);
+                return await _serviceProxy.SelectFilter(SelectedImageResource.Id, SelectFilterParam);
             }
 
             return null;
@@ -407,9 +448,8 @@ namespace WpfSample
         {
             if (SelectedImageResource != null)
             {
-                SupremeFilterParameters supremeFilterParameters = Newtonsoft.Json.JsonConvert.DeserializeObject<SupremeFilterParameters>(FilterParam);
                 // Apply Supreme Filter
-                return await _serviceProxy.SupremeFilter(SelectedImageResource.Id, supremeFilterParameters);
+                return await _serviceProxy.SupremeFilter(SelectedImageResource.Id, SupremeFilterParam);
             }
 
             return null;
@@ -422,9 +462,8 @@ namespace WpfSample
         {
             if (SelectedImageResource != null)
             {
-                AEFilterParameters aeFilterParameters = Newtonsoft.Json.JsonConvert.DeserializeObject<AEFilterParameters>(FilterParam);
                 // Apply Ae Filter
-                return await _serviceProxy.AeFilter(SelectedImageResource.Id, aeFilterParameters);
+                return await _serviceProxy.AeFilter(SelectedImageResource.Id, AEFilterParam);
             }
 
             return null;
@@ -437,9 +476,8 @@ namespace WpfSample
         {
             if (SelectedImageResource != null)
             {
-                LutInfo lutInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<LutInfo>(FilterParam);
                 // Apply Unmap Filter
-                return await _serviceProxy.UnmapFilter(SelectedImageResource.Id, lutInfo);
+                return await _serviceProxy.UnmapFilter(SelectedImageResource.Id, null);
             }
 
             return null;

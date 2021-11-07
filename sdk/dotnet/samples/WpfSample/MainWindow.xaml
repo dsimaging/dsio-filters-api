@@ -16,9 +16,21 @@
         <local:ObjectToJsonConverter x:Key="JsonConverter"/>
 
         <!-- We declare providers for Enum types for use in ComboBoxes -->
-        <ObjectDataProvider x:Key="EnhancementModeEnumValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider x:Key="SelectEnhancementModeEnumValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="v1:EnhancementMode" />
+                <x:Type TypeName="v1:SelectFilterParameters+EnhancementModes" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="SupremeTaskNameEnumValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="v1:SupremeFilterParameters+TaskNames" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="AETaskNameEnumValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="v1:AEFilterParameters+TaskNames" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
@@ -198,7 +210,7 @@
                     <Label>Enhancement Mode:</Label>
                     <ComboBox Width="150"
                               SelectedItem="{Binding SelectFilterParam.EnhancementMode}"
-                              ItemsSource="{Binding Source={StaticResource EnhancementModeEnumValues}}">
+                              ItemsSource="{Binding Source={StaticResource SelectEnhancementModeEnumValues}}">
                     </ComboBox>
                 </DockPanel>
 
