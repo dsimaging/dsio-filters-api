@@ -3,7 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfSample"
+        xmlns:local="clr-namespace:WpfSample" 
+        xmlns:types="clr-namespace:WpfSample.Types"
+        xmlns:v1="clr-namespace:DSIO.Filters.Api.Sdk.Types.V1;assembly=DSIO.Filters.Api.Sdk.Types"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         Closing="MainWindow_OnClosing"
         Title="WPF Sample"
@@ -11,6 +14,14 @@
 
     <Window.Resources>
         <local:ObjectToJsonConverter x:Key="JsonConverter"/>
+
+        <!-- We declare providers for Enum types for use in ComboBoxes -->
+        <ObjectDataProvider x:Key="EnhancementModeEnumValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="v1:EnhancementMode" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
     </Window.Resources>
 
     <Grid Margin="6">
@@ -138,8 +149,8 @@
                 </Grid>
         </GroupBox>
 
-        <!-- Images section -->
-        <GroupBox Grid.Row="2" Margin="4" IsEnabled="{Binding IsAuthenticated}">
+        <!-- Images section  IsEnabled="{Binding IsAuthenticated}"-->
+        <GroupBox Grid.Row="2" Margin="4" >
             <GroupBox.Header>
                 <Label>Filters</Label>
             </GroupBox.Header>
@@ -153,9 +164,46 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <ComboBox x:Name="TbxAeFilter" Grid.Row="0" Grid.Column="0" Margin="4" DisplayMemberPath="Key" SelectedValuePath="Key" SelectedValue="{Binding Path=SelectedFilterParam, Mode=TwoWay}" ItemsSource="{Binding Path=FilterParamList}"></ComboBox>
-                <Button x:Name="BtnFilter" Grid.Row="0" Grid.Column="1" Margin="6" Padding="12, 10" Click="BtnFilter_OnClick">Apply Filter</Button>
-                <TextBox x:Name="TbxFilter" Grid.Row="1" Grid.Column="0" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding FilterParam}"></TextBox>
+
+                <!-- Combo box to select filter -->
+                <ComboBox x:Name="TbxAeFilter" Grid.Row="0" Grid.Column="0"
+                    Margin="4"
+                    DisplayMemberPath="Key"
+                    SelectedValuePath="Key"
+                    SelectedValue="{Binding Path=SelectedFilterParam, Mode=TwoWay}"
+                    ItemsSource="{Binding Path=FilterParamList}"></ComboBox>
+
+                <!-- Button to apply current filter -->
+                <Button x:Name="BtnFilter" Grid.Row="0" Grid.Column="1"
+                    Margin="6"
+                    Padding="12, 10"
+                    Click="BtnFilter_OnClick">Apply Filter</Button>
+
+                <!-- Filter parameter content -->
+                <!-- We use DockPanels with DataTriggers to control visibility so the proper filter
+                     parameters are displayed when the user selects a filter from the above ComboBox -->
+                <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="False" Margin="12">
+                    <DockPanel.Style>
+                        <Style TargetType="DockPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedFilterParam}" Value="{x:Static types:FilterType.Select}">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DockPanel.Style>
+
+                    <!-- Select Filter Parameters -->
+                    <Label>Enhancement Mode:</Label>
+                    <ComboBox Width="150"
+                              SelectedItem="{Binding SelectFilterParam.EnhancementMode}"
+                              ItemsSource="{Binding Source={StaticResource EnhancementModeEnumValues}}">
+                    </ComboBox>
+                </DockPanel>
+
+
+                <!-- Display the filtered image -->
                 <Image x:Name="FilteredImage" Grid.Row="1" Grid.Column="1" />
             </Grid>
         </GroupBox>

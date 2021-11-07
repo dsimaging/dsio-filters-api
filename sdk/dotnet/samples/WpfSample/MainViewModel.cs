@@ -31,6 +31,9 @@ namespace WpfSample
             // assign Select Filter on load
             SelectedFilterParam = FilterType.Select;
             FilterParam = FilterParamList[FilterType.Select];
+
+            SelectFilterParam = new SelectFilterImageParam
+                {EnhancementMode = EnhancementMode.EdgePro};
         }
 
         #region INotifyPropertyChanged
@@ -362,6 +365,21 @@ namespace WpfSample
                 if (value != _filterParam)
                 {
                     _filterParam = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private SelectFilterImageParam _selectFilterParam;
+
+        public SelectFilterImageParam SelectFilterParam
+        {
+            get => _selectFilterParam;
+            set
+            {
+                if (value != _selectFilterParam)
+                {
+                    _selectFilterParam = value;
                     OnPropertyChanged();
                 }
             }
