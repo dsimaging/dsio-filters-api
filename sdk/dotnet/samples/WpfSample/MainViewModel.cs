@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 using DSIO.Filters.Api.Sdk.Client.V1;
 using DSIO.Filters.Api.Sdk.Types.V1;
@@ -26,10 +27,26 @@ namespace WpfSample
 
         private void SetDefaultValues()
         {
-            FilterParamList = FilterDefaults.GetValues();
             // assign Select Filter on load
-            SelectedFilterParam = FilterType.Select;
-            FilterParam = FilterParamList[FilterType.Select];
+            SelectedFilterType = FilterType.Select;
+
+            // Create default settings for all filters
+            SelectFilterParam = new SelectFilterParameters()
+            {
+                EnhancementMode = SelectFilterParameters.EnhancementModes.EdgePro
+            };
+
+            SupremeFilterParam = new SupremeFilterParameters()
+            {
+                Task = SupremeFilterParameters.TaskNames.General,
+                Sharpness = 70
+            };
+
+            AeFilterParam = new AEFilterParameters()
+            {
+                Task = AEFilterParameters.TaskNames.General,
+                Sharpness = 70
+            };
         }
 
         #region INotifyPropertyChanged
@@ -145,6 +162,20 @@ namespace WpfSample
             }
         }
 
+        private ImageInfo _uploadImageInfo;
+        public ImageInfo UploadImageInfo
+        {
+            get => _uploadImageInfo;
+            set
+            {
+                if (value != _uploadImageInfo)
+                {
+                    _uploadImageInfo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private string _uploadImageFileName;
         public string UploadImageFileName
         {
@@ -201,25 +232,37 @@ namespace WpfSample
             }
         }
 
-        public void UploadImage()
+        public void UploadImage(Window owner)
         {
-            if (!string.IsNullOrEmpty(UploadImageFileName))
+            // Clear Upload properties
+            UploadImageFileName = null;
+            UploadImageInfo = null;
+
+            // Create and show dialog to supply Upload info
+            ImageDataAndInfo imageDataAndInfo = new ImageDataAndInfo(this);
+            imageDataAndInfo.Owner = owner;
+            if (imageDataAndInfo.ShowDialog() == true)
             {
-                var fileStream = new FileStream(UploadImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                var imageContent = new StreamContent(fileStream);
-                // Upload a new image
-                _serviceProxy.UploadImage(imageContent, "image/png").ContinueWith(task =>
+                if (!string.IsNullOrEmpty(UploadImageFileName) && UploadImageInfo != null)
                 {
-                    if (task.IsFaulted)
+                    // create a stream from the image file
+                    var fileStream = new FileStream(UploadImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                    var imageContent = new StreamContent(fileStream);
+
+                    // Upload image with ImageInfo
+                    _serviceProxy.UploadImage(UploadImageInfo, imageContent, "image/png").ContinueWith(task =>
                     {
-                        MessageBox.Show(task.Exception?.Message);
-                    }
-                    else if (task.IsCompleted)
-                    {
-                        SelectedImageResource = task.Result;
-                        ImageResourceId = SelectedImageResource.Id;
-                    }
-                });
+                        if (task.IsFaulted)
+                        {
+                            MessageBox.Show(task.Exception?.Message);
+                        }
+                        else if (task.IsCompleted)
+                        {
+                            SelectedImageResource = task.Result;
+                            ImageResourceId = SelectedImageResource.Id;
+                        }
+                    });
+                }
             }
         }
 
@@ -303,38 +346,54 @@ namespace WpfSample
 
         #region Filters
 
-        private Dictionary<FilterType, string> _filterParamList;
-        public Dictionary<FilterType, string> FilterParamList
+        private FilterType _selectedFilterType;
+        public FilterType SelectedFilterType
         {
-            get => _filterParamList;
+            get => _selectedFilterType;
             set
             {
-                _filterParamList = value;
+                _selectedFilterType = value;
                 OnPropertyChanged();
             }
         }
 
-        private FilterType _selectedFilterParam;
-        public FilterType SelectedFilterParam
+        private SelectFilterParameters _selectFilterParam;
+        public SelectFilterParameters SelectFilterParam
         {
-            get => _selectedFilterParam;
+            get => _selectFilterParam;
             set
             {
-                _selectedFilterParam = value;
-                FilterParam = FilterParamList[_selectedFilterParam];
-                OnPropertyChanged();
-            }
-        }
-
-        private string _filterParam;
-        public string FilterParam
-        {
-            get => _filterParam;
-            set
-            {
-                if (value != _filterParam)
+                if (value != _selectFilterParam)
                 {
-                    _filterParam = value;
+                    _selectFilterParam = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private SupremeFilterParameters _supremeFilterParam;
+        public SupremeFilterParameters SupremeFilterParam
+        {
+            get => _supremeFilterParam;
+            set
+            {
+                if (value != _supremeFilterParam)
+                {
+                    _supremeFilterParam = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private AEFilterParameters _aeFilterParam;
+        public AEFilterParameters AeFilterParam
+        {
+            get => _aeFilterParam;
+            set
+            {
+                if (value != _aeFilterParam)
+                {
+                    _aeFilterParam = value;
                     OnPropertyChanged();
                 }
             }
@@ -348,8 +407,7 @@ namespace WpfSample
             if (SelectedImageResource != null)
             {
                 // Apply Select Filter
-                SelectFilterImageParam selectFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SelectFilterImageParam>(FilterParam);
-                return await _serviceProxy.SelectFilter(SelectedImageResource.Id, selectFilterImageParam);
+                return await _serviceProxy.SelectFilter(SelectedImageResource.Id, SelectFilterParam);
             }
 
             return null;
@@ -362,9 +420,8 @@ namespace WpfSample
         {
             if (SelectedImageResource != null)
             {
-                SupremeFilterImageParam supremeFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<SupremeFilterImageParam>(FilterParam);
                 // Apply Supreme Filter
-                return await _serviceProxy.SupremeFilter(SelectedImageResource.Id, supremeFilterImageParam);
+                return await _serviceProxy.SupremeFilter(SelectedImageResource.Id, SupremeFilterParam);
             }
 
             return null;
@@ -377,9 +434,8 @@ namespace WpfSample
         {
             if (SelectedImageResource != null)
             {
-                OmegaFilterImageParam omegaFilterImageParam = Newtonsoft.Json.JsonConvert.DeserializeObject<OmegaFilterImageParam>(FilterParam);
                 // Apply Ae Filter
-                return await _serviceProxy.AeFilter(SelectedImageResource.Id, omegaFilterImageParam);
+                return await _serviceProxy.AeFilter(SelectedImageResource.Id, AeFilterParam);
             }
 
             return null;
@@ -392,9 +448,8 @@ namespace WpfSample
         {
             if (SelectedImageResource != null)
             {
-                LutInfo lutInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<LutInfo>(FilterParam);
                 // Apply Unmap Filter
-                return await _serviceProxy.UnmapFilter(SelectedImageResource.Id, lutInfo);
+                return await _serviceProxy.UnmapFilter(SelectedImageResource.Id);
             }
 
             return null;

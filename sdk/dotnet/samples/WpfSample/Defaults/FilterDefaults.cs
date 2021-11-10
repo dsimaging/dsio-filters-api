@@ -16,58 +16,23 @@ namespace WpfSample.Defaults
 
             _filterParamList.Add(FilterType.Select, 
 @"{
-    'enhancementMode': 'edgePro',
-    'lutInfo': 
-    {
-        'gamma': 2.3,
-        'slope': 65535,
-        'offset': 0,
-        'totalGrays': 4096,
-        'minimumGray': 3612,
-        'maximumGray': 418
-    }
+    'enhancementMode': 'edgePro'
 }");
 
             _filterParamList.Add(FilterType.Supreme, 
 @"{
     'task': 'general',
-    'binningMode': 'Unbinned',
-    'sharpness': 70,
-    'lutInfo': 
-    {
-        'gamma': 2.3,
-        'slope': 65535,
-        'offset': 0,
-        'totalGrays': 4096,
-        'minimumGray': 3612,
-        'maximumGray': 418
-    }
+    'sharpness': 70
 }");
 
             _filterParamList.Add(FilterType.Ae, 
 @"{
     'task': 'general',
-    'sharpness': 70,
-    'lutInfo': 
-    {
-        'gamma': 2.3,
-        'slope': 65535,
-        'offset': 0,
-        'totalGrays': 4096,
-        'minimumGray': 3612,
-        'maximumGray': 418
-    }
+    'sharpness': 70
 }");
 
             _filterParamList.Add(FilterType.Unmap, 
-@"{
-    'gamma': 2.3,
-    'slope': 65535,
-    'offset': 0,
-    'totalGrays': 4096,
-    'minimumGray': 3612,
-    'maximumGray': 418
-}");
+@"");
 
             return _filterParamList;
         }

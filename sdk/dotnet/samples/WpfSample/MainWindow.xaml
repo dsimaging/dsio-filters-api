@@ -3,11 +3,45 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfSample"
+        xmlns:local="clr-namespace:WpfSample" 
+        xmlns:types="clr-namespace:WpfSample.Types"
+        xmlns:v1="clr-namespace:DSIO.Filters.Api.Sdk.Types.V1;assembly=DSIO.Filters.Api.Sdk.Types"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         Closing="MainWindow_OnClosing"
         Title="WPF Sample"
         Height="800" Width="800">
+
+    <Window.Resources>
+        <local:ObjectToJsonConverter x:Key="JsonConverter"/>
+
+        <!-- We declare providers for Enum types for use in ComboBoxes -->
+        <ObjectDataProvider x:Key="FilterTypeEnumValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="types:FilterType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="SelectEnhancementModeEnumValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="v1:SelectFilterParameters+EnhancementModes" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="SupremeTaskNameEnumValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="v1:SupremeFilterParameters+TaskNames" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="AETaskNameEnumValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="v1:AEFilterParameters+TaskNames" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+    </Window.Resources>
+
     <Grid Margin="6">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -69,19 +103,15 @@
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="BtnCreateImage"
-                            Grid.Row="0" Grid.Column="0"
+                            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                             Margin="6"
                             Padding="12, 6"
-                            Click="BtnCreateImage_OnClick">Create Image</Button>
-                <TextBox x:Name="TbxFileName" Grid.Row="0" Grid.Column="1" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding UploadImageFileName}" ></TextBox>
-                <Button x:Name="BtnBrowseFileOpen" Grid.Row="0" Grid.Column="2"
-                            Margin="2, 4, 4, 4" Padding="12, 6" Click="BtnBrowseFileOpen_OnClick">Browse</Button>
-
+                            Click="BtnCreateImage_OnClick">Create Resource by Uploading Image</Button>
                 <Button x:Name="BtnCreateImageFromModalitySession"
                             Grid.Row="1" Grid.Column="0"
                             Margin="6"
                             Padding="12, 10"
-                            Click="BtnCreateImageFromModalitySession_OnClick">Create Image From Modality Session</Button>
+                            Click="BtnCreateImageFromModalitySession_OnClick">Create Resource From Modality Session</Button>
                 <Grid Grid.Row="1" Grid.Column="1" Margin="4">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -113,16 +143,18 @@
                     <TextBlock>Expires:</TextBlock>
                     <TextBlock>Media Type:</TextBlock>
                     <TextBlock>Url:</TextBlock>
+                    <TextBlock>ImageInfo:</TextBlock>
                     <TextBlock>Modality Session Id:</TextBlock>
                     <TextBlock>Modality Session Image Id:</TextBlock>
                 </StackPanel>
                 <!-- Show DeviceInfo data in col 1 -->
-                <StackPanel Grid.Row="3" Grid.Column="1">
+                <StackPanel Grid.Row="3" Grid.Column="1" Margin="6">
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Id}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.CreatedOn}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Expires}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.MediaType}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.Url}"></TextBlock>
+                    <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ImageInfo, Converter={StaticResource JsonConverter}}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ModalitySession.SessionId}"></TextBlock>
                     <TextBlock Margin="4,0" Text="{Binding SelectedImageResource.ModalitySession.ImageId}"></TextBlock>
                 </StackPanel>
@@ -143,16 +175,115 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <ComboBox x:Name="TbxAeFilter" Grid.Row="0" Grid.Column="0" Margin="4" DisplayMemberPath="Key" SelectedValuePath="Key" SelectedValue="{Binding Path=SelectedFilterParam, Mode=TwoWay}" ItemsSource="{Binding Path=FilterParamList}"></ComboBox>
-                <Button x:Name="BtnFilter" Grid.Row="0" Grid.Column="1" Margin="6" Padding="12, 10" Click="BtnFilter_OnClick">Apply Filter</Button>
-                <TextBox x:Name="TbxFilter" Grid.Row="1" Grid.Column="0" Margin="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding FilterParam}"></TextBox>
+
+                <!-- Combo box to select filter -->
+                <ComboBox x:Name="TbxAeFilter" Grid.Row="0" Grid.Column="0"
+                    Margin="4"
+                    SelectedItem="{Binding Path=SelectedFilterType, Mode=TwoWay}"
+                    ItemsSource="{Binding Source={StaticResource FilterTypeEnumValues}}"></ComboBox>
+
+                <!-- Button to apply current filter -->
+                <Button x:Name="BtnFilter" Grid.Row="0" Grid.Column="1"
+                    Margin="6"
+                    Padding="12, 10"
+                    Click="BtnFilter_OnClick">Apply Filter</Button>
+
+                <!-- Filter parameter content -->
+                <!-- We use DockPanels with DataTriggers to control visibility so the proper filter
+                     parameters are displayed when the user selects a filter from the above ComboBox -->
+
+                <!-- Select Filter DockPanel -->
+                <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="False" Margin="12">
+                    <DockPanel.Style>
+                        <Style TargetType="DockPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedFilterType}" Value="{x:Static types:FilterType.Select}">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DockPanel.Style>
+
+                    <!-- Select Filter Parameters -->
+                    <StackPanel Orientation="Horizontal">
+                        <Label MaxHeight="36" VerticalAlignment="Top">Enhancement Mode:</Label>
+                        <ComboBox Width="150" MaxHeight="36" VerticalAlignment="Top"
+                                  SelectedItem="{Binding SelectFilterParam.EnhancementMode}"
+                                  ItemsSource="{Binding Source={StaticResource SelectEnhancementModeEnumValues}}">
+                        </ComboBox>
+                    </StackPanel>
+                </DockPanel>
+
+                <!-- Supreme Filter DockPanel -->
+                <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="False" Margin="8">
+                    <DockPanel.Style>
+                        <Style TargetType="DockPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedFilterType}" Value="{x:Static types:FilterType.Supreme}">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DockPanel.Style>
+
+                    <!-- Supreme Filter Parameters -->
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Label>Task:</Label>
+                            <ComboBox Width="150" MaxHeight="36"
+                                      SelectedItem="{Binding SupremeFilterParam.Task}"
+                                      ItemsSource="{Binding Source={StaticResource SupremeTaskNameEnumValues}}">
+                            </ComboBox>
+                        </StackPanel>
+                        <TextBlock Margin="0,6,0,0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding SupremeFilterParam.Sharpness, StringFormat=Sharpness: {0:0.00}%}"/>
+                        <Slider Margin="0,4,0,0"
+                                Minimum="0" Maximum="100"
+                                Value="{Binding SupremeFilterParam.Sharpness}" />
+                    </StackPanel>
+                </DockPanel>
+
+                <!-- AE Filter DockPanel -->
+                <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="False" Margin="8">
+                    <DockPanel.Style>
+                        <Style TargetType="DockPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedFilterType}" Value="{x:Static types:FilterType.Ae}">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DockPanel.Style>
+
+                    <!-- AE Filter Parameters -->
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Label>Task:</Label>
+                            <ComboBox Width="150"
+                                      SelectedItem="{Binding AeFilterParam.Task}"
+                                      ItemsSource="{Binding Source={StaticResource AETaskNameEnumValues}}">
+                            </ComboBox>
+                        </StackPanel>
+                        <TextBlock Margin="0,6,0,0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding AeFilterParam.Sharpness, StringFormat=Sharpness: {0:0.00}%}" />
+                        <Slider  Margin="0,4,0,0"
+                                 Minimum="0" Maximum="100"
+                                 Value="{Binding AeFilterParam.Sharpness}" />
+                    </StackPanel>
+                </DockPanel>
+
+                <!-- Display the filtered image -->
                 <Image x:Name="FilteredImage" Grid.Row="1" Grid.Column="1" />
             </Grid>
         </GroupBox>

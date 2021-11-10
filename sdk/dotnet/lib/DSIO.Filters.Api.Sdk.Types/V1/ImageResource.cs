@@ -16,5 +16,7 @@ namespace DSIO.Filters.Api.Sdk.Types.V1
 
         public DateTime Expires { get; set; }
 
+        public ImageInfo ImageInfo { get; set; }
+
     }
 }

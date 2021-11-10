@@ -47,7 +47,7 @@ namespace WpfSample
         private void BtnCreateImage_OnClick(object sender, RoutedEventArgs e)
         {
             // Create a new image
-            ViewModel.UploadImage();
+            ViewModel.UploadImage(this);
         }
 
         private void BtnCreateImageFromModalitySession_OnClick(object sender, RoutedEventArgs e)
@@ -77,7 +77,7 @@ namespace WpfSample
 
             try
             {
-                switch (ViewModel.SelectedFilterParam)
+                switch (ViewModel.SelectedFilterType)
                 {
                     case FilterType.Select:
                     {
@@ -115,16 +115,6 @@ namespace WpfSample
                 MessageBox.Show(exception.Message);
             }
 
-        }
-
-        private void BtnBrowseFileOpen_OnClick(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "image files (*.png)|*.png";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                ViewModel.UploadImageFileName = openFileDialog.FileName;
-            }
         }
     }
 }

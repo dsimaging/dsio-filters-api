@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "749d44a8-da0a-4258-afe2-e5bf1624079e",
+		"_postman_id": "4cc6f03e-f632-4b1d-ac43-7410bebf1005",
 		"name": "Dentsply Sirona Intraoral Filters API",
 		"description": "This API is used to apply custom filters to images acquired from the DSIO Modality API.\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -16,12 +16,24 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "image/png"
+								"value": "multipart/form-data"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "\"ea aliquip aliqua\""
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imageInfo",
+									"value": "{\"acquisitionInfo\":{\"binning\":\"Unbinned\"},\"lutInfo\":{\"gamma\":2.3,\"slope\":65535,\"offset\":0,\"totalGrays\":4096,\"minimumGray\":3612,\"maximumGray\":418}}",
+									"type": "text"
+								},
+								{
+									"key": "imageMedia",
+									"description": "The media file to upload. This file must be a 16-bit PNG image.",
+									"type": "file",
+									"src": []
+								}
+							]
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images",
@@ -32,7 +44,7 @@
 								"images"
 							]
 						},
-						"description": "Create a new image resource by uploading a 16-bit grayscale PNG image file. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.\n"
+						"description": "Create a new image resource by uploading a 16-bit grayscale PNG image file and information describing the image. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.\n"
 					},
 					"response": [
 						{
@@ -41,8 +53,20 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "\"ea aliquip aliqua\""
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "imageInfo",
+											"value": "{\"acquisitionInfo\":{\"binning\":\"Unbinned\"},\"lutInfo\":{\"gamma\":2.3,\"slope\":65535,\"offset\":0,\"totalGrays\":4096,\"minimumGray\":3612,\"maximumGray\":418}}",
+											"type": "text"
+										},
+										{
+											"key": "imageMedia",
+											"description": "The media file to upload. This file must be a 16-bit PNG image.",
+											"type": "file",
+											"src": []
+										}
+									]
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -64,7 +88,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1973-04-08T08:44:02.658Z\",\n \"expires\": \"1945-04-10T13:19:29.337Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1987-03-16T01:47:24.504Z\",\n \"expires\": \"1997-07-10T05:15:14.119Z\",\n \"imageInfo\": {\n  \"acquisitionInfo\": {\n   \"binning\": \"Unbinned\"\n  },\n  \"lutInfo\": {\n   \"gamma\": 2.3,\n   \"slope\": 65535,\n   \"offset\": 0,\n   \"totalGrays\": 4096,\n   \"minimumGray\": 3612,\n   \"maximumGray\": 418\n  }\n },\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Bad input parameter",
@@ -72,8 +96,20 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "\"ea aliquip aliqua\""
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "imageInfo",
+											"value": "{\"acquisitionInfo\":{\"binning\":\"Unbinned\"},\"lutInfo\":{\"gamma\":2.3,\"slope\":65535,\"offset\":0,\"totalGrays\":4096,\"minimumGray\":3612,\"maximumGray\":418}}",
+											"type": "text"
+										},
+										{
+											"key": "imageMedia",
+											"description": "The media file to upload. This file must be a 16-bit PNG image.",
+											"type": "file",
+											"src": []
+										}
+									]
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -103,8 +139,20 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "\"ea aliquip aliqua\""
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "imageInfo",
+											"value": "{\"acquisitionInfo\":{\"binning\":\"Unbinned\"},\"lutInfo\":{\"gamma\":2.3,\"slope\":65535,\"offset\":0,\"totalGrays\":4096,\"minimumGray\":3612,\"maximumGray\":418}}",
+											"type": "text"
+										},
+										{
+											"key": "imageMedia",
+											"description": "The media file to upload. This file must be a 16-bit PNG image.",
+											"type": "file",
+											"src": []
+										}
+									]
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images",
@@ -142,7 +190,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}"
+							"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images/modality",
@@ -154,7 +207,7 @@
 								"modality"
 							]
 						},
-						"description": "Create a new image resource by referencing an image captured in a current modality session. This resource will only be available as long as the modality session is active. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.\n"
+						"description": "Create a new image resource by referencing an image captured in a current modality session using the DSIO Modality API. This resource will only be available as long as the modality session is active. When finished with filter oprations, this resource should be deleted with the API call `Delete Image Resource`. Otherwise, the resource will be automatically deleted after the `expires` timestamp.\n"
 					},
 					"response": [
 						{
@@ -164,7 +217,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}"
+									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/modality",
@@ -187,7 +245,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1973-04-08T08:44:02.658Z\",\n \"expires\": \"1945-04-10T13:19:29.337Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1987-03-16T01:47:24.504Z\",\n \"expires\": \"1997-07-10T05:15:14.119Z\",\n \"imageInfo\": {\n  \"acquisitionInfo\": {\n   \"binning\": \"Unbinned\"\n  },\n  \"lutInfo\": {\n   \"gamma\": 2.3,\n   \"slope\": 65535,\n   \"offset\": 0,\n   \"totalGrays\": 4096,\n   \"minimumGray\": 3612,\n   \"maximumGray\": 418\n  }\n },\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Bad input parameter",
@@ -196,7 +254,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}"
+									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/modality",
@@ -228,7 +291,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}"
+									"raw": "{\n    \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n    \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/modality",
@@ -272,7 +340,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "nostrud incid",
 									"description": "(Required) Id of the image resource to retrieve"
 								}
 							]
@@ -296,7 +364,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to retrieve"
 										}
 									]
 								}
@@ -311,7 +381,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1973-04-08T08:44:02.658Z\",\n \"expires\": \"1945-04-10T13:19:29.337Z\",\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
+							"body": "{\n \"id\": \"160c98f9-d188-4118-94c4-697161fd5caf\",\n \"mediaType\": \"image/png\",\n \"url\": \"https://example.com/images/160c98f9-d188-4118-94c4-697161fd5caf/file.png\",\n \"createdOn\": \"1987-03-16T01:47:24.504Z\",\n \"expires\": \"1997-07-10T05:15:14.119Z\",\n \"imageInfo\": {\n  \"acquisitionInfo\": {\n   \"binning\": \"Unbinned\"\n  },\n  \"lutInfo\": {\n   \"gamma\": 2.3,\n   \"slope\": 65535,\n   \"offset\": 0,\n   \"totalGrays\": 4096,\n   \"minimumGray\": 3612,\n   \"maximumGray\": 418\n  }\n },\n \"modalitySession\": {\n  \"sessionId\": \"451f7e06-5827-4c99-b6fb-b9c330ca922c\",\n  \"imageId\": \"39db323b-198d-4219-b79e-ca918cde5be5\"\n }\n}"
 						},
 						{
 							"name": "Image resource not found",
@@ -329,7 +399,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to retrieve"
 										}
 									]
 								}
@@ -365,7 +437,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "nostrud incid",
 									"description": "(Required) Id of the image resource to delete"
 								}
 							]
@@ -389,7 +461,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to delete"
 										}
 									]
 								}
@@ -422,7 +496,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to delete"
 										}
 									]
 								}
@@ -459,7 +535,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "nostrud incid",
 									"description": "(Required) Id of the image resource to retrieve"
 								}
 							]
@@ -484,7 +560,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to retrieve"
 										}
 									]
 								}
@@ -499,7 +577,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "ea aliquip aliqua"
+							"body": "nostrud incid"
 						},
 						{
 							"name": "Image resource not found",
@@ -518,7 +596,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to retrieve"
 										}
 									]
 								}
@@ -547,16 +627,7 @@
 					"name": "Unmap image",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"gamma\": 2.3,\n    \"slope\": 65535,\n    \"offset\": 0,\n    \"totalGrays\": 4096,\n    \"minimumGray\": 3612,\n    \"maximumGray\": 418\n}"
-						},
+						"header": [],
 						"url": {
 							"raw": "{{baseUrl}}/images/:id/filters/unmap",
 							"host": [
@@ -571,7 +642,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "nostrud incid",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -584,10 +655,6 @@
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"gamma\": 2.3,\n    \"slope\": 65535,\n    \"offset\": 0,\n    \"totalGrays\": 4096,\n    \"minimumGray\": 3612,\n    \"maximumGray\": 418\n}"
-								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/unmap",
 									"host": [
@@ -601,7 +668,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -616,17 +685,13 @@
 								}
 							],
 							"cookie": [],
-							"body": "ea aliquip aliqua"
+							"body": "nostrud incid"
 						},
 						{
-							"name": "Supplied LutInfo contains invalid parameters",
+							"name": "Image resource not found",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"gamma\": 2.3,\n    \"slope\": 65535,\n    \"offset\": 0,\n    \"totalGrays\": 4096,\n    \"minimumGray\": 3612,\n    \"maximumGray\": 418\n}"
-								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/unmap",
 									"host": [
@@ -640,13 +705,15 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
 							},
-							"status": "Bad Request",
-							"code": 400,
+							"status": "Not Found",
+							"code": 404,
 							"_postman_previewlanguage": "text",
 							"header": [
 								{
@@ -658,14 +725,10 @@
 							"body": ""
 						},
 						{
-							"name": "Image resource not found",
+							"name": "Gone - Image media for this resource could not be found",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"gamma\": 2.3,\n    \"slope\": 65535,\n    \"offset\": 0,\n    \"totalGrays\": 4096,\n    \"minimumGray\": 3612,\n    \"maximumGray\": 418\n}"
-								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/unmap",
 									"host": [
@@ -679,13 +742,15 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
 							},
-							"status": "Not Found",
-							"code": 404,
+							"status": "Gone",
+							"code": 410,
 							"_postman_previewlanguage": "text",
 							"header": [
 								{
@@ -710,7 +775,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"enhancementMode\": \"edgePro\",\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+							"raw": "{\n    \"enhancementMode\": \"edgePro\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images/:id/filters/select",
@@ -726,7 +796,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "nostrud incid",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -741,7 +811,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"enhancementMode\": \"edgePro\",\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"enhancementMode\": \"edgePro\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/select",
@@ -756,7 +831,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -771,7 +848,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "ea aliquip aliqua"
+							"body": "nostrud incid"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -780,7 +857,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"enhancementMode\": \"edgePro\",\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"enhancementMode\": \"edgePro\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/select",
@@ -795,7 +877,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -819,7 +903,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"enhancementMode\": \"edgePro\",\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"enhancementMode\": \"edgePro\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/select",
@@ -834,13 +923,61 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
 							},
 							"status": "Not Found",
 							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Gone - Image media for this resource could not be found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"enhancementMode\": \"edgePro\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/select",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"select"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
+										}
+									]
+								}
+							},
+							"status": "Gone",
+							"code": 410,
 							"_postman_previewlanguage": "text",
 							"header": [
 								{
@@ -865,7 +1002,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"unbinned\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+							"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images/:id/filters/supreme",
@@ -881,7 +1023,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "nostrud incid",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -896,7 +1038,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"unbinned\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/supreme",
@@ -911,7 +1058,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -926,7 +1075,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "ea aliquip aliqua"
+							"body": "nostrud incid"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -935,7 +1084,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"unbinned\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/supreme",
@@ -950,7 +1104,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -974,7 +1130,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"binningMode\": \"unbinned\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/supreme",
@@ -989,13 +1150,61 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
 							},
 							"status": "Not Found",
 							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Gone - Image media for this resource could not be found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/supreme",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"supreme"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
+										}
+									]
+								}
+							},
+							"status": "Gone",
+							"code": 410,
 							"_postman_previewlanguage": "text",
 							"header": [
 								{
@@ -1020,7 +1229,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+							"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{baseUrl}}/images/:id/filters/ae",
@@ -1036,7 +1250,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "ea aliquip aliqua",
+									"value": "nostrud incid",
 									"description": "(Required) Id of the image resource to process"
 								}
 							]
@@ -1051,7 +1265,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/ae",
@@ -1066,7 +1285,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -1081,7 +1302,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "ea aliquip aliqua"
+							"body": "nostrud incid"
 						},
 						{
 							"name": "Supplied filter contains invalid parameters",
@@ -1090,7 +1311,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/ae",
@@ -1105,7 +1331,9 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
@@ -1129,7 +1357,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70,\n    \"lutInfo\": {\n        \"gamma\": 2.3,\n        \"slope\": 65535,\n        \"offset\": 0,\n        \"totalGrays\": 4096,\n        \"minimumGray\": 3612,\n        \"maximumGray\": 418\n    }\n}"
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/images/:id/filters/ae",
@@ -1144,13 +1377,61 @@
 									],
 									"variable": [
 										{
-											"key": "id"
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
 										}
 									]
 								}
 							},
 							"status": "Not Found",
 							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Gone - Image media for this resource could not be found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"task\": \"general\",\n    \"sharpness\": 70\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/images/:id/filters/ae",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"images",
+										":id",
+										"filters",
+										"ae"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "nostrud incid",
+											"description": "(Required) Id of the image resource to process"
+										}
+									]
+								}
+							},
+							"status": "Gone",
+							"code": 410,
 							"_postman_previewlanguage": "text",
 							"header": [
 								{
