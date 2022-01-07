@@ -1,0 +1,34 @@
+name: .NET SDK
+
+on:
+  push:
+    branches: [ master ]
+    tags:
+      - "v*"
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0  # We need tags for the build script
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Build
+      shell: powershell
+      run: .\build.ps1
+      working-directory: sdk\dotnet
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: dotnet-sdk-nugets
+        path: sdk/dotnet/lib/bin
+
